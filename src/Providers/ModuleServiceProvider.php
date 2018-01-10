@@ -36,7 +36,7 @@ class ModuleServiceProvider extends ServiceProvider
             "is_core" => "yes",
             "children" => [
                 [
-                    "title" => "Groups",
+                    "title" => "Membership Types",
                     "custom-link" => "/admin/membership/groups",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
@@ -49,6 +49,11 @@ class ModuleServiceProvider extends ServiceProvider
                     "title" => "Payments",
                     "custom-link" => "/admin/membership/payments",
                     "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
+                ], [
+                    "title" => "Settings",
+                    "custom-link" => "/admin/membership/settings",
+                    "icon" => "fa fa-cog",
                     "is_core" => "yes"
                 ]
             ]]);

@@ -19,4 +19,8 @@ class IndexConroller extends Controller
     {
         return view('forms::payments.index');
     }
+    public function getSettings()
+    {
+        return view('forms::settings.index');
+    }
 }

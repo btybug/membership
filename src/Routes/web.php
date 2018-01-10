@@ -31,3 +31,4 @@ Route::get('/payments', 'IndexConroller@getPayments', true)->name('mbsp_payments
 Route::group(['prefix' => 'datatable'], function () {
     Route::get('get-plans', 'DataTablesConroller@getPlans')->name('mbsp_plans_lists');
 });
+Route::get('/settings', 'IndexConroller@getSettings', true)->name('mbsp_settings');
