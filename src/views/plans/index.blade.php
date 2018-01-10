@@ -1,21 +1,22 @@
 @extends('btybug::layouts.admin')
 @section('content')
-    <table id="fields-table"  class="table table-striped table-bordered" cellspacing="0" width="100%">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Period</th>
-            <th>Period Type</th>
-            <th>Currency</th>
-            <th>Is Active</th>
-            <th>Created</th>
-            <th>Updated</th>
-            <th>Actions</th>
-        </thead>
-    </table>
-
+    <div class="col-md-10">
+        <table id="fields-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Period</th>
+                <th>Period Type</th>
+                <th>Currency</th>
+                <th>Is Active</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Actions</th>
+            </thead>
+        </table>
+    </div>
 @stop
 @section('CSS')
     {!! Html::style('public/js/DataTables/Buttons-1.5.1/js/buttons.bootstrap.js') !!}
@@ -27,14 +28,15 @@
             $('#fields-table').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
-                    'copy', 'excel', 'pdf',{
+                    'copy', 'excel', 'pdf', {
                         text: 'Reload',
-                        action: function ( e, dt, node, config ) {
+                        className: 'btn btn-success',
+                        action: function (e, dt, node, config) {
                             dt.ajax.reload();
                         }
-                    },{
+                    }, {
                         text: 'Create New',
-                        action: function ( e, dt, node, config ) {
+                        action: function (e, dt, node, config) {
                             window.location.replace("{!! route('mbsp_plans_create') !!}");
                         }
                     }
