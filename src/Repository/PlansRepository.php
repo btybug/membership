@@ -1,10 +1,10 @@
 <?php
-namespace BtyBugHook\Forms\Repository;
+namespace BtyBugHook\Membership\Repository;
 
 use Btybug\btybug\Repositories\GeneralRepository;
-use BtyBugHook\Forms\Models\FieldTypes;
+use BtyBugHook\Membership\Models\Plans;
 
-class FieldTypesRepository extends GeneralRepository
+class PlansRepository extends GeneralRepository
 {
     /**
      * @return mixed
@@ -12,6 +12,6 @@ class FieldTypesRepository extends GeneralRepository
 
     public function model()
     {
-        return new FieldTypes();
+        return new Plans();
     }
 }

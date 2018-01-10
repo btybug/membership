@@ -1,4 +1,4 @@
-<?php namespace BtyBugHook\Forms\Models;
+<?php namespace BtyBugHook\Membership\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
  * Time: 23:10
  */
 
-class FieldTypes extends Model
+class Plans extends Model
 {
-    protected $table='fbp_field_types';
+    protected $table='plans';
 
     protected $guarded=['id'];
 }
