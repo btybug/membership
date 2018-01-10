@@ -37,7 +37,7 @@
                         text: 'Create New',
                         className: 'btn btn-success',
                         action: function (e, dt, node, config) {
-                            //window.location.replace("{!! route('mbsp_plans_create') !!}");
+                            window.location.replace("{!! route('mbsp_new_membership') !!}");
                         }
                     }
                 ],

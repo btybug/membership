@@ -21,7 +21,10 @@
 */
 //Routes
 Route::get('/', 'IndexConroller@getIndex', true)->name('mbsp_groups');
-Route::get('/membership-types', 'IndexConroller@getIndex', true)->name('mbsp_groups');
+Route::get('/membership-types', 'MembershipController@getIndex', true)->name('mbsp_membership');
+Route::get('/manage-membership-types', 'MembershipController@getNewMembership', true)->name('mbsp_new_membership');
+Route::get('/manage-membership-types/{id?}', 'MembershipController@getNewMembership', true)->name('mbsp_new_membership');
+Route::post('/manage-membership-types/{id?}', 'MembershipController@postNewMembership')->name('mbsp_membership_save');
 Route::get('/plans', 'IndexConroller@getPlans', true)->name('mbsp_plans');
 Route::get('/plans/create', 'PlansController@createPlans', true)->name('mbsp_plans_create');
 Route::get('/plans/edit/{id}', 'PlansController@editPlans', true)->name('mbsp_plans_edit');

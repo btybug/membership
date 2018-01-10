@@ -19,8 +19,8 @@ class DataTablesConroller extends Controller
   }
   public function getMbTypes()
     {
-        return DataTables::of(MembershipTypes::query())->addColumn('actions', function ($plans) {
-            $url= url("#",$plans->id);
+        return DataTables::of(MembershipTypes::query())->addColumn('actions', function ($membership) {
+            $url= route("mbsp_new_membership",$membership->id);
             return "<a href='$url' class='bty-btn-acction bt-edit'></a>";
         },2)->rawColumns(['actions'])->make(true);
   }

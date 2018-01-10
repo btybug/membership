@@ -7,10 +7,6 @@ use App\Http\Controllers\Controller;
 class IndexConroller extends Controller
 {
 
-    public function getIndex()
-    {
-        return view('forms::membership_types.index');
-    }
     public function getPlans()
     {
         return view('forms::plans.index');
