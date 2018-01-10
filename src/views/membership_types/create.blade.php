@@ -20,6 +20,12 @@
         <fieldset class="bty-form-textarea">
             {!! Form::textarea('description',old('description'),['class'=>'bty-textarea-1','placeholder'=>'Description']) !!}
         </fieldset>
+        <fieldset class="bty-form-select">
+            <legend><span><i class="fa fa-info" aria-hidden="true"></i></span>Select Plan</legend>
+            <div class="bty-input-select-3">
+            {!! Form::select('plan_id',[null=>'No Plan']+$plans,old('plan_id')) !!}
+            </div>
+        </fieldset>
         <fieldset class="bty-form-text">
             <fieldset class="bty-form-radio">
                 <legend><span><i class="fa fa-info" aria-hidden="true"></i></span>Is Active</legend>

@@ -32,7 +32,8 @@ Route::post('/plans/create', 'PlansController@saveCreatePlan')->name('mbsp_plans
 Route::post('/plans/edit/{id}', 'PlansController@saveEditPlan')->name('mbsp_plans_edit_save');
 Route::get('/payments', 'IndexConroller@getPayments', true)->name('mbsp_payments');
 Route::group(['prefix' => 'datatable'], function () {
+
     Route::get('get-plans', 'DataTablesConroller@getPlans')->name('mbsp_plans_lists');
-    Route::get('get-plans', 'DataTablesConroller@getMbTypes')->name('mbsp_mb_types_lists');
+    Route::get('get-mb-types', 'DataTablesConroller@getMbTypes')->name('mbsp_mb_types_lists');
 });
 Route::get('/settings', 'IndexConroller@getSettings', true)->name('mbsp_settings');
