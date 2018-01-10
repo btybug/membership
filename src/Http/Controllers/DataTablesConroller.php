@@ -13,7 +13,7 @@ class DataTablesConroller extends Controller
     {
         return DataTables::of(Plans::query())->addColumn('actions', function ($plans) {
             $url= url("admin/membership/plans/edit",$plans->id);
-            return "<a href='$url' class='btn btn-warning'><i class='fa fa-edit'></i></a>";
+            return "<a href='$url' class='bty-btn-acction bt-edit'></a>";
         },2)->rawColumns(['actions'])->make(true);
   }
 }
