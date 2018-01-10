@@ -20,6 +20,9 @@
                     <label>Period?</label>
                 </div>
             </fieldset>
+            <fieldset class="bty-form-textarea">
+                <textarea id="bio" placeholder="Description" name="description" class="bty-textarea-1">{{old('description')}}</textarea>
+            </fieldset>
             <fieldset class="bty-form-select">
                 <legend><span><i class="fa fa-info" aria-hidden="true"></i></span>Period Type</legend>
                 <div class="bty-input-select-3">

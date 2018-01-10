@@ -13,8 +13,12 @@ class PlansController extends Controller
     public function createPlans(){
         return view('forms::plans.create');
     }
-    public function editPlans($id){
-        return view('forms::plans.edit');
+    public function editPlans(PlansRepository $repo,$id){
+        $plan = $repo->find($id);
+        if(!$plan){
+            abort(404);
+        }
+        return view('forms::plans.edit',compact("plan"));
     }
     public function saveCreatePlan(PlansRepository $repo, Request $request){
 
@@ -24,13 +28,12 @@ class PlansController extends Controller
             'period' => 'required|integer',
             'period_type' => 'required',
             'currency' => 'required',
+            'description' => 'required',
             'is_active' => 'required',
         ]);
-
+        
         if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $data = $request->all();
@@ -38,9 +41,26 @@ class PlansController extends Controller
 
         return redirect()->route('mbsp_plans');
     }
-    public function updatePlan(PlansRepository $repo, Request $request,$id){
-        $data = $request->all();
-        $repo->model()->update($id,$data);
+    public function saveEditPlan(PlansRepository $repo, Request $request,$id){
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            //'price' => 'required|integer',
+           // 'period' => 'required|integer',
+           // 'period_type' => 'required',
+            'currency' => 'required',
+            'description' => 'required',
+            'is_active' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $data = $request->except('_token','price','period','period_type');
+
+        $repo->update($id,$data);
+        return redirect()->route("mbsp_plans");
     }
 
 }
