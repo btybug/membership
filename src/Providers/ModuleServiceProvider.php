@@ -37,7 +37,7 @@ class ModuleServiceProvider extends ServiceProvider
             "children" => [
                 [
                     "title" => "Membership Types",
-                    "custom-link" => "/admin/membership/groups",
+                    "custom-link" => "/admin/membership/membership-types",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
                 ], [

@@ -9,7 +9,7 @@ class IndexConroller extends Controller
 
     public function getIndex()
     {
-        return view('forms::index');
+        return view('forms::membership_types.index');
     }
     public function getPlans()
     {
