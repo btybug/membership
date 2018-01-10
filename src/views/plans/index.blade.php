@@ -30,12 +30,13 @@
                 buttons: [
                     'copy', 'excel', 'pdf', {
                         text: 'Reload',
-                        className: 'btn btn-success',
+                        className: 'btn btn-info',
                         action: function (e, dt, node, config) {
                             dt.ajax.reload();
                         }
                     }, {
                         text: 'Create New',
+                        className: 'btn btn-success',
                         action: function (e, dt, node, config) {
                             window.location.replace("{!! route('mbsp_plans_create') !!}");
                         }

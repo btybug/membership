@@ -37,9 +37,11 @@
                 <fieldset class="bty-form-radio">
                     <legend><span><i class="fa fa-info" aria-hidden="true"></i></span>Is Active</legend>
                     <div>
-                        <input name="is_active" value="1" type="radio" class="bty-input-radio-1" id="bty-gender-form-61">
+                        <input name="is_active" value="1" type="radio" class="bty-input-radio-1"
+                               id="bty-gender-form-61">
                         <label for="bty-gender-form-61">Yes</label>
-                        <input name="is_active" value="0" type="radio" class="bty-input-radio-1" id="bty-gender-form-62">
+                        <input name="is_active" value="0" type="radio" class="bty-input-radio-1"
+                               id="bty-gender-form-62">
                         <label for="bty-gender-form-62">No</label>
                     </div>
                 </fieldset>
@@ -51,6 +53,8 @@
     </div>
 @stop
 @section('CSS')
+
 @stop
 @section('JS')
+
 @stop

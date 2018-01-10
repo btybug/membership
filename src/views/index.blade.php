@@ -1,7 +1,7 @@
 @extends('btybug::layouts.admin')
 @section('content')
     <div class="main_lay_cont">
-      {!! 'Index' !!}
+        {!! 'Index' !!}
     </div>
 
 @stop

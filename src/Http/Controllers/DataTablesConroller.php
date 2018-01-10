@@ -8,6 +8,7 @@ use Yajra\DataTables\DataTables;
 
 class DataTablesConroller extends Controller
 {
+
     public function getPlans()
     {
         return DataTables::of(Plans::query())->addColumn('actions', function ($plans) {

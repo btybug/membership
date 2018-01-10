@@ -1,4 +1,5 @@
 <?php
+
 namespace BtyBugHook\Membership\Repository;
 
 use Btybug\btybug\Repositories\GeneralRepository;

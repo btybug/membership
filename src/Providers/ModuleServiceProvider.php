@@ -28,6 +28,7 @@ class ModuleServiceProvider extends ServiceProvider
     {
         $this->loadTranslationsFrom(__DIR__ . '/../views', 'forms');
         $this->loadViewsFrom(__DIR__ . '/../views', 'forms');
+
         \Eventy::action('admin.menus', [
             "title" => "Membership",
             "custom-link" => "#",
@@ -39,12 +40,12 @@ class ModuleServiceProvider extends ServiceProvider
                     "custom-link" => "/admin/membership/groups",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
-                ],[
+                ], [
                     "title" => "Plans",
                     "custom-link" => "/admin/membership/plans",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
-                ],[
+                ], [
                     "title" => "Payments",
                     "custom-link" => "/admin/membership/payments",
                     "icon" => "fa fa-angle-right",

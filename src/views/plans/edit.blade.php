@@ -25,6 +25,8 @@
     </div>
 @stop
 @section('CSS')
+
 @stop
 @section('JS')
+
 @stop

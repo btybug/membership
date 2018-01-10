@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 class IndexConroller extends Controller
 {
+
     public function getIndex()
     {
         return view('forms::index');

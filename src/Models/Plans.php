@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Plans extends Model
 {
+
     protected $table='plans';
 
     protected $guarded=['id'];

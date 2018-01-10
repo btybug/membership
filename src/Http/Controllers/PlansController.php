@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class PlansController extends Controller
 {
+
     public function createPlans(){
         return view('forms::plans.create');
     }
