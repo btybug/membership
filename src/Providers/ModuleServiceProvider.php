@@ -35,8 +35,18 @@ class ModuleServiceProvider extends ServiceProvider
             "is_core" => "yes",
             "children" => [
                 [
-                    "title" => "Fields",
-                    "custom-link" => "/admin/membership",
+                    "title" => "Groups",
+                    "custom-link" => "/admin/membership/groups",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
+                ],[
+                    "title" => "Plans",
+                    "custom-link" => "/admin/membership/plans",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
+                ],[
+                    "title" => "Payments",
+                    "custom-link" => "/admin/membership/payments",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
                 ]

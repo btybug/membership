@@ -11,4 +11,12 @@ class IndexConroller extends Controller
     {
         return view('forms::index');
     }
+    public function getPlans()
+    {
+        return view('forms::plans.index');
+    }
+    public function getPayments()
+    {
+        return view('forms::payments.index');
+    }
 }

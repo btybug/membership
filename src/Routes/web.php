@@ -20,4 +20,6 @@
 |
 */
 //Routes
-Route::get('/', 'IndexConroller@getIndex',true);
+Route::get('/groups', 'IndexConroller@getIndex',true)->name('mbsp_groups');
+Route::get('/plans', 'IndexConroller@getPlans',true)->name('mbsp_plans');
+Route::get('/payments', 'IndexConroller@getPayments',true)->name('mbsp_payments');
