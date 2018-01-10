@@ -20,6 +20,7 @@
 |
 */
 //Routes
+Route::get('/', 'IndexConroller@getIndex',true)->name('mbsp_groups');
 Route::get('/groups', 'IndexConroller@getIndex',true)->name('mbsp_groups');
 Route::get('/plans', 'IndexConroller@getPlans',true)->name('mbsp_plans');
 Route::get('/plans/create', 'IndexConroller@createPlans',true)->name('mbsp_plans_create');
