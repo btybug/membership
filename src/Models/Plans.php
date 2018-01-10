@@ -1,4 +1,5 @@
 <?php namespace BtyBugHook\Membership\Models;
+use Btybug\User\User;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -14,4 +15,8 @@ class Plans extends Model
     protected $table='plans';
 
     protected $guarded=['id'];
+
+    public function users(){
+        return $this->morphedByMany(User::class,'user_plan');
+    }
 }
