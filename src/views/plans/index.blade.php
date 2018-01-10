@@ -10,6 +10,7 @@
                 <th>Period</th>
                 <th>Period Type</th>
                 <th>Currency</th>
+                <th>Description</th>
                 <th>Is Active</th>
                 <th>Created</th>
                 <th>Updated</th>
@@ -51,6 +52,7 @@
                     {data: 'period', name: 'period'},
                     {data: 'period_type', name: 'period_type'},
                     {data: 'currency', name: 'currency'},
+                    {data: 'description', name: 'description'},
                     {data: 'is_active', name: 'is_active'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'updated_at', name: 'updated_at'},
