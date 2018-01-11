@@ -9,11 +9,11 @@ class IndexConroller extends Controller
 
     public function getPlans()
     {
-        return view('forms::plans.index');
+        return view('mbshp::plans.index');
     }
     public function getPayments()
     {
-        return view('forms::payments.index');
+        return view('mbshp::payments.index');
     }
 
 }

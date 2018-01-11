@@ -32,8 +32,8 @@ class ModuleServiceProvider extends ServiceProvider
             'key' =>'pk_test_zr3Wfst8jb4GrKU8BcLEUkh9',
             'secret' => 'sk_test_5hlaHU2ovKmWpyK33i7sZxxx',
         ]);
-        $this->loadTranslationsFrom(__DIR__ . '/../views', 'forms');
-        $this->loadViewsFrom(__DIR__ . '/../views', 'forms');
+        $this->loadTranslationsFrom(__DIR__ . '/../views', 'mbshp');
+        $this->loadViewsFrom(__DIR__ . '/../views', 'mbshp');
 
         \Eventy::action('admin.menus', [
             "title" => "Membership",

@@ -19,7 +19,7 @@ class MembershipController extends Controller
 
     public function getIndex()
     {
-        return view('forms::membership_types.index');
+        return view('mbshp::membership_types.index');
     }
 
     public function getNewMembership(PlansRepository $plansRepository,$id = null)
@@ -30,7 +30,7 @@ class MembershipController extends Controller
             $model = $membership->findOrFail($id);
         }
         $plans=$plansRepository->pluck('name','id')->toArray();
-        return view('forms::membership_types.create', compact('model','plans'));
+        return view('mbshp::membership_types.create', compact('model','plans'));
     }
 
     public function postNewMembership(Request $request,MembershipTypesRepository $repository)

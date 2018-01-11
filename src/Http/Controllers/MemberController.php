@@ -15,6 +15,6 @@ class MemberController extends Controller
 {
     public function getIndex()
     {
-        return view('forms::members.index');
+        return view('mbshp::members.index');
     }
 }

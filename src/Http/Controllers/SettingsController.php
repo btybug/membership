@@ -15,10 +15,10 @@ class SettingsController extends Controller
 {
     public function getSettings()
     {
-        return view('forms::settings.index');
+        return view('mbshp::settings.index');
     }
     public function getMembershipTypes()
     {
-        return view('forms::settings.mb_types');
+        return view('mbshp::settings.mb_types');
     }
 }

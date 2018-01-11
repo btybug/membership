@@ -12,7 +12,7 @@ class PlansController extends Controller
 
     public function createPlans()
     {
-        return view('forms::plans.create');
+        return view('mbshp::plans.create');
     }
 
     public function editPlans(PlansRepository $repo, $id)
@@ -21,7 +21,7 @@ class PlansController extends Controller
         if (!$plan) {
             abort(404);
         }
-        return view('forms::plans.edit', compact("plan"));
+        return view('mbshp::plans.edit', compact("plan"));
     }
 
     public function saveCreatePlan(PlansRepository $repo, Request $request)
