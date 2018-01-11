@@ -68,6 +68,22 @@ class ModuleServiceProvider extends ServiceProvider
                     "is_core" => "yes"
                 ]
             ]]);
+        $tubs = [
+            'mb_settings' => [
+                [
+                    'title' => 'General',
+                    'url' => '/admin/membership/settings',
+                    'icon' => 'fa fa-cub'
+                ],
+                [
+                    'title' => 'Membership Status',
+                    'url' => '/admin/membership/settings/membership-status',
+                    'icon' => 'fa fa-cub'
+                ],
+            ]
+        ];
+
+        \Eventy::action('my.tab', $tubs);
         Routes::registerPages('sahak.avatar/membership');
     }
 
