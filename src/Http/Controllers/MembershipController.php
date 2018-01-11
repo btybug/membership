@@ -29,7 +29,7 @@ class MembershipController extends Controller
             $membership = new MembershipTypesRepository();
             $model = $membership->findOrFail($id);
         }
-        $plans=$plansRepository->pluck('title','id')->toArray();
+        $plans=$plansRepository->pluck('name','id')->toArray();
         return view('forms::membership_types.create', compact('model','plans'));
     }
 
