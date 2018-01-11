@@ -25,11 +25,13 @@ Route::get('/membership-types', 'MembershipController@getIndex', true)->name('mb
 Route::get('/manage-membership-types', 'MembershipController@getNewMembership', true)->name('mbsp_new_membership');
 Route::get('/manage-membership-types/{id?}', 'MembershipController@getNewMembership', true)->name('mbsp_new_membership');
 Route::post('/manage-membership-types/{id?}', 'MembershipController@postNewMembership')->name('mbsp_membership_save');
-Route::get('/plans', 'IndexConroller@getPlans', true)->name('mbsp_plans');
-Route::get('/plans/create', 'PlansController@createPlans', true)->name('mbsp_plans_create');
-Route::get('/plans/edit/{id}', 'PlansController@editPlans', true)->name('mbsp_plans_edit');
-Route::post('/plans/create', 'PlansController@saveCreatePlan')->name('mbsp_plans_create_save');
-Route::post('/plans/edit/{id}', 'PlansController@saveEditPlan')->name('mbsp_plans_edit_save');
+Route::group(['prefix' => 'plans'], function () {
+    Route::get('/', 'IndexConroller@getPlans', true)->name('mbsp_plans');
+    Route::get('/create', 'PlansController@createPlans', true)->name('mbsp_plans_create');
+    Route::get('/edit/{id}', 'PlansController@editPlans', true)->name('mbsp_plans_edit');
+    Route::post('/create', 'PlansController@saveCreatePlan')->name('mbsp_plans_create_save');
+    Route::post('/edit/{id}', 'PlansController@saveEditPlan')->name('mbsp_plans_edit_save');
+});
 Route::get('/payments', 'IndexConroller@getPayments', true)->name('mbsp_payments');
 Route::group(['prefix' => 'datatable'], function () {
 
@@ -38,10 +40,10 @@ Route::group(['prefix' => 'datatable'], function () {
     Route::get('get-mb-members', 'DataTablesConroller@getMembers')->name('mbsp_members_lists');
 });
 Route::group(['prefix' => 'stripe'], function () {
-    Route::get('/', 'StripeController@getIndex',true)->name('mbsp_stripe');
+    Route::get('/', 'StripeController@getIndex', true)->name('mbsp_stripe');
 });
 Route::group(['prefix' => 'members'], function () {
-    Route::get('/', 'MemberController@getIndex',true)->name('mbsp_stripe');
+    Route::get('/', 'MemberController@getIndex', true)->name('mbsp_stripe');
 });
 Route::group(['prefix' => 'settings'], function () {
     Route::get('/', 'SettingsController@getSettings', true)->name('mbsp_settings');
