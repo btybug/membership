@@ -27,7 +27,7 @@ class SettingsController extends Controller
     public function getCreateStatus()
     {
         $model = null;
-        return view('mbshp::settings.create_status',compact(['model']));
+        return view('mbshp::settings.status_form',compact(['model']));
     }
 
     public function  postCreateStatus(
@@ -48,7 +48,7 @@ class SettingsController extends Controller
         if (!$model) {
             abort(404);
         }
-        return view('mbshp::settings.create_status', compact("model"));
+        return view('mbshp::settings.status_form', compact("model"));
     }
 
     public function  postEditStatus(

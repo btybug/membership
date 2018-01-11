@@ -27,6 +27,7 @@
                     {!! Form::text('icon',null,['class' => 'form-control icp']) !!}
                 </div>
             </div>
+
             <div class="form-group">
                 <div class="col-md-12">
                     {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
