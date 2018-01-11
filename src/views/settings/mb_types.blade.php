@@ -8,6 +8,8 @@
                 <th>Slug</th>
                 <th>Title</th>
                 <th>Description</th>
+                <th>Icon</th>
+                <th>Type</th>
                 <th>Created</th>
                 <th>Actions</th>
             </thead>
@@ -30,7 +32,13 @@
                         action: function (e, dt, node, config) {
                             dt.ajax.reload();
                         }
-                    },
+                    }, {
+                        text: 'Create New',
+                        className: 'btn btn-success',
+                        action: function (e, dt, node, config) {
+                            window.location.replace("{!! route('mbsp_settings_status_create') !!}");
+                        }
+                    }
                 ],
 
                 ajax: '{!! route('mbsp_statuses') !!}',
@@ -39,7 +47,9 @@
                     {data: 'slug', name: 'slug',},
                     {data: 'title', name: 'title'},
                     {data: 'description', name: 'description'},
-                    {data: 'created', name: 'created'},
+                    {data: 'icon', name: 'icon'},
+                    {data: 'type', name: 'type'},
+                    {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ]
             });

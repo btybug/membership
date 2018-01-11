@@ -57,9 +57,16 @@ class DataTablesConroller extends Controller
 
     public function getStatuses()
     {
-        return DataTables::of(MembershipStatuses::query())->addColumn('actions', function ($membership) {
-
-            return "<a href='' class='bty-btn-acction bt-edit'></a>";
-        }, 2)->rawColumns(['actions'])->make(true);
+        return DataTables::of(MembershipStatuses::query())->editColumn('actions', function ($status) {
+            $url = route("mbsp_settings_status_edit", $status->id);
+            $action = "<a href='$url' class='bty-btn-acction bt-edit'></a>";
+            if($status->type == 'custom'){
+                $del_url = route("mbsp_settings_status_del", $status->id);
+                $action.= "<a href='$del_url' class='bty-btn-acction bt-delete'></a>";
+            }
+            return $action;
+        })->editColumn('created_at', function ($status) {
+            return BBgetDateFormat($status->created_at);
+        })->rawColumns(['actions'])->make(true);
     }
 }
