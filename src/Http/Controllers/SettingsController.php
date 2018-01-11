@@ -19,6 +19,7 @@ class SettingsController extends Controller
     }
     public function getMembershipTypes()
     {
+
         return view('mbshp::settings.mb_types');
     }
 }

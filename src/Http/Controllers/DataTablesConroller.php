@@ -4,6 +4,7 @@ namespace BtyBugHook\Membership\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Btybug\User\User;
+use BtyBugHook\Membership\Models\MembershipStatuses;
 use BtyBugHook\Membership\Models\MembershipTypes;
 use BtyBugHook\Membership\Models\Plans;
 use BtyBugHook\Membership\Repository\PlansRepository;
@@ -46,5 +47,13 @@ class DataTablesConroller extends Controller
         return DataTables::of(User::where('role_id',0))->editColumn('membership_id', function ($member) {
             return  'No Data';
         })->make(true);
+    }
+
+    public function getStatuses()
+    {
+        return DataTables::of(MembershipStatuses::query())->addColumn('actions', function ($membership) {
+
+            return "<a href='' class='bty-btn-acction bt-edit'></a>";
+        }, 2)->rawColumns(['actions'])->make(true);
     }
 }
