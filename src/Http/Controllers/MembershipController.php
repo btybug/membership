@@ -42,12 +42,16 @@ class MembershipController extends Controller
             'icon' => 'required',
             'description' => 'required',
             'is_active' => 'required',
+            'is_default' => 'required',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $params=['id'=>$request->get('id')];
-        $repository->updateOrCreate($params,$data);
+        $result=$repository->updateOrCreate($params,$data);
+        if($data['is_default']){
+            $repository->makeActive($result->id);
+        }
         return redirect()->route('mbsp_membership');
     }
 

@@ -36,6 +36,15 @@
                     <label for="bty-gender-form-62">No</label>
                 </div>
             </fieldset>
+            <fieldset class="bty-form-radio">
+                <legend><span><i class="fa fa-info" aria-hidden="true"></i></span>Is default</legend>
+                <div>
+                    {!! Form::radio('is_default',1,0,['class'=>'bty-input-radio-1','id'=>'bty-gender-form-63']) !!}
+                    <label for="bty-gender-form-63">Yes</label>
+                    {!! Form::radio('is_default',0,1,['class'=>'bty-input-radio-1','id'=>'bty-gender-form-64']) !!}
+                    <label for="bty-gender-form-64">No</label>
+                </div>
+            </fieldset>
         </fieldset>
 
         <button class="bty-btn bty-btn-save"><span>Save</span></button>
