@@ -50,14 +50,14 @@ class MembershipController extends Controller
         $params=['id'=>$request->get('id')];
         $result=$repository->updateOrCreate($params,$data);
         if($data['is_default']){
-            $repository->makeActive($result->id);
+            $repository->makeDefault($result->id);
         }
         return redirect()->route('mbsp_membership');
     }
 
-    public function makeActive(MembershipTypesRepository $membershipTypesRepository,$id)
+    public function makeDefault(MembershipTypesRepository $membershipTypesRepository,$id)
     {
-        $membershipTypesRepository->makeActive($id);
+        $membershipTypesRepository->makeDefault($id);
         return redirect()->route('mbsp_membership');
     }
 }

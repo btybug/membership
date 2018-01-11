@@ -22,7 +22,7 @@
 //Routes
 Route::get('/', 'IndexConroller@getIndex', true)->name('mbsp_groups');
 Route::get('/membership-types', 'MembershipController@getIndex', true)->name('mbsp_membership');
-Route::get('/membership-types/make-active/{id}', 'MembershipController@makeActive')->name('mbsp_type_make_active');
+Route::get('/membership-types/make-default/{id}', 'MembershipController@makeDefault')->name('mbsp_type_make_active');
 Route::get('/manage-membership-types', 'MembershipController@getNewMembership', true)->name('mbsp_new_membership');
 Route::get('/manage-membership-types/{id?}', 'MembershipController@getNewMembership', true)->name('mbsp_new_membership');
 Route::post('/manage-membership-types/{id?}', 'MembershipController@postNewMembership')->name('mbsp_membership_save');

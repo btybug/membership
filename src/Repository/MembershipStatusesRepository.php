@@ -15,4 +15,9 @@ class MembershipStatusesRepository extends GeneralRepository
     {
         return new MembershipStatuses();
     }
+
+    public function getDefault()
+    {
+        return $this->model()->where('type', 'core')->first();
+    }
 }

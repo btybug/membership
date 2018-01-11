@@ -16,10 +16,15 @@ class MembershipTypesRepository extends GeneralRepository
         return new MembershipTypes();
     }
 
-    public function makeActive(int $id)
+    public function makeDefault(int $id)
     {
-        $this->model()->where('is_default', 1)->update(['is_default'=> 0]);
-        return $this->model()->where('id', $id)->update(['is_default'=> 1]);
+        $this->model()->where('is_default', 1)->update(['is_default' => 0]);
+        return $this->model()->where('id', $id)->update(['is_default' => 1]);
 
+    }
+
+    public function getDefault()
+    {
+        return $this->model()->where('is_default', 1)->first();
     }
 }
