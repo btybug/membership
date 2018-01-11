@@ -26,6 +26,7 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+    //    $this->app->register('Laravel\Cashier\CashierServiceProvider');
         $this->loadTranslationsFrom(__DIR__ . '/../views', 'forms');
         $this->loadViewsFrom(__DIR__ . '/../views', 'forms');
 
