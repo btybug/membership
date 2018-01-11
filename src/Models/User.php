@@ -14,4 +14,9 @@ use Laravel\Cashier\Billable;
 class User extends \Btybug\User\User
 {
     use Billable;
+
+    public function membership()
+    {
+       return $this->belongsTo(MembershipTypes::class,'membership_id');
+    }
 }

@@ -45,6 +45,8 @@ Route::group(['prefix' => 'stripe'], function () {
 });
 Route::group(['prefix' => 'members'], function () {
     Route::get('/', 'MemberController@getIndex', true)->name('mbsp_stripe');
+    Route::get('/edit/{id}', 'MemberController@getEdit', true)->name('mbsp_edit_member');
+    Route::post('/edit/{id?}', 'MemberController@postEdit');
 });
 Route::group(['prefix' => 'settings'], function () {
     Route::get('/', 'SettingsController@getSettings', true)->name('mbsp_settings');

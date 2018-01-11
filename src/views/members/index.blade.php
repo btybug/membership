@@ -9,6 +9,7 @@
                 <th>E-mail</th>
                 <th>Status</th>
                 <th>Membership</th>
+                <th>Actions</th>
             </thead>
         </table>
     </div>
@@ -44,7 +45,8 @@
                     {data: 'username', name: 'username',},
                     {data: 'email', name: 'email'},
                     {data: 'status', name: 'status'},
-                    {data: 'membership_id', name: 'membership_id'}
+                    {data: 'membership_id', name: 'membership_id'},
+                    {data: 'actions', name: 'actions'}
                 ]
             });
         });
