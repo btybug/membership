@@ -36,4 +36,7 @@ Route::group(['prefix' => 'datatable'], function () {
     Route::get('get-plans', 'DataTablesConroller@getPlans')->name('mbsp_plans_lists');
     Route::get('get-mb-types', 'DataTablesConroller@getMbTypes')->name('mbsp_mb_types_lists');
 });
+Route::group(['prefix' => 'stripe'], function () {
+    Route::get('/', 'StripeController@getIndex',true)->name('mbsp_stripe');
+});
 Route::get('/settings', 'IndexConroller@getSettings', true)->name('mbsp_settings');

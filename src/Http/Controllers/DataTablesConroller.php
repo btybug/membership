@@ -16,7 +16,13 @@ class DataTablesConroller extends Controller
         return DataTables::of(Plans::query())->addColumn('actions', function ($plans) {
             $url= url("admin/membership/plans/edit",$plans->id);
             return "<a href='$url' class='bty-btn-acction bt-edit'></a>";
-        },2)->rawColumns(['actions'])->make(true);
+        },2)->editColumn('is_active',function ($membership){
+            return ($membership->is_active) ? 'Yes' : 'No';
+        })->editColumn('livemode',function ($membership){
+            return ($membership->livemode) ? 'Yes' : 'No';
+        })->editColumn('created',function ($membership){
+            return BBgetDateFormat($membership->livemode);
+        })->rawColumns(['actions'])->make(true);
   }
   public function getMbTypes()
     {

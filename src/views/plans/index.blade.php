@@ -5,15 +5,16 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Period</th>
-                <th>Period Type</th>
+                <th>Plan Id</th>
+                <th>Name</th>
+                <th>Amount</th>
                 <th>Currency</th>
-                <th>Description</th>
+                <th>Interval</th>
+                <th>Interval Count</th>
+                <th>Live mode</th>
+                <th>Statement Descriptor</th>
                 <th>Is Active</th>
                 <th>Created</th>
-                <th>Updated</th>
                 <th>Actions</th>
             </thead>
         </table>
@@ -47,15 +48,16 @@
                 ajax: '{!! route('mbsp_plans_lists') !!}',
                 columns: [
                     {data: 'id', name: 'id',},
-                    {data: 'title', name: 'title'},
-                    {data: 'price', name: 'price'},
-                    {data: 'period', name: 'period'},
-                    {data: 'period_type', name: 'period_type'},
+                    {data: 'plan_id', name: 'plan_id',},
+                    {data: 'name', name: 'name'},
+                    {data: 'amount', name: 'amount'},
                     {data: 'currency', name: 'currency'},
-                    {data: 'description', name: 'description'},
+                    {data: 'interval', name: 'interval'},
+                    {data: 'interval_count', name: 'interval_count'},
+                    {data: 'livemode', name: 'livemode'},
+                    {data: 'statement_descriptor', name: 'statement_descriptor'},
                     {data: 'is_active', name: 'is_active'},
-                    {data: 'created_at', name: 'created_at'},
-                    {data: 'updated_at', name: 'updated_at'},
+                    {data: 'created', name: 'created'},
                     {data: 'actions', name: 'actions'}
                 ]
             });

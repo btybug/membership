@@ -10,44 +10,66 @@ use Illuminate\Support\Facades\Validator;
 class PlansController extends Controller
 {
 
-    public function createPlans(){
+    public function createPlans()
+    {
         return view('forms::plans.create');
     }
-    public function editPlans(PlansRepository $repo,$id){
+
+    public function editPlans(PlansRepository $repo, $id)
+    {
         $plan = $repo->find($id);
-        if(!$plan){
+        if (!$plan) {
             abort(404);
         }
-        return view('forms::plans.edit',compact("plan"));
+        return view('forms::plans.edit', compact("plan"));
     }
-    public function saveCreatePlan(PlansRepository $repo, Request $request){
+
+    public function saveCreatePlan(PlansRepository $repo, Request $request)
+    {
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'price' => 'required|integer',
-            'period' => 'required|integer',
-            'period_type' => 'required',
-            'currency' => 'required',
-            'description' => 'required',
+            'plan_id' => 'required|unique:plans',
+            'amount' => 'required|integer',
+            'currency' => 'required|alpha',
+            'interval' => 'required',
+            'interval_count' => 'required|integer',
+            'name' => 'required',
             'is_active' => 'required',
         ]);
-        
+
         if ($validator->fails()) {
+            dd($validator->messages());
             return redirect()->back()->withErrors($validator)->withInput();
         }
+        $data = $request->except('_token');
+        \Stripe\Stripe::setApiKey(\Config::get('services.stripe.secret'));
 
-        $data = $request->all();
-        $result = $repo->model()->create($data);
+        $response = \Stripe\Plan::create(array(
+            "amount" => $data['amount'],
+            "interval" => $data['interval'],
+            "interval_count" => $data['interval_count'],
+            "name" => $data['name'],
+            "currency" => $data['currency'],
+            "id" => $data['plan_id']
+        ));
+        if ($response) {
+            $data['object'] = $response->object;
+            $data['created'] = $response->created;
+            $data['metadata'] = json_encode($response->metadata, true);
+            $result = $repo->model()->create($data);
+            return redirect()->route('mbsp_plans');
+        }
 
-        return redirect()->route('mbsp_plans');
     }
-    public function saveEditPlan(PlansRepository $repo, Request $request,$id){
+
+    public function saveEditPlan(PlansRepository $repo, Request $request, $id)
+    {
 
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             //'price' => 'required|integer',
-           // 'period' => 'required|integer',
-           // 'period_type' => 'required',
+            // 'period' => 'required|integer',
+            // 'period_type' => 'required',
             'currency' => 'required',
             'description' => 'required',
             'is_active' => 'required',
@@ -57,9 +79,9 @@ class PlansController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $data = $request->except('_token','price','period','period_type');
+        $data = $request->except('_token', 'price', 'period', 'period_type');
 
-        $repo->update($id,$data);
+        $repo->update($id, $data);
         return redirect()->route("mbsp_plans");
     }
 
