@@ -41,6 +41,6 @@ Route::group(['prefix' => 'stripe'], function () {
     Route::get('/', 'StripeController@getIndex',true)->name('mbsp_stripe');
 });
 Route::group(['prefix' => 'members'], function () {
-//    Route::get('/', 'MemberController@getIndex',true)->name('mbsp_stripe');
+    Route::get('/', 'MemberController@getIndex',true)->name('mbsp_stripe');
 });
 Route::get('/settings', 'IndexConroller@getSettings', true)->name('mbsp_settings');
