@@ -8,6 +8,7 @@
                 <th>Username</th>
                 <th>E-mail</th>
                 <th>Status</th>
+                <th>Membership</th>
             </thead>
         </table>
     </div>
@@ -42,7 +43,8 @@
                     {data: 'id', name: 'id',},
                     {data: 'username', name: 'username',},
                     {data: 'email', name: 'email'},
-                    {data: 'status', name: 'status'}
+                    {data: 'status', name: 'status'},
+                    {data: 'membership_id', name: 'membership_id'}
                 ]
             });
         });

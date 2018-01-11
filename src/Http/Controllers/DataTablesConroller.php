@@ -43,6 +43,8 @@ class DataTablesConroller extends Controller
 
     public function getMembers()
     {
-        return DataTables::of(User::where('role_id',0))->make(true);
+        return DataTables::of(User::where('role_id',0))->editColumn('membership_id', function ($member) {
+            return ($member->membership_id) ? 'Yes' : 'No Data';
+        })->make(true);
     }
 }
