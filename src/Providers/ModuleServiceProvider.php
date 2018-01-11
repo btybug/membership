@@ -47,6 +47,11 @@ class ModuleServiceProvider extends ServiceProvider
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
                 ], [
+                    "title" => "Members",
+                    "custom-link" => "/admin/membership/members",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
+                ],[
                     "title" => "Plans",
                     "custom-link" => "/admin/membership/plans",
                     "icon" => "fa fa-angle-right",
