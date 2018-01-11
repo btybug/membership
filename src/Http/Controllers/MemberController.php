@@ -12,6 +12,8 @@ namespace BtyBugHook\Membership\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Btybug\User\Repository\UserRepository;
 use BtyBugHook\Membership\Models\MembershipTypes;
+use BtyBugHook\Membership\Models\User;
+use BtyBugHook\Membership\Models\UserMembership;
 use BtyBugHook\Membership\Repository\MembershipStatusesRepository;
 use BtyBugHook\Membership\Repository\MembershipTypesRepository;
 use Illuminate\Http\Request;
@@ -45,5 +47,14 @@ class MemberController extends Controller
     {
         $userRepository->update($request->get('id',$request->id),$request->except('_token'));
         return redirect()->route('mbsp_stripe');
+    }
+
+    public function getoptimize(User $user,UserMembership $membership)
+    {
+        $users=$user->where('role_id',0)->get();
+        foreach ($users as $user){
+            $membership->create(['user_id'=>$user->id,'']);
+        }
+
     }
 }

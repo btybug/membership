@@ -50,4 +50,10 @@ class MembershipController extends Controller
         $repository->updateOrCreate($params,$data);
         return redirect()->route('mbsp_membership');
     }
+
+    public function makeActive(MembershipTypesRepository $membershipTypesRepository,$id)
+    {
+        $membershipTypesRepository->makeActive($id);
+        return redirect()->route('mbsp_membership');
+    }
 }

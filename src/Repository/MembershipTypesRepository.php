@@ -4,7 +4,6 @@ namespace BtyBugHook\Membership\Repository;
 
 use Btybug\btybug\Repositories\GeneralRepository;
 use BtyBugHook\Membership\Models\MembershipTypes;
-use BtyBugHook\Membership\Models\Plans;
 
 class MembershipTypesRepository extends GeneralRepository
 {
@@ -15,5 +14,12 @@ class MembershipTypesRepository extends GeneralRepository
     public function model()
     {
         return new MembershipTypes();
+    }
+
+    public function makeActive(int $id)
+    {
+        $this->model()->where('is_default', 1)->update(['is_default'=> 0]);
+        return $this->model()->where('id', $id)->update(['is_default'=> 1]);
+
     }
 }

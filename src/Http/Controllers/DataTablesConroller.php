@@ -3,10 +3,10 @@
 namespace BtyBugHook\Membership\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use BtyBugHook\Membership\Models\User;
 use BtyBugHook\Membership\Models\MembershipStatuses;
 use BtyBugHook\Membership\Models\MembershipTypes;
 use BtyBugHook\Membership\Models\Plans;
+use BtyBugHook\Membership\Models\UserMembership;
 use BtyBugHook\Membership\Repository\PlansRepository;
 use Yajra\DataTables\DataTables;
 
@@ -31,7 +31,14 @@ class DataTablesConroller extends Controller
     {
         return DataTables::of(MembershipTypes::query())->addColumn('actions', function ($membership) {
             $url = route("mbsp_new_membership", $membership->id);
-            return "<a href='$url' class='bty-btn-acction bt-edit'></a>";
+            $makeActive = route("mbsp_type_make_active", $membership->id);
+            $html="<a href='$url' class='bty-btn-acction bt-edit'></a>";
+            if($membership->is_default){
+                $html.="<button class='btn btn-default'>Active</button>";
+            }else{
+                $html.="<a href='$makeActive' class='btn btn-warning'>Make Active</a>";
+            }
+            return $html;
         }, 2)->editColumn('plan_id', function ($membership) {
             $planRepo = new PlansRepository();
             $id = ($membership->plan_id) ?? 0;
@@ -44,12 +51,20 @@ class DataTablesConroller extends Controller
 
     public function getMembers()
     {
-        return DataTables::of(User::where('role_id',0))
-            ->editColumn('membership_id', function ($member) {
-                $type=$member->membership;
-
-            return  ($type)?$type->title:'Default Type';
-        })->addColumn('actions', function ($member) {
+        return DataTables::of(UserMembership::query())
+            ->editColumn('username', function ($member) {
+                $user = $member->user;
+                return $user->username;
+            })->editColumn('email', function ($member) {
+                $user = $member->user;
+                return $user->email;
+            })->editColumn('status', function ($member) {
+                $status = $member->status;
+                return $status->title;
+            })->editColumn('membership_id', function ($member) {
+                $type = $member->membership_type;
+                return ($type) ? $type->title : 'Default Type';
+            })->addColumn('actions', function ($member) {
                 $url = route("mbsp_edit_member", $member->id);
                 return "<a href='$url' class='bty-btn-acction bt-edit'></a>";
             }, 2)->rawColumns(['actions'])->make(true);
