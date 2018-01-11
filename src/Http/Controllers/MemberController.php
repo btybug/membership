@@ -15,6 +15,7 @@ use BtyBugHook\Membership\Models\User;
 use BtyBugHook\Membership\Models\UserMembership;
 use BtyBugHook\Membership\Repository\MembershipStatusesRepository;
 use BtyBugHook\Membership\Repository\MembershipTypesRepository;
+use BtyBugHook\Membership\Repository\UserMembershipRepository;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -25,7 +26,7 @@ class MemberController extends Controller
     }
 
     public function getEdit(
-        UserRepository $userRepository,
+        UserMembershipRepository $userRepository,
         MembershipTypesRepository $membershipTypes,
         MembershipStatusesRepository $membershipStatusesRepository,
         $id
@@ -33,17 +34,11 @@ class MemberController extends Controller
     {
         $user = $userRepository->findOrFail($id);
         $mb_types = $membershipTypes->pluck('title', 'id');
-        $mb_types = $mb_types->toArray();
-        $mb_types[0] = 'No Types';
-
-        $mb_status = $membershipStatusesRepository->pluck('title', 'slug');
-        $mb_status = $mb_status->toArray();
-        $mb_status[0] = 'No Status';
-        ksort($mb_status);
+        $mb_status = $membershipStatusesRepository->pluck('title', 'id');
         return view('mbshp::members.edit', compact('user', 'mb_types', 'mb_status'));
     }
 
-    public function postEdit(Request $request, UserRepository $userRepository)
+    public function postEdit(Request $request, UserMembershipRepository $userRepository)
     {
         $userRepository->update($request->get('id', $request->id), $request->except('_token'));
         return redirect()->route('mbsp_stripe');
