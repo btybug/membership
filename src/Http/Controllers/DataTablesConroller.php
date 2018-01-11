@@ -43,6 +43,6 @@ class DataTablesConroller extends Controller
 
     public function getMembers()
     {
-        return DataTables::of(User::where('role_id',0)->query())->make(true);
+        return DataTables::of(User::where('role_id',0))->make(true);
     }
 }
