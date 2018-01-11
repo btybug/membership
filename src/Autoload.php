@@ -1,6 +1,6 @@
 <?php
 
-namespace BtyBugHook\Blog;
+namespace BtyBugHook\Membership;
 use Illuminate\Support\Facades\Schema;
 
 /**
