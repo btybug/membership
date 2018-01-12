@@ -10,15 +10,17 @@ namespace BtyBugHook\Membership\Http\Controllers;
 
 
 use App\Http\Controllers\Controller;
+use Btybug\btybug\Repositories\AdminsettingRepository;
 use BtyBugHook\Membership\Http\Requests\MembershipStatusCreateRequest;
 use BtyBugHook\Membership\Repository\MembershipStatusesRepository;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
-    public function getSettings()
+    public function getSettings(AdminsettingRepository $adminsettingRepository)
     {
-        return view('mbshp::settings.index');
+        $pricing_page=$adminsettingRepository->getSettings('membership','pricing_page');
+        return view('mbshp::settings.index',compact('pricing_page'));
     }
     public function getMembershipTypes()
     {
@@ -81,5 +83,11 @@ class SettingsController extends Controller
         $status->delete();
 
         return redirect()->back()->with('message','Status Deleted');
+    }
+
+    public function postSavePricingPage(Request $request,AdminsettingRepository $adminsettingRepository)
+    {
+        $adminsettingRepository->createOrUpdateOriginalToJson($request->except('_token'),'membership','pricing_page');
+        return redirect()->back();
     }
 }
