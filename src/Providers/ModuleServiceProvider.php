@@ -82,6 +82,7 @@ class ModuleServiceProvider extends ServiceProvider
                 ],
             ]
         ];
+        \Config::set('painter.PAINTERSPATHS',array_merge( \Config::get('painter.PAINTERSPATHS'),['app'.DS.'Plugins'.DS.'vendor'.DS.'sahak.avatar'.DS.'membership'.DS.'src'.DS.'Units']));
 
         \Eventy::action('my.tab', $tubs);
         Routes::registerPages('sahak.avatar/membership');

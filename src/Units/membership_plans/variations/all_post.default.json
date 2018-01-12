@@ -1,0 +1,20 @@
+{
+  "title": "main variation",
+  "id": "membership_plans.default",
+  "settings": {
+    "custom_search": "on",
+    "grid_system": "grid",
+    "custom_search_by": [
+      "id",
+      "author_id",
+      "title"
+    ],
+    "custom_sort": "on",
+    "custom_sort_by": [
+      "id"
+    ],
+    "custom_sort_how": "ASC",
+    "custom_pagination": "load",
+    "custom_limit_per_page": "5"
+  }
+}
