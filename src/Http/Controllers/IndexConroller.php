@@ -11,6 +11,7 @@ class IndexConroller extends Controller
     {
         return view('mbshp::plans.index');
     }
+
     public function getPayments()
     {
         return view('mbshp::payments.index');
