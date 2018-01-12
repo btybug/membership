@@ -9,27 +9,23 @@ body{
     color: #fff;
     letter-spacing: 2px;
     margin: 30px 0;
+    font-weight: bold;
 }
 #hosting-header hr{
     width: 22%;
+    border-width: 2px;
 }
 .block-white{
-    padding:50px 20px;
+    box-shadow: -5px 0px 21px rgba(0, 0, 0, 0.45);
+    position: relative;
+    padding: 50px 60px;
     background-color: white;
     width: 90%;
     height: auto;
     margin: 20px auto;
+    transition: ease all 0.5s;
 }
-.block-gray{
-    position: relative;
-    padding:70px 20px;
-    background-color: #8a839a;
-    width:90%;
-    height: auto;
-    margin: 0 auto;
-    color:#fff
-}
-.block-white hr, .block-gray hr{
+.block-white hr{
     width: 60px;
     height: 2px;
     background-color: #000;
@@ -40,22 +36,17 @@ body{
     letter-spacing: 2px;
     font-size: 24px;
     font-style: italic;
-    color: aqua;
-}
-.block-gray .block-title{
-    letter-spacing: 2px;
-    font-size: 24px;
-    font-style: italic;
-    color: #fff;
+    color: #92d8e4;
+    font-weight: bold;
 }
 .block-white ul li{
-    padding: 15px;
+    padding: 20px 10px;
     border-bottom: 1px solid #ccc;
     letter-spacing: 2px;
 }
 .block-footer>b{
     font-size: 40px;
-    letter-spacing: 3px;
+    letter-spacing: 7px;
 }
 .block-footer sup{
     top: -1.5em;
@@ -63,13 +54,8 @@ body{
     letter-spacing: 2px;
 }
 .block-footer sub {
-    bottom: 0.75em;
-    margin-left: -20px;
-    letter-spacing: 2px;
-}
-.block-gray ul li{
-    padding: 15px;
-    border-bottom: 1px solid #ccc;
+    bottom: 0.55em;
+    margin-left: -26px;
     letter-spacing: 2px;
 }
 .block-content {
@@ -80,19 +66,39 @@ body{
     width: 82%;
 }
 .buy{
+    display: none;
     width: 160px;
     position: absolute;
     bottom: -25px;
     height: 50px;
     left: 84px;
-    background-color: aqua;
+    background-color: #92d8e4;
     color: #fff;
     font-size: 30px;
     font-style: italic;
     font-weight: bold;
     letter-spacing: 2px;
+    padding-top: 6px;
 }
-.block-white{
-    padding: 10px;
-    box-shadow: 5px 10px 8px 10px #888888;
+.buy:hover{
+    color: #fff;
+}
+.block:active .buy, .block:focus .buy, .block:hover .buy, .block:visited .buy{
+    display: block;
+}
+.block:active .block-white,.block:hover .block-white{
+    position: relative;
+    padding: 70px 60px;
+    background-color: #8a839a;
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    color: #fff;
+    transition: ease all 0.5s;
+}
+.block:active .block-title,.block:hover .block-title {
+    color: white;
+}
+.block:active .block-white hr,.block:hover .block-white hr {
+    background-color: white;
 }

@@ -13,7 +13,7 @@
   "is_core": 0,
   "place": "frontend",
   "tags": [
-    "membership","plan","membership_plan",
+    "membership","plans","products",
     "frontend"
   ],
   "path": "app\/Plugins\/vendor\/sahak.avatar\/membership\/src\/Units\/membership_plans"

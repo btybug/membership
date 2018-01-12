@@ -14,7 +14,7 @@
             </div>
             <div id="collapseOne" class="collapse in" aria-expanded="true" style="">
                 <div class="content">
-                    {!! BBbutton2('unit','pricing','membership_plan','Select pricing unit') !!}
+                    {!! BBbutton2('unit','pricing','products','Select pricing unit') !!}
                 </div>
             </div>
             <div class="col-md-3">
