@@ -10,6 +10,7 @@ namespace BtyBugHook\Membership\Http\Controllers;
 
 
 use App\Http\Controllers\Controller;
+use BtyBugHook\Membership\Http\Requests\MembershipStatusCreateRequest;
 use BtyBugHook\Membership\Repository\MembershipStatusesRepository;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,7 @@ class SettingsController extends Controller
     }
 
     public function  postCreateStatus(
-        Request $request,
+        MembershipStatusCreateRequest $request,
         MembershipStatusesRepository $repository
     )
     {

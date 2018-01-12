@@ -15,4 +15,8 @@ class MembershipStatuses extends Model
 
     protected $guarded=['id'];
 
+    protected $casts = [
+      'json_data' => 'json'
+    ];
+
 }

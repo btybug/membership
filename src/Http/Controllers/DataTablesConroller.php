@@ -82,6 +82,8 @@ class DataTablesConroller extends Controller
             return $action;
         })->editColumn('created_at', function ($status) {
             return BBgetDateFormat($status->created_at);
-        })->rawColumns(['actions'])->make(true);
+        })->editColumn('icon', function ($status) {
+            return '<i class="fa '.$status->icon.'"></i>';
+        })->rawColumns(['actions','icon'])->make(true);
     }
 }
