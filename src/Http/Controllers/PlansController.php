@@ -51,20 +51,20 @@ class PlansController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $data = $request->except('_token');
-        Stripe::setApiKey(\Config::get('services.stripe.secret'));
-
-        $response = \Stripe\Plan::create(array(
-            "amount" => $data['amount'],
-            "interval" => $data['interval'],
-            "interval_count" => $data['interval_count'],
-            "name" => $data['name'],
-            "currency" => $data['currency'],
-            "id" => $data['plan_id']
-        ));
+//        Stripe::setApiKey(\Config::get('services.stripe.secret'));
+//
+//        $response = \Stripe\Plan::create(array(
+//            "amount" => $data['amount'],
+//            "interval" => $data['interval'],
+//            "interval_count" => $data['interval_count'],
+//            "name" => $data['name'],
+//            "currency" => $data['currency'],
+//            "id" => $data['plan_id']
+//        ));
         if ($response) {
-            $data['object'] = $response->object;
-            $data['created'] = $response->created;
-            $data['metadata'] = json_encode($response->metadata, true);
+            $data['object'] ='plan';
+            $data['created'] = time();
+            $data['metadata'] = 'object';
             $result = $repo->model()->create($data);
             return redirect()->route('mbsp_plans');
         }
