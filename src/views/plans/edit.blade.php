@@ -1,60 +1,76 @@
-@extends('btybug::layouts.admin')
-@section('content')
-    <div class="main_lay_cont">
+@extends('btybug::layouts.mTabs',['index'=>'create_product','id'=>$id])
+<!-- Nav tabs -->
+@section('tab')
+    {!! Form::model($plan,['class'=>'bty-form-5','url'=>route('mbsp_plans_edit_save',$plan->id)]) !!}
+    <h2 class="form-title">Create Post</h2>
+    <div class="field-box">
+        <fieldset class="bty-form-text" id="bty-input-id-11">
+            <div>
+                {!! Form::text('plan_id',null,['class'=>'bty-input-label-5','placeholder'=>'my-plan']) !!}
+                <label>Plan ID</label>
+            </div>
+        </fieldset>
+        <fieldset class="bty-form-text" id="bty-input-id-11">
+            <div>
+                {!! Form::text('name',null,['class'=>'bty-input-label-5','placeholder'=>'Pro+']) !!}
+                <label>Plan Name</label>
+            </div>
+        </fieldset>
+        <fieldset class="bty-form-text" id="bty-input-id-11">
+            <div>
+                {!! Form::text('amount',null,['class'=>'bty-input-label-5','placeholder'=>'my-plan']) !!}
+                <label>Plan Amount</label>
+            </div>
+        </fieldset>
+        <fieldset class="bty-form-text" id="bty-input-id-11">
+            <div class="bty-input-select-5">
+                {!! Form::select('currency',['usd'=>'USD','eur'=>'EUR','amd'=>'AMD']) !!}
+                <label>Currency</label>
+            </div>
+        </fieldset>
+        <fieldset class="bty-form-text">
+            <div>
+                {!! Form::number('interval_count',null,['class'=>'bty-input-label-5','placeholder'=>'1']) !!}
+                <label>Interval Count?</label>
+            </div>
+            <div>
+                <div class="bty-input-select-5">
+                    {!! Form::select('interval',['day'=>'daily','month'=>'monthly','year'=>'yearly','week','weekly']) !!}
+                </div>
+                <lable>Interval</lable>
 
-        <form class="bty-form-4" method="post" action="{{route('mbsp_plans_edit_save',$plan->id)}}">
-            {{csrf_field()}}
-            <h2>Create Plan</h2>
-            <fieldset class="bty-form-text">
-                <legend><span><i class="fa fa-info" aria-hidden="true"></i></span>General</legend>
-                <div>
-                    <input class="bty-input-label-6" name="name" type="text" placeholder="Insert Title" value="{{$plan->name}}">
-                    <label>Title?</label>
-                </div>
-                <div>
-                    <input class="bty-input-label-6" name="amount" type="number" min="1" placeholder="Insert Price" value="{{$plan->amount}}" disabled="disabled">
-                    <label>Price?</label>
-                </div>
-                <div>
-                    <input class="bty-input-label-6" name="interval" type="number" placeholder="Insert Period" value="{{$plan->interval}}" disabled="disabled">
-                    <label>Period?</label>
-                </div>
-            </fieldset>
-            <fieldset class="bty-form-textarea">
-                <textarea id="bio" placeholder="Description" name="statement_descriptor" class="bty-textarea-1">{{$plan->statement_descriptor}}</textarea>
-            </fieldset>
-            <fieldset class="bty-form-select">
-                <legend><span><i class="fa fa-info" aria-hidden="true"></i></span>Period Type</legend>
-                <div class="bty-input-select-3">
-                    <select name="period_type" disabled="disabled">
-                        <option {{$plan->period_type == 'day' ? 'selected' : ''}}>day</option>
-                        <option {{$plan->period_type == 'week' ? 'selected' : ''}}>week</option>
-                        <option {{$plan->period_type == 'month' ? 'selected' : ''}}>month</option>
-                    </select>
-                </div>
-            </fieldset>
-            <fieldset class="bty-form-text">
-                <div>
-                    <input class="bty-input-label-6" name="currency" type="text" placeholder="Insert Currency" value="{{$plan->currency}}">
-                    <label>Currency?</label>
-                </div>
-                <fieldset class="bty-form-radio">
-                    <legend><span><i class="fa fa-info" aria-hidden="true"></i></span>Is Active</legend>
-                    <div>
-                        <input name="is_active" value="1" type="radio" class="bty-input-radio-1"
-                               id="bty-gender-form-61" {{$plan->is_active == 1 ? 'checked' : ''}}>
-                        <label for="bty-gender-form-61">Yes</label>
-                        <input name="is_active" value="0" type="radio" class="bty-input-radio-1"
-                               id="bty-gender-form-62" {{$plan->is_active == 0 ? 'checked' : ''}}>
-                        <label for="bty-gender-form-62">No</label>
-                    </div>
-                </fieldset>
-            </fieldset>
+            </div>
+        </fieldset>
 
-            <button class="bty-btn bty-btn-save"><span>Save</span></button>
-        </form>
+        <fieldset class="bty-form-text" id="bty-input-id-11">
+            <div>
+                {!! Form::text('plan_id',null,['class'=>'bty-input-label-5','placeholder'=>'my-plan']) !!}
+                <label>Plan ID</label>
+            </div>
+        </fieldset>
 
     </div>
+    <fieldset class="bty-form-textarea" id="bty-input-id-10">
+        {!! Form::textarea('statement_descriptor',null,['class'=>'bty-textarea-1']) !!}
+        <label>Description</label>
+    </fieldset>
+        <fieldset class="bty-form-radio">
+            <legend><span><i class="fa fa-info" aria-hidden="true"></i></span>Is Active</legend>
+            <div>
+                {!! Form::radio('is_active',1,1,['class']) !!}
+                <input name="is_active" value="1" type="radio" class="bty-input-radio-1"
+                       id="bty-gender-form-61" checked>
+                <label for="bty-gender-form-61">Yes</label>
+                <input name="is_active" value="0" type="radio" class="bty-input-radio-1"
+                       id="bty-gender-form-62">
+                <label for="bty-gender-form-62">No</label>
+            </div>
+        </fieldset>
+
+    <button type="submit" class="bty-btn bty-btn-save"><span>Save</span></button>
+    </div>
+    {!! Form::close() !!}
+
 @stop
 @section('CSS')
 

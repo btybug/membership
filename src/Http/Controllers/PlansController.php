@@ -21,7 +21,7 @@ class PlansController extends Controller
         if (!$plan) {
             abort(404);
         }
-        return view('mbshp::plans.edit', compact("plan"));
+        return view('mbshp::plans.edit', compact("plan",'id'));
     }
 
     public function saveCreatePlan(PlansRepository $repo, Request $request)

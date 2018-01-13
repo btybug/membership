@@ -80,6 +80,17 @@ class ModuleServiceProvider extends ServiceProvider
                     'url' => '/admin/membership/settings/membership-status',
                     'icon' => 'fa fa-cub'
                 ],
+            ],
+            'create_product'=>[
+                [
+                    'title' => 'General',
+                    'url' => '/admin/membership/plans/edit/{id}',
+                    'icon' => 'fa fa-cub'
+                ],[
+                    'title' => 'Price',
+                    'url' => '/admin/membership/plans/edit/{id}/price',
+                    'icon' => 'fa fa-cub'
+                ],
             ]
         ];
 
