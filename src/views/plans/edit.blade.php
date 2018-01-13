@@ -8,20 +8,20 @@
             <fieldset class="bty-form-text">
                 <legend><span><i class="fa fa-info" aria-hidden="true"></i></span>General</legend>
                 <div>
-                    <input class="bty-input-label-6" name="title" type="text" placeholder="Insert Title" value="{{$plan->title}}">
+                    <input class="bty-input-label-6" name="name" type="text" placeholder="Insert Title" value="{{$plan->name}}">
                     <label>Title?</label>
                 </div>
                 <div>
-                    <input class="bty-input-label-6" name="price" type="number" min="1" placeholder="Insert Price" value="{{$plan->price}}" disabled="disabled">
+                    <input class="bty-input-label-6" name="amount" type="number" min="1" placeholder="Insert Price" value="{{$plan->amount}}" disabled="disabled">
                     <label>Price?</label>
                 </div>
                 <div>
-                    <input class="bty-input-label-6" name="period" type="number" placeholder="Insert Period" value="{{$plan->period}}" disabled="disabled">
+                    <input class="bty-input-label-6" name="interval" type="number" placeholder="Insert Period" value="{{$plan->interval}}" disabled="disabled">
                     <label>Period?</label>
                 </div>
             </fieldset>
             <fieldset class="bty-form-textarea">
-                <textarea id="bio" placeholder="Description" name="description" class="bty-textarea-1">{{$plan->description}}</textarea>
+                <textarea id="bio" placeholder="Description" name="statement_descriptor" class="bty-textarea-1">{{$plan->statement_descriptor}}</textarea>
             </fieldset>
             <fieldset class="bty-form-select">
                 <legend><span><i class="fa fa-info" aria-hidden="true"></i></span>Period Type</legend>
