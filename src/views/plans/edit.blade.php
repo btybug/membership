@@ -76,13 +76,14 @@
                     </label>
                 </div>
             </div>
-        </fieldset>
+
     <!-- Button -->
     <div class="form-group">
         <div class="col-md-4">
-            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Save</button>
+            <input type="submit" id="singlebutton"  class="btn btn-primary">Save</input>
         </div>
     </div>
+        </fieldset>
 {!! Form::close() !!}
 
 @stop
