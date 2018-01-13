@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use BtyBugHook\Membership\Repository\PlansRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Stripe\Stripe;
 class PlansController extends Controller
 {
 
@@ -42,7 +42,7 @@ class PlansController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $data = $request->except('_token');
-        \Stripe\Stripe::setApiKey(\Config::get('services.stripe.secret'));
+        Stripe::setApiKey(\Config::get('services.stripe.secret'));
 
         $response = \Stripe\Plan::create(array(
             "amount" => $data['amount'],

@@ -11,6 +11,7 @@ namespace BtyBugHook\Membership\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Repositories\AdminsettingRepository;
+use BtyBugHook\Membership\Repository\PlansRepository;
 
 class FrontPagesController extends Controller
 {
@@ -23,5 +24,16 @@ class FrontPagesController extends Controller
             $unit=$json['pricing'];
         }
         return view('mbshp::frontend.products',compact('unit'));
+    }
+    public function grtProduct(AdminsettingRepository $adminsettingRepository,$id)
+    {
+        $product=PlansRepository::find($id);
+        $pricing_page=$adminsettingRepository->getSettings('membership','pricing_page');
+        $unit=null;
+        if($pricing_page){
+            $json=  json_decode($pricing_page->val,true);
+            $unit=$json['product']??null;
+        }
+        return view('mbshp::frontend.product',compact('unit','product'));
     }
 }
