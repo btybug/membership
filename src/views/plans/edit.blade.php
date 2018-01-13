@@ -23,35 +23,35 @@
                 </div>
             </div>
             <!-- Text input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="plan_amount">Plan Amount</label>
-                <div class="col-md-4">
-                    {!! Form::number('amount',null,['class'=>'form-control input-md','placeholder'=>'100','id'=>'plan_amount']) !!}
-                </div>
-            </div>
-            <!-- Select Basic -->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="currency">Currency</label>
-                <div class="col-md-4">
-                    {!! Form::select('currency',['usd'=>'USD','eur'=>'EUR','amd'=>'AMD'],null,['class'=>'form-control','id'=>'currency']) !!}
+            {{--<div class="form-group">--}}
+                {{--<label class="col-md-4 control-label" for="plan_amount">Plan Amount</label>--}}
+                {{--<div class="col-md-4">--}}
+                    {{--{!! Form::number('amount',null,['class'=>'form-control input-md','placeholder'=>'100','id'=>'plan_amount']) !!}--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<!-- Select Basic -->--}}
+            {{--<div class="form-group">--}}
+                {{--<label class="col-md-4 control-label" for="currency">Currency</label>--}}
+                {{--<div class="col-md-4">--}}
+                    {{--{!! Form::select('currency',['usd'=>'USD','eur'=>'EUR','amd'=>'AMD'],null,['class'=>'form-control','id'=>'currency']) !!}--}}
 
-                </div>
-            </div>
-            <!-- Select Basic -->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="interval">Interval</label>
-                <div class="col-md-4">
-                    {!! Form::select('interval',['day'=>'daily','month'=>'monthly','year'=>'yearly','week','weekly'],null,['class'=>'form-control','id'=>'interval']) !!}
-                </div>
-            </div>
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<!-- Select Basic -->--}}
+            {{--<div class="form-group">--}}
+                {{--<label class="col-md-4 control-label" for="interval">Interval</label>--}}
+                {{--<div class="col-md-4">--}}
+                    {{--{!! Form::select('interval',['day'=>'daily','month'=>'monthly','year'=>'yearly','week','weekly'],null,['class'=>'form-control','id'=>'interval']) !!}--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
-            <!-- Text input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="interval_count">Interval Count</label>
-                <div class="col-md-4">
-                    {!! Form::number('interval_count',1,['class'=>'form-control input-md','placeholder'=>'1','id'=>'interval_count']) !!}
-                </div>
-            </div>
+            {{--<!-- Text input-->--}}
+            {{--<div class="form-group">--}}
+                {{--<label class="col-md-4 control-label" for="interval_count">Interval Count</label>--}}
+                {{--<div class="col-md-4">--}}
+                    {{--{!! Form::number('interval_count',1,['class'=>'form-control input-md','placeholder'=>'1','id'=>'interval_count']) !!}--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
             <!-- Textarea -->
             <div class="form-group">
