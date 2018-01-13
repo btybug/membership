@@ -57,12 +57,9 @@
         <fieldset class="bty-form-radio">
             <legend><span><i class="fa fa-info" aria-hidden="true"></i></span>Is Active</legend>
             <div>
-                {!! Form::radio('is_active',1,1,['class']) !!}
-                <input name="is_active" value="1" type="radio" class="bty-input-radio-1"
-                       id="bty-gender-form-61" checked>
+                {!! Form::radio('is_active',1,1,['class'=>'bty-input-radio-1','id'=>'bty-gender-form-61']) !!}
                 <label for="bty-gender-form-61">Yes</label>
-                <input name="is_active" value="0" type="radio" class="bty-input-radio-1"
-                       id="bty-gender-form-62">
+                {!! Form::radio('is_active',1,1,['class'=>'bty-input-radio-1','id'=>'bty-gender-form-62']) !!}
                 <label for="bty-gender-form-62">No</label>
             </div>
         </fieldset>
