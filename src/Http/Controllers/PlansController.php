@@ -7,6 +7,7 @@ use BtyBugHook\Membership\Repository\PlansRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Stripe\Stripe;
+
 class PlansController extends Controller
 {
 
@@ -22,6 +23,14 @@ class PlansController extends Controller
             abort(404);
         }
         return view('mbshp::plans.edit', compact("plan",'id'));
+    }
+    public function editPlansPrice(PlansRepository $repo, $id)
+    {
+        $plan = $repo->find($id);
+        if (!$plan) {
+            abort(404);
+        }
+        return view('mbshp::plans.edit_price', compact("plan",'id'));
     }
 
     public function saveCreatePlan(PlansRepository $repo, Request $request)

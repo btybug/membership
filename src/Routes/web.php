@@ -30,6 +30,7 @@ Route::group(['prefix' => 'plans'], function () {
     Route::get('/', 'IndexConroller@getPlans', true)->name('mbsp_plans');
     Route::get('/create', 'PlansController@createPlans', true)->name('mbsp_plans_create');
     Route::get('/edit/{id}', 'PlansController@editPlans', true)->name('mbsp_plans_edit');
+    Route::get('/edit/{id}/price', 'PlansController@editPlansPrice', true)->name('mbsp_plans_edit_price');
     Route::post('/create', 'PlansController@saveCreatePlan')->name('mbsp_plans_create_save');
     Route::post('/edit/{id}', 'PlansController@saveEditPlan')->name('mbsp_plans_edit_save');
 });
