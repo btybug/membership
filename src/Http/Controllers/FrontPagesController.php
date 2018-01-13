@@ -25,7 +25,7 @@ class FrontPagesController extends Controller
         }
         return view('mbshp::frontend.products',compact('unit'));
     }
-    public function grtProduct(AdminsettingRepository $adminsettingRepository,$id)
+    public function getProduct(AdminsettingRepository $adminsettingRepository,$id)
     {
         $product=PlansRepository::find($id);
         $pricing_page=$adminsettingRepository->getSettings('membership','pricing_page');
