@@ -1,67 +1,89 @@
 @extends('btybug::layouts.mTabs',['index'=>'create_product','id'=>$id])
 <!-- Nav tabs -->
 @section('tab')
-    {!! Form::model($plan,['class'=>'bty-form-5','url'=>route('mbsp_plans_edit_save',$plan->id)]) !!}
-    <h2 class="form-title">Create Post</h2>
-    <div class="field-box">
-        <fieldset class="bty-form-text" id="bty-input-id-11">
-            <div>
-                {!! Form::text('plan_id',null,['class'=>'bty-input-label-5','placeholder'=>'my-plan']) !!}
-                <label>Plan ID</label>
-            </div>
-        </fieldset>
-        <fieldset class="bty-form-text" id="bty-input-id-11">
-            <div>
-                {!! Form::text('name',null,['class'=>'bty-input-label-5','placeholder'=>'Pro+']) !!}
-                <label>Plan Name</label>
-            </div>
-        </fieldset>
-        <fieldset class="bty-form-text" id="bty-input-id-11">
-            <div>
-                {!! Form::text('amount',null,['class'=>'bty-input-label-5','placeholder'=>'my-plan']) !!}
-                <label>Plan Amount</label>
-            </div>
-        </fieldset>
-        <fieldset class="bty-form-text" id="bty-input-id-11">
-            <div class="bty-input-select-5">
-                {!! Form::select('currency',['usd'=>'USD','eur'=>'EUR','amd'=>'AMD']) !!}
-                <label>Currency</label>
-            </div>
-        </fieldset>
-        <fieldset class="bty-form-text">
-            <div>
-                {!! Form::number('interval_count',null,['class'=>'bty-input-label-5','placeholder'=>'1']) !!}
-                <label>Interval Count?</label>
-            </div>
-            <div>
-                <div class="bty-input-select-5">
-                    {!! Form::select('interval',['day'=>'daily','month'=>'monthly','year'=>'yearly','week','weekly']) !!}
+    {!! Form::model($plan,['class'=>'form-horizontal','url'=>route('mbsp_plans_edit_save',$plan->id)]) !!}
+
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Edit Plan {!! $plan->name !!}</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="plan_id">Plan ID</label>
+                <div class="col-md-4">
+                    {!! Form::text('plan_id',null,['class'=>'form-control input-md','placeholder'=>'my-plan','id'=>'plan_id']) !!}
                 </div>
-                <lable>Interval</lable>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="plan_name">Plan Name</label>
+                <div class="col-md-4">
+                    {!! Form::text('name',null,['class'=>'form-control input-md','placeholder'=>'my-plan','id'=>'plan_name']) !!}
+                </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="plan_amount">Plan Amount</label>
+                <div class="col-md-4">
+                    {!! Form::number('plan_amount',null,['class'=>'form-control input-md','placeholder'=>'my-plan','id'=>'plan_amount']) !!}
+                </div>
+            </div>
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="currency">Currency</label>
+                <div class="col-md-4">
+                    {!! Form::select('currency',['usd'=>'USD','eur'=>'EUR','amd'=>'AMD'],null,['class'=>'form-control','id'=>'currency']) !!}
 
+                </div>
+            </div>
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="interval">Interval</label>
+                <div class="col-md-4">
+                    {!! Form::select('interval',['day'=>'daily','month'=>'monthly','year'=>'yearly','week','weekly'],null,['class'=>'form-control','id'=>'interval']) !!}
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="interval_count">Interval Count</label>
+                <div class="col-md-4">
+                    {!! Form::number('interval_count',1,['class'=>'form-control input-md','placeholder'=>'1','id'=>'interval_count']) !!}
+                </div>
+            </div>
+
+            <!-- Textarea -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="statement_descriptor">Description</label>
+                <div class="col-md-4">
+                    {!! Form::textarea('statement_descriptor',null,['class'=>'form-control','id'=>'statement_descriptor']) !!}
+                </div>
+            </div>
+
+            <!-- Multiple Radios (inline) -->
+            <div class="form-group">
+
+                <label class="col-md-4 control-label" for="radios">Is Active</label>
+                <div class="col-md-4">
+                    <label class="radio-inline" for="radios-0">
+                        {!! Form::radio('is_active',1,1,['id'=>'radio-0']) !!}
+                        Yes
+                    </label>
+                    <label class="radio-inline" for="radios-1">
+                        {!! Form::radio('is_active',0,1,['id'=>'radio-1']) !!}
+                        No
+                    </label>
+                </div>
             </div>
         </fieldset>
-
-      
-
+    <!-- Button -->
+    <div class="form-group">
+        <div class="col-md-4">
+            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Save</button>
+        </div>
     </div>
-    <fieldset class="bty-form-textarea" id="bty-input-id-10">
-        {!! Form::textarea('statement_descriptor',null,['class'=>'bty-textarea-1']) !!}
-        <label>Description</label>
-    </fieldset>
-        <fieldset class="bty-form-radio">
-            <legend><span><i class="fa fa-info" aria-hidden="true"></i></span>Is Active</legend>
-            <div>
-                {!! Form::radio('is_active',1,1,['class'=>'bty-input-radio-1','id'=>'bty-gender-form-61']) !!}
-                <label for="bty-gender-form-61">Yes</label>
-                {!! Form::radio('is_active',1,1,['class'=>'bty-input-radio-1','id'=>'bty-gender-form-62']) !!}
-                <label for="bty-gender-form-62">No</label>
-            </div>
-        </fieldset>
-
-    <button type="submit" class="bty-btn bty-btn-save"><span>Save</span></button>
-    </div>
-    {!! Form::close() !!}
+{!! Form::close() !!}
 
 @stop
 @section('CSS')
