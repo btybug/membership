@@ -80,7 +80,7 @@
     <!-- Button -->
     <div class="form-group">
         <div class="col-md-4">
-            <input type="submit" id="singlebutton"  class="btn btn-primary">Save</input>
+            <input type="submit" id="singlebutton"  class="btn btn-primary">
         </div>
     </div>
         </fieldset>
