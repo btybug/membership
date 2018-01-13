@@ -61,13 +61,11 @@ class PlansController extends Controller
 //            "currency" => $data['currency'],
 //            "id" => $data['plan_id']
 //        ));
-        if ($response) {
             $data['object'] ='plan';
             $data['created'] = time();
             $data['metadata'] = 'object';
             $result = $repo->model()->create($data);
             return redirect()->route('mbsp_plans');
-        }
 
     }
 
@@ -75,16 +73,17 @@ class PlansController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            //'price' => 'required|integer',
-            // 'period' => 'required|integer',
-            // 'period_type' => 'required',
-            'currency' => 'required',
-            'description' => 'required',
+            'plan_id' => 'required|unique:plans',
+            'amount' => 'required|integer',
+            'currency' => 'required|alpha',
+            'interval' => 'required',
+            'interval_count' => 'required|integer',
+            'name' => 'required',
             'is_active' => 'required',
         ]);
 
         if ($validator->fails()) {
+            dd($validator->messages());
             return redirect()->back()->withErrors($validator)->withInput();
         }
 

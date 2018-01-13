@@ -42,12 +42,7 @@
             </div>
         </fieldset>
 
-        <fieldset class="bty-form-text" id="bty-input-id-11">
-            <div>
-                {!! Form::text('plan_id',null,['class'=>'bty-input-label-5','placeholder'=>'my-plan']) !!}
-                <label>Plan ID</label>
-            </div>
-        </fieldset>
+      
 
     </div>
     <fieldset class="bty-form-textarea" id="bty-input-id-10">
