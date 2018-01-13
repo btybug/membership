@@ -26,7 +26,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="plan_amount">Plan Amount</label>
                 <div class="col-md-4">
-                    {!! Form::number('plan_amount',null,['class'=>'form-control input-md','placeholder'=>'my-plan','id'=>'plan_amount']) !!}
+                    {!! Form::number('amount',null,['class'=>'form-control input-md','placeholder'=>'my-plan','id'=>'plan_amount']) !!}
                 </div>
             </div>
             <!-- Select Basic -->
