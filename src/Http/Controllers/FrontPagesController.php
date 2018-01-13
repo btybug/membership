@@ -27,7 +27,7 @@ class FrontPagesController extends Controller
     }
     public function getProduct(AdminsettingRepository $adminsettingRepository,$id)
     {
-        $product=PlansRepository::find($id);
+        $product=$adminsettingRepository->find($id);
         $pricing_page=$adminsettingRepository->getSettings('membership','pricing_page');
         $unit=null;
         if($pricing_page){
