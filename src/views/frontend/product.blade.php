@@ -1,7 +1,7 @@
 @extends('mbshp::frontend.layouts.app')
 @section('content')
     <section>
-{!! BBRenderUnits($unit) !!}
+{!! BBRenderUnits($unit,['product'=>$product]) !!}
     </section>
 
 @stop
