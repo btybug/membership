@@ -57,11 +57,6 @@ class ModuleServiceProvider extends ServiceProvider
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
                 ], [
-                    "title" => "Payments",
-                    "custom-link" => "/admin/membership/payments",
-                    "icon" => "fa fa-angle-right",
-                    "is_core" => "yes"
-                ], [
                     "title" => "Settings",
                     "custom-link" => "/admin/membership/settings",
                     "icon" => "fa fa-cog",
@@ -86,11 +81,7 @@ class ModuleServiceProvider extends ServiceProvider
                     'title' => 'General',
                     'url' => '/admin/membership/plans/edit/{id}',
                     'icon' => 'fa fa-cub'
-                ],[
-                    'title' => 'Price',
-                    'url' => '/admin/membership/plans/edit/{id}/price',
-                    'icon' => 'fa fa-cub'
-                ],
+                ]
             ]
         ];
 
