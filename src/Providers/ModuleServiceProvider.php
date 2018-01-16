@@ -74,6 +74,10 @@ class ModuleServiceProvider extends ServiceProvider
                     'title' => 'Membership Status',
                     'url' => '/admin/membership/settings/membership-status',
                     'icon' => 'fa fa-cub'
+                ],[
+                    'title' => 'Options',
+                    'url' => '/admin/membership/settings/membership-options',
+                    'icon' => 'fa fa-cub'
                 ],
             ],
             'create_product' => [

@@ -90,4 +90,9 @@ class SettingsController extends Controller
         $adminsettingRepository->createOrUpdateOriginalToJson($request->except('_token'),'membership','pricing_page');
         return redirect()->back();
     }
+
+    public function getMembershipOptions()
+    {
+        return view('mbshp::settings.options');
+    }
 }

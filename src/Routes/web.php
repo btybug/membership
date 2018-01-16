@@ -61,5 +61,8 @@ Route::group(['prefix' => 'settings'], function () {
         Route::get('/delete/{id}', 'SettingsController@getDeleteStatus')->name('mbsp_settings_status_del');
         Route::post('/edit/{id}', 'SettingsController@postEditStatus');
     });
+    Route::group(['prefix' => 'membership-options'], function () {
+        Route::get('/', 'SettingsController@getMembershipOptions', true)->name('mbsp_settings_mb_options');
+    });
 });
 
