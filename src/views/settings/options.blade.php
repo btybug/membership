@@ -1,4 +1,4 @@
-@extends('btybug::layouts.mTabs',['index'=>'mb_settings'])
+@extends('btybug::layouts.mTabs',['index'=>'cars_pages'])
 <!-- Nav tabs -->
 @section('tab')
     <div class="col-md-6">

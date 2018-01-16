@@ -81,7 +81,7 @@ class ModuleServiceProvider extends ServiceProvider
                     'title' => 'Options',
                     'url' => '/admin/membership/settings/membership-options',
                     'icon' => 'fa fa-cub'
-                ],
+                ]
             ],
             'create_product' => [
                 [
@@ -103,7 +103,15 @@ class ModuleServiceProvider extends ServiceProvider
                 ], [
                     'title' => 'Form List',
                     'url' => '/admin/membership/cars/form-list',
-                ],
+                ],[
+                    'title' => 'Options',
+                    'url' => '/admin/membership/cars/options',
+                    'icon' => 'fa fa-cub'
+                ],[
+                    'title' => 'Order Button',
+                    'url' => '/admin/membership/cars/order-button',
+                    'icon' => 'fa fa-cub'
+                ]
             ]
         ];
 

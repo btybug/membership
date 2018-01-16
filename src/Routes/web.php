@@ -52,55 +52,54 @@ Route::group(['prefix' => 'stripe'], function () {
 //});
 Route::group(['prefix' => 'settings'], function () {
     Route::get('/', 'SettingsController@getSettings', true)->name('mbsp_settings');
-    Route::post('/save-pricing-page','SettingsController@postSavePricingPage')->name('mbsp_settings_save_pricing_page');
-    Route::group(['prefix' => 'membership-options'], function () {
-        Route::get('/', 'SettingsController@getMembershipOptions', true)->name('mbsp_settings_mb_options');
-    });
+    Route::post('/save-pricing-page', 'SettingsController@postSavePricingPage')->name('mbsp_settings_save_pricing_page');
+
 });
 
 //cars Blog
 Route::group(['prefix' => 'cars'], function () {
-    Route::get('/', 'CarsController@getIndex',true);
-    Route::get('/posts', 'CarsController@getPosts',true);
+    Route::get('/', 'CarsController@getIndex', true);
+    Route::get('/posts', 'CarsController@getPosts', true);
     Route::get('/posts-data', 'CarsController@carsData')->name('carsData');
     Route::get('/create-data', 'CarsController@createPosts');
-    Route::get('/new-post', 'CarsController@getNewPost',true);
+    Route::get('/new-post', 'CarsController@getNewPost', true);
 //Route::post('/new-post', 'IndexConroller@postNewPost');
     Route::post('/get-fields', 'CarsController@getFieldsByTable');
-    Route::get('/settings', 'CarsController@getSettings',true);
-
+    Route::get('/settings', 'CarsController@getSettings', true);
+    Route::get('/options', 'SettingsController@getOptions', true)->name('mbsp_settings_mb_options');
+    Route::get('/order-button', 'SettingsController@getOrderButton', true)->name('mbsp_order_button');
     Route::post('/render-fields', 'CarsController@postRenderField');
     Route::post('/save-form', 'CarsController@postSaverForm');
 
-    Route::group(['prefix'=>'edit-post'],function (){
-        Route::get('/', 'CarsController@getEditPost',true);
-        Route::get('/{param}', 'CarsController@getEditPost',true);
+    Route::group(['prefix' => 'edit-post'], function () {
+        Route::get('/', 'CarsController@getEditPost', true);
+        Route::get('/{param}', 'CarsController@getEditPost', true);
         Route::post('/{param}', 'CarsController@postEditPos');
     });
 
-    Route::group(['prefix'=>'form-list'],function (){
-        Route::get('/', 'CarsController@getList',true);
-        Route::get('/create', 'CarsController@getFormBulder',true)->name("form_builder_cars");
+    Route::group(['prefix' => 'form-list'], function () {
+        Route::get('/', 'CarsController@getList', true);
+        Route::get('/create', 'CarsController@getFormBulder', true)->name("form_builder_cars");
 
-        Route::group(['prefix'=>'edit-form'],function (){
-            Route::get('/', 'CarsController@getEditFormBulder',true);
-            Route::get('/{id}', 'CarsController@getEditFormBulder',true)->name("form_edit_cars_builder_cars");
+        Route::group(['prefix' => 'edit-form'], function () {
+            Route::get('/', 'CarsController@getEditFormBulder', true);
+            Route::get('/{id}', 'CarsController@getEditFormBulder', true)->name("form_edit_cars_builder_cars");
         });
 
         Route::post('/create', 'CarsController@postFormBulder')->name('add_or_update_form_builder_cars');
 
-        Route::group(['prefix'=>'settings'],function (){
-            Route::get('/', 'CarsController@getFormSettings',true);
-            Route::get('/{id}', 'CarsController@getFormSettings',true)->name("form_settings_cars");
-            Route::post('/{id}', 'CarsController@postFormSettings',true)->name("post_form_settings_cars");
+        Route::group(['prefix' => 'settings'], function () {
+            Route::get('/', 'CarsController@getFormSettings', true);
+            Route::get('/{id}', 'CarsController@getFormSettings', true)->name("form_settings_cars");
+            Route::post('/{id}', 'CarsController@postFormSettings', true)->name("post_form_settings_cars");
         });
-        Route::group(['prefix'=>'view'],function (){
-            Route::get('/', 'CarsController@getMyFormsView',true);
-            Route::get('/{id}', 'CarsController@getMyFormsView',true)->name("form_view_cars");
+        Route::group(['prefix' => 'view'], function () {
+            Route::get('/', 'CarsController@getMyFormsView', true);
+            Route::get('/{id}', 'CarsController@getMyFormsView', true)->name("form_view_cars");
         });
-        Route::group(['prefix'=>'edit'],function (){
-            Route::get('/', 'MyFormController@getMyFormsEdit',true);
-            Route::get('/{id}', 'MyFormController@getMyFormsEdit',true)->name("form_edit_cars");
+        Route::group(['prefix' => 'edit'], function () {
+            Route::get('/', 'MyFormController@getMyFormsEdit', true);
+            Route::get('/{id}', 'MyFormController@getMyFormsEdit', true)->name("form_edit_cars");
         });
         Route::post('/form-fields', 'CarsController@postFormFieldsSettings');
     });

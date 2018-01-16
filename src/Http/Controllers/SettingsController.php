@@ -91,8 +91,12 @@ class SettingsController extends Controller
         return redirect()->back();
     }
 
-    public function getMembershipOptions()
+    public function getOptions()
     {
         return view('mbshp::settings.options');
+    }
+    public function getOrderButton()
+    {
+        return view('mbshp::settings.order_button');
     }
 }
