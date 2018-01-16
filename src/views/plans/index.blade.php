@@ -1,6 +1,7 @@
 @extends('btybug::layouts.admin')
 @section('content')
     <div class="col-md-10">
+        <a href="{!! route('mbsp_plans_create') !!}" class="btn btn-default btn-success pull-left" tabindex="0" aria-controls="fields-table"><span>Create New</span></a>
         <table id="fields-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
             <tr>
@@ -35,12 +36,6 @@
                         className: 'btn btn-info',
                         action: function (e, dt, node, config) {
                             dt.ajax.reload();
-                        }
-                    }, {
-                        text: 'Create New',
-                        className: 'btn btn-success',
-                        action: function (e, dt, node, config) {
-                            window.location.replace("{!! route('mbsp_plans_create') !!}");
                         }
                     }
                 ],
