@@ -1,5 +1,5 @@
-@extends('btybug::layouts.mTabs',['index'=>'cars_pages_create'])
-@section('tab')
+@extends('btybug::layouts.admin')
+@section('content')
     <div class="col-md-8">
         {!! form_render(get_active_form()) !!}
     </div>

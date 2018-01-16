@@ -112,11 +112,6 @@ class ModuleServiceProvider extends ServiceProvider
                     'url' => '/admin/membership/cars/order-button',
                     'icon' => 'fa fa-cub'
                 ]
-            ], 'cars_pages_create' => [
-                [
-                    'title' => 'General',
-                    'url' => '/admin/membership/cars/new-post',
-                ]
             ]
         ];
 
