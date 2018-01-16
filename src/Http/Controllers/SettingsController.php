@@ -114,7 +114,8 @@ class SettingsController extends Controller
 
     public function getOrderButton()
     {
-        return view('mbshp::settings.order_button');
+        $columns = \DB::select('SHOW COLUMNS FROM cars');
+        return view('mbshp::settings.order_button',compact('columns'));
     }
 
     public function postOptions(Request $request, AdminsettingRepository $adminsettingRepository)
