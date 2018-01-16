@@ -17,9 +17,9 @@ use Btybug\Console\Repository\FrontPagesRepository;
 use Btybug\btybug\Models\Migrations;
 use Btybug\btybug\Repositories\AdminsettingRepository;
 use BtyBugHook\Blog\Http\Requests\CreatePostRequest;
-use BtyBugHook\Blog\Http\Requests\PostSettingsRequest;
-use BtyBugHook\Blog\Repository\PostsRepository;
-use BtyBugHook\Blog\Services\PostsService;
+use BtyBugHook\Membership\Http\Requests\PostSettingsRequest;
+use BtyBugHook\Membership\Repository\PostsRepository;
+use BtyBugHook\Membership\Services\PostsService;
 use Yajra\DataTables\DataTables;
 
 class CarsController extends Controller
@@ -50,7 +50,7 @@ class CarsController extends Controller
     {
         $result = $postsService->create($request->except("_token", 'image'), $request->file("image"));
 
-        return redirect()->to('admin/blog/posts')->with("message", "Post Successfully Created");
+        return redirect()->to('admin/membership/cars/posts')->with("message", "Post Successfully Created");
     }
 
     public function getSettings(
@@ -59,7 +59,7 @@ class CarsController extends Controller
         AdminsettingRepository $adminsettingRepository
     )
     {
-        $table = 'posts';
+        $table = 'cars';
         $all = $pagesRepository->findBy('slug', 'all-posts');
         $single = $pagesRepository->findBy('slug', 'single-post');
         $createForms = $formsRepository->getFormsByFieldType($table,['*'],true,'new');
@@ -74,6 +74,7 @@ class CarsController extends Controller
             $after_columns[$column->Field] = $column->Field;
         }
         $this->data['after_columns'] = $after_columns;
+
         $settings = $adminsettingRepository->findOneByMultipleSettingsArray(['section' => 'btybug_blog','settingkey' => 'blog_settings']);
         return view('mbshp::cars.settings', compact(['all', 'single','createForms','editForms','settings']))->with($this->data);
     }
