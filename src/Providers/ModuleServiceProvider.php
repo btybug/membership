@@ -77,7 +77,7 @@ class ModuleServiceProvider extends ServiceProvider
                     'title' => 'General',
                     'url' => '/admin/membership/settings',
                     'icon' => 'fa fa-cub'
-                ],[
+                ], [
                     'title' => 'Options',
                     'url' => '/admin/membership/settings/membership-options',
                     'icon' => 'fa fa-cub'
@@ -96,21 +96,26 @@ class ModuleServiceProvider extends ServiceProvider
                     'url' => '/admin/membership/plans/edit/{id}',
                     'icon' => 'fa fa-cub'
                 ]
-            ],'cars_pages' => [
+            ], 'cars_pages' => [
                 [
                     'title' => 'General',
                     'url' => '/admin/membership/cars/settings',
                 ], [
                     'title' => 'Form List',
                     'url' => '/admin/membership/cars/form-list',
-                ],[
+                ], [
                     'title' => 'Options',
                     'url' => '/admin/membership/cars/options',
                     'icon' => 'fa fa-cub'
-                ],[
+                ], [
                     'title' => 'Order Button',
                     'url' => '/admin/membership/cars/order-button',
                     'icon' => 'fa fa-cub'
+                ]
+            ], 'cars_pages_create' => [
+                [
+                    'title' => 'General',
+                    'url' => '/admin/membership/cars/new-post',
                 ]
             ]
         ];
