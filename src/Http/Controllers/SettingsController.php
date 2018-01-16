@@ -100,7 +100,15 @@ class SettingsController extends Controller
         if($settings){
             $data=(json_decode($settings->val,true));
         }
+
         $options = get_prices_data();
+        foreach ($options as $key=>$option){
+            if(isset($data['options'][$key])){
+                $options[$key]['checked']=true;
+            }else{
+                $options[$key]['checked']=false;
+            }
+        }
         return view('mbshp::settings.options', compact('options','data'));
     }
 
