@@ -65,4 +65,8 @@ Route::group(['prefix' => 'settings'], function () {
         Route::get('/', 'SettingsController@getMembershipOptions', true)->name('mbsp_settings_mb_options');
     });
 });
+Route::group(['prefix' => 'products-Settings'], function () {
+    Route::get('/', 'ProductSettingsController@getIndex', true)->name('mbsp_settings');
+
+});
 
