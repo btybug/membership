@@ -22,38 +22,31 @@
                     {!! Form::text('name',null,['class'=>'form-control input-md','placeholder'=>'my-plan','id'=>'plan_name']) !!}
                 </div>
             </div>
-            <!-- Text input-->
-        {{--<div class="form-group">--}}
-        {{--<label class="col-md-4 control-label" for="plan_amount">Plan Amount</label>--}}
-        {{--<div class="col-md-4">--}}
-        {{--{!! Form::number('amount',null,['class'=>'form-control input-md','placeholder'=>'100','id'=>'plan_amount']) !!}--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--<!-- Select Basic -->--}}
-        {{--<div class="form-group">--}}
-        {{--<label class="col-md-4 control-label" for="currency">Currency</label>--}}
-        {{--<div class="col-md-4">--}}
-        {{--{!! Form::select('currency',['usd'=>'USD','eur'=>'EUR','amd'=>'AMD'],null,['class'=>'form-control','id'=>'currency']) !!}--}}
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="feature_1">Feature 1</label>
+                <div class="col-md-4">
+                    {!! Form::text('feature_1',null,['class'=>'form-control input-md','placeholder'=>'','id'=>'feature_1']) !!}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="plan_name">Feature 2</label>
+                <div class="col-md-4">
+                    {!! Form::text('feature_2',null,['class'=>'form-control input-md','placeholder'=>'','id'=>'feature_2']) !!}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="image">Product Image</label>
+                <div class="col-md-4">
+                    {!! Form::file('image',null,['class'=>'form-control input-md','placeholder'=>'','id'=>'image']) !!}
+                </div>
+            </div>
 
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--<!-- Select Basic -->--}}
-        {{--<div class="form-group">--}}
-        {{--<label class="col-md-4 control-label" for="interval">Interval</label>--}}
-        {{--<div class="col-md-4">--}}
-        {{--{!! Form::select('interval',['day'=>'daily','month'=>'monthly','year'=>'yearly','week','weekly'],null,['class'=>'form-control','id'=>'interval']) !!}--}}
-        {{--</div>--}}
-        {{--</div>--}}
-
-        {{--<!-- Text input-->--}}
-        {{--<div class="form-group">--}}
-        {{--<label class="col-md-4 control-label" for="interval_count">Interval Count</label>--}}
-        {{--<div class="col-md-4">--}}
-        {{--{!! Form::number('interval_count',1,['class'=>'form-control input-md','placeholder'=>'1','id'=>'interval_count']) !!}--}}
-        {{--</div>--}}
-        {{--</div>--}}
-
-        <!-- Textarea -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="short_descriptor">Short Description</label>
+                <div class="col-md-4">
+                    {!! Form::textarea('short_descriptor',null,['class'=>'form-control','id'=>'short_descriptor']) !!}
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-md-4 control-label" for="statement_descriptor">Description</label>
                 <div class="col-md-4">
