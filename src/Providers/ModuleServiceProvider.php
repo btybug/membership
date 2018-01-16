@@ -54,7 +54,7 @@ class ModuleServiceProvider extends ServiceProvider
 //                ],
                 [
                     "title" => " Products Settings",
-                    "custom-link" => "/admin/membership/products-settings",
+                    "custom-link" => "/admin/membership/settings",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
                 ],
