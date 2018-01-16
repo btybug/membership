@@ -53,14 +53,6 @@ Route::group(['prefix' => 'stripe'], function () {
 Route::group(['prefix' => 'settings'], function () {
     Route::get('/', 'SettingsController@getSettings', true)->name('mbsp_settings');
     Route::post('/save-pricing-page','SettingsController@postSavePricingPage')->name('mbsp_settings_save_pricing_page');
-    Route::group(['prefix' => 'membership-status'], function () {
-        Route::get('/', 'SettingsController@getMembershipTypes', true)->name('mbsp_settings_mb_types');
-        Route::get('/create', 'SettingsController@getCreateStatus', true)->name('mbsp_settings_status_create');
-        Route::post('/create', 'SettingsController@postCreateStatus');
-        Route::get('/edit/{id}', 'SettingsController@getEditStatus', true)->name('mbsp_settings_status_edit');
-        Route::get('/delete/{id}', 'SettingsController@getDeleteStatus')->name('mbsp_settings_status_del');
-        Route::post('/edit/{id}', 'SettingsController@postEditStatus');
-    });
     Route::group(['prefix' => 'membership-options'], function () {
         Route::get('/', 'SettingsController@getMembershipOptions', true)->name('mbsp_settings_mb_options');
     });
