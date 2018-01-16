@@ -36,22 +36,23 @@ class ModuleServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../views', 'mbshp');
 
         \Eventy::action('admin.menus', [
-            "title" => "Membership",
+            "title" => "Products",
             "custom-link" => "#",
             "icon" => "fa fa-users",
             "is_core" => "yes",
             "children" => [
+//                [
+//                    "title" => "Membership Types",
+//                    "custom-link" => "/admin/membership/membership-types",
+//                    "icon" => "fa fa-angle-right",
+//                    "is_core" => "yes"
+//                ], [
+//                    "title" => "Members",
+//                    "custom-link" => "/admin/membership/members",
+//                    "icon" => "fa fa-angle-right",
+//                    "is_core" => "yes"
+//                ],
                 [
-                    "title" => "Membership Types",
-                    "custom-link" => "/admin/membership/membership-types",
-                    "icon" => "fa fa-angle-right",
-                    "is_core" => "yes"
-                ], [
-                    "title" => "Members",
-                    "custom-link" => "/admin/membership/members",
-                    "icon" => "fa fa-angle-right",
-                    "is_core" => "yes"
-                ], [
                     "title" => "Plans",
                     "custom-link" => "/admin/membership/plans",
                     "icon" => "fa fa-angle-right",
