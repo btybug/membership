@@ -63,6 +63,12 @@ class ModuleServiceProvider extends ServiceProvider
                     "custom-link" => "/admin/membership/plans",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
+                ],
+                [
+                    "title" => "Cars",
+                    "custom-link" => "/admin/membership/cars",
+                    "icon" => "fa fa-angle-right",
+                    "is_core" => "yes"
                 ]
             ]]);
         $tubs = [
@@ -90,12 +96,24 @@ class ModuleServiceProvider extends ServiceProvider
                     'url' => '/admin/membership/plans/edit/{id}',
                     'icon' => 'fa fa-cub'
                 ]
+            ],'cars_pages' => [
+                [
+                    'title' => 'General',
+                    'url' => '/admin/membership/cars/settings',
+                ], [
+                    'title' => 'Form List',
+                    'url' => '/admin/membership/cars/form-list',
+                ],
             ]
         ];
 
         //   \Config::set('painter.PAINTERSPATHS',array_merge( \Config::get('painter.PAINTERSPATHS'),['app'.DS.'Plugins'.DS.'vendor'.DS.'sahak.avatar'.DS.'membership'.DS.'src'.DS.'Gears']));
         \Eventy::action('my.tab', $tubs);
         Routes::registerPages('sahak.avatar/membership');
+
+        \Eventy::action('shortcode.except.url', [
+            'admin/membership/cars/form-list'
+        ]);
     }
 
 
