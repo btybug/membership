@@ -28,8 +28,8 @@ class ModuleServiceProvider extends ServiceProvider
     public function boot()
     {
         \Config::set('services.stripe', [
-            'model'  => User::class,
-            'key' =>'pk_test_zr3Wfst8jb4GrKU8BcLEUkh9',
+            'model' => User::class,
+            'key' => 'pk_test_zr3Wfst8jb4GrKU8BcLEUkh9',
             'secret' => 'sk_test_5hlaHU2ovKmWpyK33i7sZxxx',
         ]);
         $this->loadTranslationsFrom(__DIR__ . '/../views', 'mbshp');
@@ -51,7 +51,7 @@ class ModuleServiceProvider extends ServiceProvider
                     "custom-link" => "/admin/membership/members",
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
-                ],[
+                ], [
                     "title" => "Plans",
                     "custom-link" => "/admin/membership/plans",
                     "icon" => "fa fa-angle-right",
@@ -76,7 +76,14 @@ class ModuleServiceProvider extends ServiceProvider
                     'icon' => 'fa fa-cub'
                 ],
             ],
-            'create_product'=>[
+            'create_product' => [
+                [
+                    'title' => 'General',
+                    'url' => '/admin/membership/plans/create',
+                    'icon' => 'fa fa-cub'
+                ]
+            ],
+            'edit_product' => [
                 [
                     'title' => 'General',
                     'url' => '/admin/membership/plans/edit/{id}',
@@ -85,7 +92,7 @@ class ModuleServiceProvider extends ServiceProvider
             ]
         ];
 
-     //   \Config::set('painter.PAINTERSPATHS',array_merge( \Config::get('painter.PAINTERSPATHS'),['app'.DS.'Plugins'.DS.'vendor'.DS.'sahak.avatar'.DS.'membership'.DS.'src'.DS.'Gears']));
+        //   \Config::set('painter.PAINTERSPATHS',array_merge( \Config::get('painter.PAINTERSPATHS'),['app'.DS.'Plugins'.DS.'vendor'.DS.'sahak.avatar'.DS.'membership'.DS.'src'.DS.'Gears']));
         \Eventy::action('my.tab', $tubs);
         Routes::registerPages('sahak.avatar/membership');
     }

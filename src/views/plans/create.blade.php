@@ -1,5 +1,6 @@
-@extends('btybug::layouts.admin')
-@section('content')
+@extends('btybug::layouts.mTabs',['index'=>'create_product'])
+<!-- Nav tabs -->
+@section('tab')
     <div class="main_lay_cont">
         {!! Form::open(['class'=>'form-horizontal','url'=>route('mbsp_plans_create_save')]) !!}
 
@@ -8,13 +9,6 @@
             <!-- Form Name -->
             <legend>Create Plan</legend>
 
-            <!-- Text input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="plan_id">Plan ID</label>
-                <div class="col-md-4">
-                    {!! Form::text('plan_id',null,['class'=>'form-control input-md','placeholder'=>'my-plan','id'=>'plan_id']) !!}
-                </div>
-            </div>
             <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="plan_name">Plan Name</label>
