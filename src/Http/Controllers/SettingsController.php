@@ -14,14 +14,16 @@ use Btybug\btybug\Repositories\AdminsettingRepository;
 use BtyBugHook\Membership\Http\Requests\MembershipStatusCreateRequest;
 use BtyBugHook\Membership\Repository\MembershipStatusesRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class SettingsController extends Controller
 {
     public function getSettings(AdminsettingRepository $adminsettingRepository)
     {
-        $pricing_page=$adminsettingRepository->getSettings('membership','pricing_page');
-        return view('mbshp::settings.index',compact('pricing_page'));
+        $pricing_page = $adminsettingRepository->getSettings('membership', 'pricing_page');
+        return view('mbshp::settings.index', compact('pricing_page'));
     }
+
     public function getMembershipTypes()
     {
         return view('mbshp::settings.mb_types');
@@ -30,10 +32,10 @@ class SettingsController extends Controller
     public function getCreateStatus()
     {
         $model = null;
-        return view('mbshp::settings.status_form',compact(['model']));
+        return view('mbshp::settings.status_form', compact(['model']));
     }
 
-    public function  postCreateStatus(
+    public function postCreateStatus(
         MembershipStatusCreateRequest $request,
         MembershipStatusesRepository $repository
     )
@@ -54,7 +56,7 @@ class SettingsController extends Controller
         return view('mbshp::settings.status_form', compact("model"));
     }
 
-    public function  postEditStatus(
+    public function postEditStatus(
         Request $request,
         MembershipStatusesRepository $repo,
         $id
@@ -70,7 +72,7 @@ class SettingsController extends Controller
         return redirect()->route('mbsp_settings_mb_types');
     }
 
-    public function getDeleteStatus (
+    public function getDeleteStatus(
         MembershipStatusesRepository $repo,
         $id
     )
@@ -82,21 +84,39 @@ class SettingsController extends Controller
 
         $status->delete();
 
-        return redirect()->back()->with('message','Status Deleted');
+        return redirect()->back()->with('message', 'Status Deleted');
     }
 
-    public function postSavePricingPage(Request $request,AdminsettingRepository $adminsettingRepository)
+    public function postSavePricingPage(Request $request, AdminsettingRepository $adminsettingRepository)
     {
-        $adminsettingRepository->createOrUpdateOriginalToJson($request->except('_token'),'membership','pricing_page');
+        $adminsettingRepository->createOrUpdateOriginalToJson($request->except('_token'), 'membership', 'pricing_page');
         return redirect()->back();
     }
 
-    public function getOptions()
+    public function getOptions(AdminsettingRepository $adminsettingRepository)
     {
-        return view('mbshp::settings.options');
+        $data=[];
+        $settings=$adminsettingRepository->getSettings('product', 'blog_price_options');
+        if($settings){
+            $data=(json_decode($settings->val,true));
+        }
+        $options = get_prices_data();
+        return view('mbshp::settings.options', compact('options','data'));
     }
+
     public function getOrderButton()
     {
         return view('mbshp::settings.order_button');
+    }
+
+    public function postOptions(Request $request, AdminsettingRepository $adminsettingRepository)
+    {
+        $flag=false;
+        $data=$request->except('_token');
+        if($data['allow_price']){
+            $flag=true;
+        }
+        $adminsettingRepository->createOrUpdate(json_encode($data,true), 'product', 'blog_price_options');
+        return \Response::json(['error' => false,'flag'=>$flag]);
     }
 }

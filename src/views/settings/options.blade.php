@@ -1,6 +1,7 @@
 @extends('btybug::layouts.mTabs',['index'=>'cars_pages'])
 <!-- Nav tabs -->
 @section('tab')
+    {!! Form::model($data) !!}
     <div class="col-md-6">
         <div class="form-horizontal">
             <fieldset>
@@ -10,7 +11,9 @@
                     <div class="col-md-4">
                         <div class="checkbox">
                             <label for="allow_price">
-                                <input type="checkbox" name="allow_price" id="allow_price" value="1">
+
+                                <input type="hidden" name="allow_price" id="allow_price" value="0">
+                                {!! Form::checkbox('allow_price',1,false,['id'=>'allow_price']) !!}
                                 Allow price
                             </label>
                         </div>
@@ -26,50 +29,49 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="checkboxes">Payment Options</label>
                     <div class="col-md-4">
+                        @foreach($options as $option)
                         <div class="checkbox">
-                            <label for="checkboxes-0">
-                                <input type="checkbox" name="simple_price" id="checkboxes-0" value="1">
-                               Simple Price
+                            <label for="checkboxes-{!! $option['slug'] !!}">
+                                <input type="checkbox" name="options[{!! $option['slug'] !!}]" id="checkboxes-{!! $option['slug'] !!}" value="1">
+                                {!! $option['name'] !!}
                             </label>
                         </div>
-                        <div class="checkbox">
-                            <label for="checkboxes-1">
-                                <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
-                                Quantiti based price
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label for="checkboxes-2">
-                                <input type="checkbox" name="attribute" id="checkboxes-3" value="2">
-                                Attribute based price
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label for="checkboxes-2">
-                                <input type="checkbox" name="attribute" id="checkboxes-4" value="2">
-                                ..........
-                            </label>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
             </fieldset>
         </div>
     </div>
+    {!! Form::close() !!}
 @stop
 @section('CSS')
 @stop
 @section('JS')
     <script>
         $(function () {
-            $('#allow_price').on('change', function () {
-
-                if (this.checked) {
-                    $('.options').removeClass('hidden')
-                } else {
-                    $('.options').addClass('hidden')
-                }
-            })
-        })
+            $('form').on('change','input[type=checkbox]', function () {
+                optionSave();
+            });
+            function optionSave() {
+                var data=$('form').serialize();
+                $.ajax({
+                    type: "post",
+                    datatype: "json",
+                    url: '{!! route('mbsp_settings_mb_save_options') !!}',
+                    data:data,
+                    headers: {
+                        'X-CSRF-TOKEN': $("input[name='_token']").val()
+                    },
+                    success: function (data) {
+                        if (!data.error && data.flag) {
+                            $('.options').removeClass('hidden');
+                        } else {
+                            $('.options').addClass('hidden');
+                        }
+                    }
+                });
+            }
+        });
     </script>
 @stop

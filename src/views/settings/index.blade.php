@@ -3,7 +3,7 @@
 @section('tab')
     <div class="main_lay_cont">
     <div class="col-md-5">
-       
+
     </div>
     </div>
     @include('resources::assests.magicModal')

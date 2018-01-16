@@ -67,6 +67,7 @@ Route::group(['prefix' => 'cars'], function () {
     Route::post('/get-fields', 'CarsController@getFieldsByTable');
     Route::get('/settings', 'CarsController@getSettings', true);
     Route::get('/options', 'SettingsController@getOptions', true)->name('mbsp_settings_mb_options');
+    Route::post('/options', 'SettingsController@postOptions')->name('mbsp_settings_mb_save_options');
     Route::get('/order-button', 'SettingsController@getOrderButton', true)->name('mbsp_order_button');
     Route::post('/render-fields', 'CarsController@postRenderField');
     Route::post('/save-form', 'CarsController@postSaverForm');
