@@ -97,6 +97,7 @@ class CarsController extends Controller
         $form->unit_json = json_encode(ajaxExtract(json_decode($form->unit_json, true)));
         $fields = json_encode((count($form->form_fields)) ? $form->form_fields()->pluck('field_slug','field_slug')->toArray() : []);
         $html = $formService->render($id);
+
         return view("mbshp::cars.form_bulder",compact('form','fields','html'));
     }
 
