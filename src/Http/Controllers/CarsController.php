@@ -10,7 +10,7 @@ use Btybug\Console\Repository\FormsRepository;
 use Btybug\Console\Services\FieldService;
 use Btybug\Console\Services\FormService;
 use Btybug\User\Repository\RoleRepository;
-use BtyBugHook\Blog\Models\Post;
+use BtyBugHook\Membership\Models\Post;
 use Illuminate\Http\Request;
 use Btybug\btybug\Models\Templates\Units;
 use Btybug\Console\Repository\FrontPagesRepository;
@@ -241,7 +241,7 @@ class CarsController extends Controller
         set_time_limit(-1);
         ini_set('memory_limit', '2048M');
         return DataTables::of(Post::query())->addColumn('actions', function ($post) {
-            $url= url("admin/blog/edit-post",$post->id);
+            $url= url("admin/membership/cars/edit-post",$post->id);
             return "<a href='$url' class='btn btn-warning'><i class='fa fa-edit'></i></a>";
         },2)->addColumn('author', function ($post) {
 
