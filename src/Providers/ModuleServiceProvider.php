@@ -38,7 +38,7 @@ class ModuleServiceProvider extends ServiceProvider
         \Eventy::action('admin.menus', [
             "title" => "Products",
             "custom-link" => "#",
-            "icon" => "fa fa-users",
+            "icon" => "fa-product-hunt",
             "is_core" => "yes",
             "children" => [
 //                [
@@ -73,11 +73,11 @@ class ModuleServiceProvider extends ServiceProvider
                 ],
                 [
                     'title' => 'Membership Status',
-                    'url' => '/admin/membership/settings/membership-status',
+                    'url' => '/admin/membership/settings/product-status',
                     'icon' => 'fa fa-cub'
                 ],[
                     'title' => 'Options',
-                    'url' => '/admin/membership/settings/membership-options',
+                    'url' => '/admin/membership/settings/product-options',
                     'icon' => 'fa fa-cub'
                 ],
             ],
