@@ -2,6 +2,7 @@
 @section('content')
     <div class="col-md-10">
         <a href="{!! route('mbsp_plans_create') !!}" class="btn btn-default btn-success pull-left" tabindex="0" aria-controls="fields-table"><span>Create New</span></a>
+        <a href="{!! route('mbsp_settings') !!}" class="btn  btn-warning pull-right" tabindex="0" aria-controls="fields-table"><span>Settings</span></a>
         <table id="fields-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
             <tr>

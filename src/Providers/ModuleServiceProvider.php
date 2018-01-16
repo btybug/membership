@@ -53,14 +53,9 @@ class ModuleServiceProvider extends ServiceProvider
 //                    "is_core" => "yes"
 //                ],
                 [
-                    "title" => "Plans",
+                    "title" => "Mobiles",
                     "custom-link" => "/admin/membership/plans",
                     "icon" => "fa fa-angle-right",
-                    "is_core" => "yes"
-                ], [
-                    "title" => "Settings",
-                    "custom-link" => "/admin/membership/settings",
-                    "icon" => "fa fa-cog",
                     "is_core" => "yes"
                 ]
             ]]);
