@@ -81,6 +81,10 @@ class ModuleServiceProvider extends ServiceProvider
                     'title' => 'Options',
                     'url' => '/admin/membership/settings/membership-options',
                     'icon' => 'fa fa-cub'
+                ], [
+                    'title' => 'Blogs',
+                    'url' => '/admin/membership/blogs',
+                    'icon' => 'fa fa-cub'
                 ]
             ],
             'create_product' => [

@@ -21,6 +21,19 @@
 */
 //Routes
 Route::get('/', 'IndexConroller@getIndex', true)->name('mbsp_groups');
+Route::group(['prefix' => 'blogs'], function () {
+    Route::get('/', 'BlogController@getIndex', true)->name('mbsp_blog');
+    Route::get('/edit/{id}', 'BlogController@getEdit', true)->name('mbsp_blog_edit');
+    Route::get('/delete/{id}', 'BlogController@getDelete')->name('mbsp_blog_delete');
+    Route::get('/activate/{id}', 'BlogController@getActivate')->name('mbsp_blog_make_active');
+    Route::get('/deactivate/{id}', 'BlogController@getDeactivate')->name('mbsp_blog_deactivate');
+});
+
+Route::group(['prefix' => 'settings'], function () {
+    Route::get('/', 'SettingsController@getSettings', true)->name('mbsp_settings');
+    Route::post('/save-pricing-page', 'SettingsController@postSavePricingPage')->name('mbsp_settings_save_pricing_page');
+});
+
 //Route::get('/membership-types', 'MembershipController@getIndex', true)->name('mbsp_membership');
 //Route::get('/membership-types/make-default/{id}', 'MembershipController@makeDefault')->name('mbsp_type_make_active');
 //Route::get('/manage-membership-types', 'MembershipController@getNewMembership', true)->name('mbsp_new_membership');
@@ -40,6 +53,7 @@ Route::group(['prefix' => 'datatable'], function () {
     Route::get('get-mb-types', 'DataTablesConroller@getMbTypes')->name('mbsp_mb_types_lists');
     Route::get('get-mb-members', 'DataTablesConroller@getMembers')->name('mbsp_members_lists');
     Route::get('get-mb-statuses', 'DataTablesConroller@getStatuses')->name('mbsp_statuses');
+    Route::get('get-mb-blogs', 'DataTablesConroller@getBlogs')->name('mbsp_blogs');
 });
 Route::group(['prefix' => 'stripe'], function () {
     Route::get('/', 'StripeController@getIndex', true)->name('mbsp_stripe');
@@ -50,11 +64,6 @@ Route::group(['prefix' => 'stripe'], function () {
 //    Route::get('/edit/{id}', 'MemberController@getEdit', true)->name('mbsp_edit_member');
 //    Route::post('/edit/{id?}', 'MemberController@postEdit');
 //});
-Route::group(['prefix' => 'settings'], function () {
-    Route::get('/', 'SettingsController@getSettings', true)->name('mbsp_settings');
-    Route::post('/save-pricing-page', 'SettingsController@postSavePricingPage')->name('mbsp_settings_save_pricing_page');
-
-});
 
 //cars Blog
 Route::group(['prefix' => 'cars'], function () {

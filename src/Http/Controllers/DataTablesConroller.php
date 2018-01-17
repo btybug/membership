@@ -3,6 +3,7 @@
 namespace BtyBugHook\Membership\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use BtyBugHook\Membership\Models\Blog;
 use BtyBugHook\Membership\Models\MembershipStatuses;
 use BtyBugHook\Membership\Models\MembershipTypes;
 use BtyBugHook\Membership\Models\Plans;
@@ -85,5 +86,29 @@ class DataTablesConroller extends Controller
         })->editColumn('icon', function ($status) {
             return '<i class="fa '.$status->icon.'"></i>';
         })->rawColumns(['actions','icon'])->make(true);
+    }
+
+    public function getBlogs()
+    {
+        return DataTables::of(Blog::query())->addColumn('actions', function ($blog) {
+            $url = route("mbsp_blog_edit", $blog->id);
+            $deleteUrl = route("mbsp_blog_delete", $blog->id);
+            $makeActive = route("mbsp_blog_make_active", $blog->id);
+            $deactivate = route("mbsp_blog_deactivate", $blog->id);
+            $html="<a href='$url' class='bty-btn-acction bt-edit'></a>";
+            $html="<a href='$deleteUrl' class='bty-btn-acction bt-delete'></a>";
+            if($blog->status){
+                $html.="<a href='$deactivate' class='btn btn-warning'>Deactivate</a>";
+            }else{
+                $html.="<a href='$makeActive' class='btn btn-success'>Make Active</a>";
+            }
+            return $html;
+        }, 2)->editColumn('author_id', function ($blog) {
+            return BBGetUser($blog->author_id);
+        })->editColumn('created_at', function ($status) {
+            return BBgetDateFormat($status->created_at);
+        })->editColumn('status', function ($blog) {
+            return ($blog->status) ? '<span class="alert alert-success">Active</span>' : '<span class="alert alert-danger">Inactive</span>';
+        })->rawColumns(['actions','status'])->make(true);
     }
 }
