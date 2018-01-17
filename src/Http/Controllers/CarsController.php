@@ -24,6 +24,11 @@ use Yajra\DataTables\DataTables;
 
 class CarsController extends Controller
 {
+    public function __construct()
+    {
+
+    }
+
     public function getIndex()
     {
         return view('mbshp::cars.index');

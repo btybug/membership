@@ -1,0 +1,13 @@
+<?php
+
+namespace BtyBugHook\Membership\Models\Blogs;
+
+use Illuminate\Database\Eloquent\Model;
+
+
+class {ClassName} extends Model
+{
+    protected $table = '{slug}';
+
+    protected $guarded = ['id'];
+}

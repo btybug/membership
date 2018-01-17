@@ -35,6 +35,8 @@ class ModuleServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../views', 'mbshp');
         $this->loadViewsFrom(__DIR__ . '/../views', 'mbshp');
 
+
+
         \Eventy::action('admin.menus', [
             "title" => "Products",
             "custom-link" => "#",
@@ -58,18 +60,18 @@ class ModuleServiceProvider extends ServiceProvider
                     "icon" => "fa fa-angle-right",
                     "is_core" => "yes"
                 ],
-                [
-                    "title" => "Mobiles",
-                    "custom-link" => "/admin/membership/plans",
-                    "icon" => "fa fa-angle-right",
-                    "is_core" => "yes"
-                ],
-                [
-                    "title" => "Cars",
-                    "custom-link" => "/admin/membership/cars",
-                    "icon" => "fa fa-angle-right",
-                    "is_core" => "yes"
-                ]
+//                [
+//                    "title" => "Mobiles",
+//                    "custom-link" => "/admin/membership/plans",
+//                    "icon" => "fa fa-angle-right",
+//                    "is_core" => "yes"
+//                ],
+//                [
+//                    "title" => "Cars",
+//                    "custom-link" => "/admin/membership/cars",
+//                    "icon" => "fa fa-angle-right",
+//                    "is_core" => "yes"
+//                ]
             ]]);
         $tubs = [
             'mb_settings' => [

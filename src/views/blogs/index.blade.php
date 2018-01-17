@@ -103,7 +103,7 @@
                         success: function (data) {
                             if(! data.error){
                                 blogs.ajax.reload();
-                                $("#form-modal").modal('hide');
+                                $("#blog-modal").modal('hide');
                             }else{
                                 // alert(data.message);
                             }
