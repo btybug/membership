@@ -19,4 +19,11 @@ class BlogController extends Controller
     {
         return view('mbshp::blogs.index');
     }
+
+    public function postCreate(
+        Request $request
+    )
+    {
+        return $request->all();
+    }
 }

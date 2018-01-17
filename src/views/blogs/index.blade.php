@@ -16,6 +16,42 @@
             </thead>
         </table>
     </div>
+
+    <div class="modal modal-info fade" id="blog-modal" datatable="" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Create Blog</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body p0">
+                    <div class="row form-box">
+                        {!! Form::open(['url'=>route('mbsp_blog_create')]) !!}
+                        <div class="col-md-12">
+                            <div class="form-horizontal mt15 p15">
+                                <div class="">
+                                    <div class="form-group">
+                                        <label for="sport_name" class="col-sm-2 control-label">Titl</label>
+                                        <div class="col-sm-10">
+                                            {!! Form::text('title',null,['class'=>'form-control','id'=>'blog_name','placeholder'=>'Cars,Mobiles ...']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {!! Form::close() !!}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary save-changes">Save changes</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 @section('CSS')
     {!! Html::style('public/js/DataTables/Buttons-1.5.1/js/buttons.bootstrap.js') !!}
@@ -24,7 +60,7 @@
     {!! Html::script('public/js/DataTables/datatables.js') !!}
     <script>
         $(function () {
-            $('#blogs-table').DataTable({
+            var blogs = $('#blogs-table').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                     'copy', 'excel', 'pdf', {
@@ -33,6 +69,9 @@
                         action: function (e, dt, node, config) {
                             dt.ajax.reload();
                         }
+                    }, {
+                        text: 'Create New',
+                        className: 'btn btn-primary add-new'
                     }
                 ],
 
@@ -47,6 +86,34 @@
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ]
+            });
+
+            $(document).ready(function () {
+                $("body").on('click','.save-changes',function () {
+                    var form = $(".form-box form");
+                    $.ajax({
+                        data: form.serialize(),
+                        type: 'POST',
+                        url:  form.attr('action'),
+                        headers: {
+                            'X-CSRF-TOKEN': $("input[name='_token']").val()
+                        },
+                        datatype: 'json',
+                        cache: false,
+                        success: function (data) {
+                            if(! data.error){
+                                blogs.ajax.reload();
+                                $("#form-modal").modal('hide');
+                            }else{
+                                // alert(data.message);
+                            }
+                        }
+                    });
+                });
+
+                $("body").on('click','.add-new',function () {
+                    $("#blog-modal").modal();
+                });
             });
         });
     </script>

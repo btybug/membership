@@ -23,6 +23,7 @@
 Route::get('/', 'IndexConroller@getIndex', true)->name('mbsp_groups');
 Route::group(['prefix' => 'blogs'], function () {
     Route::get('/', 'BlogController@getIndex', true)->name('mbsp_blog');
+    Route::post('/create', 'BlogController@postCreate', true)->name('mbsp_blog_create');
     Route::get('/edit/{id}', 'BlogController@getEdit', true)->name('mbsp_blog_edit');
     Route::get('/delete/{id}', 'BlogController@getDelete')->name('mbsp_blog_delete');
     Route::get('/activate/{id}', 'BlogController@getActivate')->name('mbsp_blog_make_active');
