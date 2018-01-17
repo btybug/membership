@@ -1,23 +1,24 @@
-<?php
+<?php namespace BtyBugHook\Membership\Database;
+
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBlogTable extends Migration
+class CreatePostsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public static function up($tableName)
     {
-        Schema::create('blog', function (Blueprint $table) {
+        Schema::create($tableName, function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->unsignedInteger('author_id');
             $table->string('title',100);
-            $table->text('image');
+            $table->text('image')->nullable();
             $table->string('slug')->unique();
             $table->string('url')->unique();
             $table->timestamp('start_date')->nullable();
@@ -32,8 +33,8 @@ class CreateBlogTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public static function down($tableName)
     {
-        Schema::dropIfExists('blog');
+        Schema::dropIfExists($tableName);
     }
 }
