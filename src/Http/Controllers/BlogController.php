@@ -10,6 +10,7 @@ namespace BtyBugHook\Membership\Http\Controllers;
 
 
 use App\Http\Controllers\Controller;
+use Btybug\Console\Repository\FrontPagesRepository;
 use BtyBugHook\Membership\Repository\BlogRepository;
 use BtyBugHook\Membership\Services\GeneratorService;
 use Illuminate\Http\Request;
@@ -87,6 +88,7 @@ class BlogController extends Controller
         Painter::findByVariation($page->template)->variations(true)->deleteVariation($page->template);
         $child->delete();
         $page->delete();
+        $blog->delete();
         CreatePostsTable::down($blog->slug);
         return redirect()->back();
     }
