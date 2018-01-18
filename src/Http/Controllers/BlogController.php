@@ -12,6 +12,7 @@ namespace BtyBugHook\Membership\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Models\Painter\Painter;
 use Btybug\Console\Repository\FrontPagesRepository;
+use BtyBugHook\Membership\Database\CreatePostsTable;
 use BtyBugHook\Membership\Repository\BlogRepository;
 use BtyBugHook\Membership\Services\GeneratorService;
 use Illuminate\Http\Request;
