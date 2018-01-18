@@ -35,7 +35,7 @@ class GeneratorService extends GeneralService
     public function generate($title)
     {
         $this->title = $title;
-        $this->slug = str_slug($this->title, "_");
+        $this->slug = str_slug($this->title);
         $this->makeTable();
         $this->makeVariations();
         $this->makePages();

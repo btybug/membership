@@ -37,7 +37,7 @@ class BlogController extends Controller
     {
         $this->blogRepositroy->create([
             'title' => $request->title,
-            'slug' => str_slug($request->title, "_"),
+            'slug' => str_slug($request->title),
             'author_id' => \Auth::id(),
             'status' => 1
         ]);
