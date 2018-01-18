@@ -8,6 +8,7 @@ use BtyBugHook\Membership\Models\MembershipStatuses;
 use BtyBugHook\Membership\Models\MembershipTypes;
 use BtyBugHook\Membership\Models\Plans;
 use BtyBugHook\Membership\Models\UserMembership;
+use BtyBugHook\Membership\Repository\BlogRepository;
 use BtyBugHook\Membership\Repository\PlansRepository;
 use Yajra\DataTables\DataTables;
 
@@ -88,27 +89,33 @@ class DataTablesConroller extends Controller
         })->rawColumns(['actions','icon'])->make(true);
     }
 
-    public function getBlogs()
+    public function getBlogs(BlogRepository $repository)
     {
-        return DataTables::of(Blog::query())->addColumn('actions', function ($blog) {
+        return DataTables::of($repository->model()->where('status', true))->addColumn('actions', function ($blog) {
             $url = route("mbsp_blog_edit", $blog->id);
-            $deleteUrl = route("mbsp_blog_delete", $blog->id);
-            $makeActive = route("mbsp_blog_make_active", $blog->id);
             $deactivate = route("mbsp_blog_deactivate", $blog->id);
             $html="<a href='$url' class='bty-btn-acction bt-edit'></a>";
-            $html="<a href='$deleteUrl' class='bty-btn-acction bt-delete'></a>";
-            if($blog->status){
-                $html.="<a href='$deactivate' class='btn btn-warning'>Deactivate</a>";
-            }else{
-                $html.="<a href='$makeActive' class='btn btn-success'>Make Active</a>";
-            }
+            $html.="<a href='$deactivate' class='btn btn-info'>Archive</a>";
             return $html;
         }, 2)->editColumn('author_id', function ($blog) {
             return BBGetUser($blog->author_id);
         })->editColumn('created_at', function ($status) {
             return BBgetDateFormat($status->created_at);
-        })->editColumn('status', function ($blog) {
-            return ($blog->status) ? '<span class="alert alert-success">Active</span>' : '<span class="alert alert-danger">Inactive</span>';
-        })->rawColumns(['actions','status'])->make(true);
+        })->rawColumns(['actions'])->make(true);
+    }
+
+    public function getBlogsArchive(BlogRepository $repository)
+    {
+        return DataTables::of($repository->model()->where('status', false))->addColumn('actions', function ($blog) {
+            $deleteUrl = route("mbsp_blog_delete", $blog->id);
+            $makeActive = route("mbsp_blog_make_active", $blog->id);
+            $html ="<a href='$deleteUrl' class='bty-btn-acction bt-delete'></a>";
+            $html.="<a href='$makeActive' class='btn btn-success'>Make Active</a>";
+            return $html;
+        }, 2)->editColumn('author_id', function ($blog) {
+            return BBGetUser($blog->author_id);
+        })->editColumn('created_at', function ($status) {
+            return BBgetDateFormat($status->created_at);
+        })->rawColumns(['actions'])->make(true);
     }
 }

@@ -55,6 +55,7 @@ Route::group(['prefix' => 'datatable'], function () {
     Route::get('get-mb-members', 'DataTablesConroller@getMembers')->name('mbsp_members_lists');
     Route::get('get-mb-statuses', 'DataTablesConroller@getStatuses')->name('mbsp_statuses');
     Route::get('get-mb-blogs', 'DataTablesConroller@getBlogs')->name('mbsp_blogs');
+    Route::get('get-mb-blogs-archive', 'DataTablesConroller@getBlogsArchive')->name('mbsp_blogs_archive');
 });
 Route::group(['prefix' => 'stripe'], function () {
     Route::get('/', 'StripeController@getIndex', true)->name('mbsp_stripe');
