@@ -13,6 +13,7 @@ namespace BtyBugHook\Membership\Providers;
 
 use Btybug\btybug\Models\Routes;
 use BtyBugHook\Membership\Models\User;
+use BtyBugHook\Membership\Services\BlogService;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -35,6 +36,7 @@ class ModuleServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../views', 'mbshp');
         $this->loadViewsFrom(__DIR__ . '/../views', 'mbshp');
 
+        BlogService::getActive();
 
 
         \Eventy::action('admin.menus', [

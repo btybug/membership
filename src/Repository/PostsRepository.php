@@ -4,13 +4,16 @@ namespace BtyBugHook\Membership\Repository;
 use Btybug\btybug\Models\Universal\Paginator;
 use Btybug\btybug\Repositories\GeneralRepository;
 use BtyBugHook\Membership\Models\Post;
+use BtyBugHook\Membership\Services\BlogService;
 
 class PostsRepository extends GeneralRepository
 {
     private $table;
+    private $slug;
     public function __construct()
     {
-        $this->table = \Request::route('slug');
+        $this->slug = \Request::route('slug');
+        $this->table = str_replace('-','_',$this->slug);
         parent::__construct();
     }
     /**
@@ -68,11 +71,17 @@ class PostsRepository extends GeneralRepository
 
     public function model()
     {
+        if(!$this->checkStatus()) return false;
+
         return \DB::table($this->table);
     }
 
     public function getAll()
     {
         return $this->model->get();
+    }
+
+    private function checkStatus(){
+        BlogService::checkStatus($this->slug);
     }
 }
