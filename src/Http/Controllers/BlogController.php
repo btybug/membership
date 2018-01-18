@@ -46,4 +46,32 @@ class BlogController extends Controller
 
         return \Response::json(['error' => false]);
     }
+
+    public function getActivate(
+        Request $request,
+        $id
+    )
+    {
+        $blog = $this->blogRepositroy->findOrFail($id);
+
+        $blog->update([
+           'status' => true
+        ]);
+
+        return redirect()->back()->with('message','Blog activated');
+    }
+
+    public function getDeactivate(
+        Request $request,
+        $id
+    )
+    {
+        $blog = $this->blogRepositroy->findOrFail($id);
+
+        $blog->update([
+            'status' => false
+        ]);
+
+        return redirect()->back()->with('message','Blog deactivated');
+    }
 }
