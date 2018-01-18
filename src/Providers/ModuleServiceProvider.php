@@ -107,17 +107,17 @@ class ModuleServiceProvider extends ServiceProvider
             ], 'cars_pages' => [
                 [
                     'title' => 'General',
-                    'url' => '/admin/membership/cars/settings',
+                    'url' => '/admin/membership/{slug}/settings',
                 ], [
                     'title' => 'Form List',
-                    'url' => '/admin/membership/cars/form-list',
+                    'url' => '/admin/membership/{slug}/form-list',
                 ], [
                     'title' => 'Options',
-                    'url' => '/admin/membership/cars/options',
+                    'url' => '/admin/membership/{slug}/options',
                     'icon' => 'fa fa-cub'
                 ], [
                     'title' => 'Order Button',
-                    'url' => '/admin/membership/cars/order-button',
+                    'url' => '/admin/membership/{slug}/order-button',
                     'icon' => 'fa fa-cub'
                 ]
             ]
