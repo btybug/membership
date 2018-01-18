@@ -4,6 +4,7 @@ namespace BtyBugHook\Membership\Services;
 
 use Btybug\btybug\Models\Painter\Painter;
 use Btybug\btybug\Services\GeneralService;
+use Btybug\Console\Repository\FormsRepository;
 use Btybug\Console\Repository\FrontPagesRepository;
 use BtyBugHook\Membership\Database\CreatePostsTable;
 use BtyBugHook\Membership\Repository\PostsRepository;
@@ -39,6 +40,7 @@ class GeneratorService extends GeneralService
         $this->makeTable();
         $this->makeVariations();
         $this->makePages();
+        $this->makeForms();
     }
 
     private function makeTable()
@@ -49,6 +51,11 @@ class GeneratorService extends GeneralService
     private function makePages()
     {
         $this->registerFrontPages();
+    }
+
+    private function makeForms()
+    {
+        $this->registerForms();
     }
 
     private function registerFrontPages()
@@ -119,5 +126,24 @@ class GeneratorService extends GeneralService
         }
 
         \File::put($this->generatingFile, $this->fileString);
+    }
+
+    private function registerForms(){
+        $form = new FormsRepository();
+        $form->create([
+            'name' => 'Create '.$this->title,
+            'slug' => 'create_'.$this->slug,
+            'created_by' => 'plugin',
+            'type' => 'new',
+            'fields_type' => str_replace('-','_',$this->slug)
+        ]);
+
+        $form->create([
+            'name' => 'Edit '.$this->title,
+            'slug' => 'edit_'.$this->slug,
+            'created_by' => 'plugin',
+            'type' => 'edit',
+            'fields_type' => str_replace('-','_',$this->slug)
+        ]);
     }
 }

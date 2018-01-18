@@ -135,8 +135,8 @@ class BlogCommonController extends Controller
         $slug
     )
     {
-        $pluginForms = $formsRepository->getFormsByFieldType('posts', ['core', 'plugin']);
-        $forms = $formsRepository->getFormsByFieldType('posts', ['custom']);
+        $pluginForms = $formsRepository->getFormsByFieldType($this->postsRepository->table, ['core', 'plugin']);
+        $forms = $formsRepository->getFormsByFieldType($this->postsRepository->table, ['custom']);
         return view("mbshp::common.form-list", compact('pluginForms', 'forms', 'slug'));
     }
 
@@ -223,9 +223,10 @@ class BlogCommonController extends Controller
     }
 
     public function getFormSettings(
-        $id,
         RoleRepository $roleRepository,
-        FormsRepository $formsRepository
+        FormsRepository $formsRepository,
+        $slug,
+        $id
     )
     {
         $form = $formsRepository->findOrFail($id);
@@ -235,9 +236,10 @@ class BlogCommonController extends Controller
     }
 
     public function postFormSettings(
-        $id,
         Request $request,
-        FormService $formService
+        FormService $formService,
+        $slug,
+        $id
     )
     {
         $formService->saveSettings($id, $request);

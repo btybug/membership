@@ -2,7 +2,7 @@
 @section('tab')
     <div role="tabpanel" class="m-t-10" id="main">
         <div class="col-md-12 m-b-10">
-            <a target="_blank" href="{!! route('form_builder_cars',$slug) !!}" class="bty-btn bty-btn-add bty-btn-size-md pull-right">New Form</a>
+            <a target="_blank" href="{!! route('form_builder_posts',$slug) !!}" class="bty-btn bty-btn-add bty-btn-size-md pull-right">New Form</a>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main_container_11">
             <table class="bty-table bty-table-hover bty-table-th-cl-beige" id="tpl-table">
