@@ -74,4 +74,20 @@ class BlogController extends Controller
 
         return redirect()->back()->with('message','Blog deactivated');
     }
+
+    public function getDelete($id, FrontPagesRepository $frontPagesRepository)
+    {
+        $blog = $this->blogRepositroy->find($id);
+        $page=$frontPagesRepository->findOneByMultiple([
+            'module_id'=>'sahak.avatar/membership',
+            'slug' => "all_" . $blog->slug,
+        ]);
+        $child=$frontPagesRepository->findBy('parent_id',$page->id);
+        Painter::findByVariation($child->template)->variations(true)->deleteVariation($child->template);
+        Painter::findByVariation($page->template)->variations(true)->deleteVariation($page->template);
+        $child->delete();
+        $page->delete();
+        CreatePostsTable::down($blog->slug);
+        return redirect()->back();
+    }
 }
