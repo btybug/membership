@@ -85,8 +85,8 @@ class BlogController extends Controller
             'slug' => "all_" . $blog->slug,
         ]);
         $child=$frontPagesRepository->findBy('parent_id',$page->id);
-        Painter::findByVariation($child->template)->variations(true)->deleteVariation($child->template);
-        Painter::findByVariation($page->template)->variations(true)->deleteVariation($page->template);
+        Painter::findByVariation($child->template)->variations(false)->deleteVariation($child->template);
+        Painter::findByVariation($page->template)->variations(false)->deleteVariation($page->template);
         $child->delete();
         $page->delete();
         $blog->delete();
