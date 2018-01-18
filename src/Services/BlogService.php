@@ -20,7 +20,6 @@ class BlogService  extends GeneralService
 
         if($slug){
             $blog = $blogRepositroy->findBy('slug',$slug);
-
             if($blog && $blog->status){
                 return true;
             }

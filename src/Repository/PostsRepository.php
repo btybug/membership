@@ -10,9 +10,12 @@ class PostsRepository extends GeneralRepository
 {
     private $table;
     private $slug;
-    public function __construct()
+    private $blog;
+
+    public function __construct(BlogRepository $blogRepository)
     {
         $this->slug = \Request::route('slug');
+        $this->blog = $blogRepository;
         $this->table = str_replace('-','_',$this->slug);
         parent::__construct();
     }
@@ -39,6 +42,11 @@ class PostsRepository extends GeneralRepository
             $posts = new Paginator($limit_per_page,6,'bty-pagination-2',$posts);
         }
         return $posts;
+    }
+
+    public function __get($name)
+    {
+        return $this->$name;
     }
 
     public function getPublishedByUrl($slug)
@@ -81,7 +89,11 @@ class PostsRepository extends GeneralRepository
         return $this->model->get();
     }
 
-    private function checkStatus(){
-        BlogService::checkStatus($this->slug);
+    public function checkStatus(){
+        return BlogService::checkStatus($this->slug);
+    }
+
+    public function getBlogModel(){
+        return $this->blog->findBy('slug',$this->slug);
     }
 }

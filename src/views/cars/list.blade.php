@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main_container_11">
-        <table id="users-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <table id="posts-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
             <tr>
                 <th>id</th>
@@ -23,10 +23,10 @@
     <script>
 
         $(function () {
-            $('#users-table').DataTable({
+            $('#posts-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('carsData') !!}',
+                ajax: '{!! route('postsData',['slug' => $slug]) !!}',
                 dom: 'Bfrtip',
                 columnDefs: [
                     {
@@ -42,13 +42,13 @@
                     {
                         text: 'Create New',
                         action: function (e, dt, node, config) {
-                            window.location = '/admin/membership/cars/new-post'
+                            window.location = '/admin/membership/{{ $slug }}/new-post'
                         }
                     },
                     {
                         text: 'Settings',
                         action: function (e, dt, node, config) {
-                            window.location = '/admin/membership/cars/settings'
+                            window.location = '/admin/membership/{{ $slug }}/settings'
                         }
                     }
                 ]

@@ -2,23 +2,23 @@
 @section('content')
     <div class="main_lay_cont">
         <div class="row for_title_row">
-            <h1 class="text-center">Cars Control</h1>
+            <h1 class="text-center">{{ $model->title }} Control</h1>
         </div>
         <div class="row layouts_row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 items_links">
-                <a href="{!! url('admin/membership/cars/posts') !!}" class="ly_items">
+                <a href="{!! url('admin/membership/'.$model->slug.'/posts') !!}" class="ly_items">
                     <h3>Posts</h3>
                     <h2><i class="fa fa-trello" aria-hidden="true"></i></h2>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 items_links">
-                <a href="{!! url('admin/membership/cars/new-post') !!}" class="ly_items">
+                <a href="{!! url('admin/membership/'.$model->slug.'/new-post') !!}" class="ly_items">
                     <h3>New Post</h3>
                     <h2><i class="fa fa-columns" aria-hidden="true"></i></h2>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 items_links">
-                <a href="{!! url('admin/membership/cars/settings') !!}" class="ly_items">
+                <a href="{!! url('admin/membership/'.$model->slug.'/settings') !!}" class="ly_items">
                     <h3>Settings</h3>
                     <h2><i class="fa fa-columns" aria-hidden="true"></i></h2>
                 </a>

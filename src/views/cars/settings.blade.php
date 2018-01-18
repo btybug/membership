@@ -12,7 +12,7 @@
                 </div>
                 <div id="urlManagerCol" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="urlManager">
                     <div class="panel-body">
-                        {!! Form::model($settings,['url' => '/admin/blog/settings']) !!}
+                        {!! Form::model($settings,['url' => route('post_settings_save',['slug' => $slug])]) !!}
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="radios">Select type</label>
                             <div class="col-md-4">
@@ -40,8 +40,8 @@
                             <div class="row">
                                 <div class="col-md-12 m-b-10">
                                     <div class="col-sm-4 p-l-0">All posts Unit</div>
-                                    {!! BBbutton2('unit','all_main_content','all_posts',(isset($all->template) && $all->template)?'Change':'Select',['class'=>'btn btn-default change-layout','model' =>(isset($all->template) && $all->template) ?$all->template : null]) !!}
-
+{{--                                    {!! BBbutton2('unit','all_main_content','all_posts',(isset($all->template) && $all->template)?'Change':'Select',['class'=>'btn btn-default change-layout','model' =>(isset($all->template) && $all->template) ?$all->template : null]) !!}--}}
+                                    <a href="{!! url(route('uploads_settings',$all->template)) !!}" target="_blank">Customize</a>
                                 </div>
                             </div>
                         </div>
@@ -49,8 +49,8 @@
                             <div class="row">
                                 <div class="col-md-12 m-b-10">
                                     <div class="col-sm-4 p-l-0">Single posts Unit</div>
-                                    {!! BBbutton2('unit','single_main_content','single_post',(isset($single->template) && $single->template)?'Change':'Select',['class'=>'btn btn-default change-layout','model' =>(isset($single->template) && $single->template) ?$single->template : null]) !!}
-
+                                    <a href="{!! url(route('uploads_settings',$single->template)) !!}" target="_blank">Customize</a>
+                                    {{--{!! BBbutton2('unit','single_main_content','single_post',(isset($single->template) && $single->template)?'Change':'Select',['class'=>'btn btn-default change-layout','model' =>(isset($single->template) && $single->template) ?$single->template : null]) !!}--}}
                                 </div>
                             </div>
                         </div>
@@ -314,7 +314,7 @@
                 var data = $('.columns-add-form').serialize();
                 $.ajax({
                     type: 'POST',
-                    url: '/admin/console/structure/tables/add-column/posts',
+                    url: '/admin/console/structure/tables/add-column/{{ $table }}',
                     headers: '{!! csrf_token() !!}',
                     datatype: 'json',
                     cache: false,
