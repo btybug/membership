@@ -32,7 +32,7 @@
                         @foreach($options as $option)
                         <div class="checkbox">
                             <label for="checkboxes-{!! $option['slug'] !!}">
-                                <input type="checkbox" name="options[{!! $option['slug'] !!}]" checked="{!! $option['checked'] !!}" id="checkboxes-{!! $option['slug'] !!}" value="1">
+                                <input type="checkbox" name="options[{!! $option['slug'] !!}]" @if($option['checked']) checked @endif id="checkboxes-{!! $option['slug'] !!}" value="1">
                                 {!! $option['name'] !!}
                             </label>
                         </div>
@@ -59,7 +59,7 @@
                 $.ajax({
                     type: "post",
                     datatype: "json",
-                    url: '{!! route('mbsp_settings_mb_save_options') !!}',
+                    url: '{!! route('mbsp_settings_mb_save_options',$slug) !!}',
                     data:data,
                     headers: {
                         'X-CSRF-TOKEN': $("input[name='_token']").val()

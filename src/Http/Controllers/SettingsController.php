@@ -93,39 +93,8 @@ class SettingsController extends Controller
         return redirect()->back();
     }
 
-    public function getOptions(AdminsettingRepository $adminsettingRepository)
-    {
-        $data=[];
-        $settings=$adminsettingRepository->getSettings('product', 'blog_price_options');
-        if($settings){
-            $data=(json_decode($settings->val,true));
-        }
 
-        $options = get_prices_data();
-        foreach ($options as $key=>$option){
-            if(isset($data['options'][$key])){
-                $options[$key]['checked']=true;
-            }else{
-                $options[$key]['checked']=false;
-            }
-        }
-        return view('mbshp::settings.options', compact('options','data'));
-    }
 
-    public function getOrderButton()
-    {
-        $columns = \DB::select('SHOW COLUMNS FROM cars');
-        return view('mbshp::settings.order_button',compact('columns'));
-    }
 
-    public function postOptions(Request $request, AdminsettingRepository $adminsettingRepository)
-    {
-        $flag=false;
-        $data=$request->except('_token');
-        if($data['allow_price']){
-            $flag=true;
-        }
-        $adminsettingRepository->createOrUpdate(json_encode($data,true), 'product', 'blog_price_options');
-        return \Response::json(['error' => false,'flag'=>$flag]);
-    }
+
 }

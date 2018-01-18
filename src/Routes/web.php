@@ -76,9 +76,9 @@ Route::group(['prefix' => 'cars'], function () {
 //Route::post('/new-post', 'IndexConroller@postNewPost');
     Route::post('/get-fields', 'CarsController@getFieldsByTable');
     Route::get('/settings', 'CarsController@getSettings', true);
-    Route::get('/options', 'SettingsController@getOptions', true)->name('mbsp_settings_mb_options');
-    Route::post('/options', 'SettingsController@postOptions')->name('mbsp_settings_mb_save_options');
-    Route::get('/order-button', 'SettingsController@getOrderButton', true)->name('mbsp_order_button');
+//    Route::get('/options', 'SettingsController@getOptions', true)->name('mbsp_settings_mb_options');
+//    Route::post('/options', 'SettingsController@postOptions')->name('mbsp_settings_mb_save_options');
+//    Route::get('/order-button', 'SettingsController@getOrderButton', true)->name('mbsp_order_button');
     Route::post('/render-fields', 'CarsController@postRenderField');
     Route::post('/save-form', 'CarsController@postSaverForm');
 
@@ -136,9 +136,9 @@ Route::group(['prefix' => '{slug}'], function () {
 //Route::post('/new-post', 'IndexConroller@postNewPost');
     Route::post('/get-fields', 'BlogCommonController@getFieldsByTable');
     Route::get('/settings', 'BlogCommonController@getSettings', true);
-    Route::get('/options', 'SettingsController@getOptions', true)->name('mbsp_settings_blog_options');
-    Route::post('/options', 'SettingsController@postOptions')->name('mbsp_settings_blog_save_options');
-    Route::get('/order-button', 'SettingsController@getOrderButton', true)->name('mbsp_order_button');
+    Route::get('/options', 'BlogCommonController@getOptions', true)->name('mbsp_settings_blog_options');
+    Route::post('/options', 'BlogCommonController@postOptions')->name('mbsp_settings_mb_save_options');
+    Route::get('/order-button', 'BlogCommonController@getOrderButton', true)->name('mbsp_order_button');
     Route::post('/render-fields', 'BlogCommonController@postRenderField');
     Route::post('/save-form', 'BlogCommonController@postSaverForm');
 

@@ -24,23 +24,24 @@ use Yajra\DataTables\DataTables;
 class BlogCommonController extends Controller
 {
     public $postsRepository;
+
     public function __construct(PostsRepository $postsRepository)
     {
         $this->postsRepository = $postsRepository;
-        if(! $this->postsRepository->checkStatus()) abort(404, 'Blog not found');
+        if (!$this->postsRepository->checkStatus()) abort(404, 'Blog not found');
     }
 
     public function getIndex()
     {
         $model = $this->postsRepository->getBlogModel();
-        return view('mbshp::cars.index',compact('model'));
+        return view('mbshp::common.index', compact('model'));
     }
 
     public function getPosts($slug)
     {
         $posts = $this->postsRepository->getAll();
 
-        return view('mbshp::cars.list', compact(['posts','slug']));
+        return view('mbshp::common.list', compact(['posts', 'slug']));
     }
 
     public function postsData($slug)
@@ -48,16 +49,16 @@ class BlogCommonController extends Controller
         set_time_limit(-1);
         ini_set('memory_limit', '2048M');
         return DataTables::of($this->postsRepository->model())->addColumn('actions', function ($post) {
-            $url= url("admin/membership/slug/edit-post",$post->id);
+            $url = url("admin/membership/slug/edit-post", $post->id);
             return "<a href='$url' class='btn btn-warning'><i class='fa fa-edit'></i></a>";
-        },2)->addColumn('author', function ($post) {
+        }, 2)->addColumn('author', function ($post) {
             return BBGetUser($post->author_id);
         })->rawColumns(['actions'])->make(true);
     }
 
     public function getNewPost()
     {
-        return view('mbshp::cars.create');
+        return view('mbshp::common.create');
     }
 
     public function postNewPost(
@@ -78,10 +79,10 @@ class BlogCommonController extends Controller
     )
     {
         $table = $this->postsRepository->table;
-        $all = $pagesRepository->findBy('slug', 'all_'.$slug);
-        $single = $pagesRepository->findBy('slug', 'single_'.$slug);
-        $createForms = $formsRepository->getFormsByFieldType($table,['*'],true,'new');
-        $editForms = $formsRepository->getFormsByFieldType($table,['*'],true,'edit');
+        $all = $pagesRepository->findBy('slug', 'all_' . $slug);
+        $single = $pagesRepository->findBy('slug', 'single_' . $slug);
+        $createForms = $formsRepository->getFormsByFieldType($table, ['*'], true, 'new');
+        $editForms = $formsRepository->getFormsByFieldType($table, ['*'], true, 'edit');
         $columns = \DB::select('SHOW COLUMNS FROM ' . $table);
         $this->data['default'] = ['NULL', 'USER_DEFINED', 'CURRENT_TIMESTAMP'];
         $this->data['tbtypes'] = Migrations::types();
@@ -93,15 +94,15 @@ class BlogCommonController extends Controller
         }
         $this->data['after_columns'] = $after_columns;
 
-        $settings = $adminsettingRepository->findOneByMultipleSettingsArray(['section' => 'btybug_blog','settingkey' => 'blog_settings']);
-        return view('mbshp::cars.settings', compact(['all', 'single','createForms','editForms','settings','slug','table']))->with($this->data);
+        $settings = $adminsettingRepository->findOneByMultipleSettingsArray(['section' => 'btybug_blog', 'settingkey' => 'blog_settings']);
+        return view('mbshp::common.settings', compact(['all', 'single', 'createForms', 'editForms', 'settings', 'slug', 'table']))->with($this->data);
     }
 
     public function getFormBulder()
     {
         $form = null;
         //$data['form_fields'] = ($settings) ? json_decode($settings->value,true) : [];
-        return view("mbshp::cars.form_bulder",compact('form'));
+        return view("mbshp::common.form_bulder", compact('form'));
     }
 
     public function getEditFormBulder(
@@ -111,12 +112,12 @@ class BlogCommonController extends Controller
     )
     {
         $form = $formsRepository->findOrFail($id);
-        $form->fields_json = $formService->fieldsJson($id,true);
+        $form->fields_json = $formService->fieldsJson($id, true);
         $form->unit_json = json_encode(ajaxExtract(json_decode($form->unit_json, true)));
-        $fields = json_encode((count($form->form_fields)) ? $form->form_fields()->pluck('field_slug','field_slug')->toArray() : []);
+        $fields = json_encode((count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : []);
         $html = $formService->render($id);
 
-        return view("mbshp::cars.form_bulder",compact('form','fields','html'));
+        return view("mbshp::common.form_bulder", compact('form', 'fields', 'html'));
     }
 
     public function postFormBulder(
@@ -126,7 +127,7 @@ class BlogCommonController extends Controller
     {
         $service->createOrUpdate($request->except('_token'));
 
-        return redirect()->to('admin/blog/form-list')->with('message','Form successfully Saved');
+        return redirect()->to('admin/blog/form-list')->with('message', 'Form successfully Saved');
     }
 
     public function getList(
@@ -134,9 +135,9 @@ class BlogCommonController extends Controller
         $slug
     )
     {
-        $pluginForms = $formsRepository->getFormsByFieldType('posts',['core','plugin']);
-        $forms = $formsRepository->getFormsByFieldType('posts',['custom']);
-        return view("mbshp::cars.form-list",compact('pluginForms','forms','slug'));
+        $pluginForms = $formsRepository->getFormsByFieldType('posts', ['core', 'plugin']);
+        $forms = $formsRepository->getFormsByFieldType('posts', ['custom']);
+        return view("mbshp::common.form-list", compact('pluginForms', 'forms', 'slug'));
     }
 
 
@@ -146,11 +147,11 @@ class BlogCommonController extends Controller
         AdminsettingRepository $adminsettingRepository
     )
     {
-        $adminsettingRepository->createOrUpdate(json_encode($request->only('posts_create_form','posts_edit_form','url_manager'),true), 'btybug_blog', 'blog_settings');
+        $adminsettingRepository->createOrUpdate(json_encode($request->only('posts_create_form', 'posts_edit_form', 'url_manager'), true), 'btybug_blog', 'blog_settings');
         $all = $pagesRepository->findBy('slug', 'all-posts');
         $single = $pagesRepository->findBy('slug', 'single-post');
-        $pagesRepository->update($all->id,['template' => $request->all_main_content]);
-        $pagesRepository->update($single->id,['template' => $request->single_main_content]);
+        $pagesRepository->update($all->id, ['template' => $request->all_main_content]);
+        $pagesRepository->update($single->id, ['template' => $request->single_main_content]);
         return redirect()->back();
     }
 
@@ -161,13 +162,13 @@ class BlogCommonController extends Controller
         FieldService $fieldService
     )
     {
-        $fields = $request->get('fields',null);
+        $fields = $request->get('fields', null);
         $data = [];
         $existing = [];
-        if($fields){
-            foreach ($fields as $k => $v){
+        if ($fields) {
+            foreach ($fields as $k => $v) {
                 $f = $fieldsRepository->find($k);
-                if($f) {
+                if ($f) {
 
                     $existing['object'] = $f;
                     $existing['html'] = $fieldService->returnHtml($f);
@@ -177,15 +178,15 @@ class BlogCommonController extends Controller
                 }
             }
 
-            return \Response::json(['error' => false,'fields' => $data]);
+            return \Response::json(['error' => false, 'fields' => $data]);
         }
-        return \Response::json(['message' => "Fields are invalid",'error' => true]);
+        return \Response::json(['message' => "Fields are invalid", 'error' => true]);
     }
 
     public function postFormFieldsSettings(Request $request, AdminsettingRepository $adminsettingRepository)
     {
         $data = $request->except('_token');
-        $adminsettingRepository->createOrUpdate(json_encode($data,true), 'btybug_blog', 'form_field_settings');
+        $adminsettingRepository->createOrUpdate(json_encode($data, true), 'btybug_blog', 'form_field_settings');
         return redirect()->back();
     }
 
@@ -196,7 +197,7 @@ class BlogCommonController extends Controller
     {
         $post = $postsRepository->findOrFail($id);
 
-        return view('mbshp::cars.edit',compact('post'));
+        return view('mbshp::common.edit', compact('post'));
     }
 
     public function postEditPos(
@@ -215,22 +216,22 @@ class BlogCommonController extends Controller
         FieldsRepository $fieldsRepository
     )
     {
-        $fields = $fieldsRepository->getWhereNotExists($request->table,$request->fields);
-        $html = \View("mbshp::cars._partials.field-list",compact('fields'))->render();
+        $fields = $fieldsRepository->getWhereNotExists($request->table, $request->fields);
+        $html = \View("mbshp::common._partials.field-list", compact('fields'))->render();
 
         return \Response::json(['html' => $html]);
     }
 
-    public function getFormSettings (
+    public function getFormSettings(
         $id,
         RoleRepository $roleRepository,
         FormsRepository $formsRepository
     )
     {
         $form = $formsRepository->findOrFail($id);
-        $formRoles = (count($form->form_roles)) ? $form->form_roles()->pluck('role_id','role_id')->toArray() : [];
+        $formRoles = (count($form->form_roles)) ? $form->form_roles()->pluck('role_id', 'role_id')->toArray() : [];
         $roles = $roleRepository->getAll()->toArray();
-        return view('mbshp::cars.forms.settings',compact('roles','form','formRoles'));
+        return view('mbshp::common.forms.settings', compact('roles', 'form', 'formRoles'));
     }
 
     public function postFormSettings(
@@ -239,21 +240,21 @@ class BlogCommonController extends Controller
         FormService $formService
     )
     {
-        $formService->saveSettings($id,$request);
+        $formService->saveSettings($id, $request);
 
-        return redirect()->back()->with('message','Form settings are saved');
+        return redirect()->back()->with('message', 'Form settings are saved');
     }
 
-    public function getMyFormsView (
+    public function getMyFormsView(
         $id,
         FormsRepository $formsRepository,
         FormService $formService
     )
     {
-        $form = $formsRepository->findOneByMultiple(['id' => $id,'created_by' => 'plugin']);
-        if( ! $form) abort(404,"Form not found");
+        $form = $formsRepository->findOneByMultiple(['id' => $id, 'created_by' => 'plugin']);
+        if (!$form) abort(404, "Form not found");
 
-        return view('mbshp::cars.forms.view',compact('form'));
+        return view('mbshp::common.forms.view', compact('form'));
     }
 
     public function carsData()
@@ -261,9 +262,9 @@ class BlogCommonController extends Controller
         set_time_limit(-1);
         ini_set('memory_limit', '2048M');
         return DataTables::of(Post::query())->addColumn('actions', function ($post) {
-            $url= url("admin/membership/cars/edit-post",$post->id);
+            $url = url("admin/membership/cars/edit-post", $post->id);
             return "<a href='$url' class='btn btn-warning'><i class='fa fa-edit'></i></a>";
-        },2)->addColumn('author', function ($post) {
+        }, 2)->addColumn('author', function ($post) {
 
             return BBGetUser($post->author_id);
         })->rawColumns(['actions'])->make(true);
@@ -274,19 +275,20 @@ class BlogCommonController extends Controller
 
         set_time_limit(-1);
         ini_set('memory_limit', '2048M');
-        $data=array();
-        for ($i=0;$i<500;$i++){
-            $data[$i]['author_id']=1;
-            $data[$i]['title']=str_random(5);
-            $data[$i]['description']=str_random(10);
-            $data[$i]['image']='images/posts/5a26da145b969.jpg';
-            $data[$i]['slug']=str_random(5);
-            $data[$i]['status']='published';
+        $data = array();
+        for ($i = 0; $i < 500; $i++) {
+            $data[$i]['author_id'] = 1;
+            $data[$i]['title'] = str_random(5);
+            $data[$i]['description'] = str_random(10);
+            $data[$i]['image'] = 'images/posts/5a26da145b969.jpg';
+            $data[$i]['slug'] = str_random(5);
+            $data[$i]['status'] = 'published';
         }
         return \DB::table('posts')->insert($data);
     }
 
-    public function appendPostScrollPaginator(PostsRepository $repository,Request $request){
+    public function appendPostScrollPaginator(PostsRepository $repository, Request $request)
+    {
 
         $posts = json_decode($request->all_posts);
 
@@ -294,27 +296,29 @@ class BlogCommonController extends Controller
         $col_md_x = isset($request->bootstrap_col) ? $request->bootstrap_col : "col-md-4";
         $settings_for_ajax = unserialize($request->settings_for_ajax);
         $all_posts = json_encode($posts);
-        if(!count($posts) < $limit_per_page){
-            return \Response::json(["html" => '','all_posts' => $all_posts]);
+        if (!count($posts) < $limit_per_page) {
+            return \Response::json(["html" => '', 'all_posts' => $all_posts]);
         }
-        $posts = new Paginator($limit_per_page,6,'bty-pagination-2',$posts);
+        $posts = new Paginator($limit_per_page, 6, 'bty-pagination-2', $posts);
 
-        $html = \View::make('mbshp::cars._partials.render-for-post',compact('posts','col_md_x','settings_for_ajax'))->render();
+        $html = \View::make('mbshp::common._partials.render-for-post', compact('posts', 'col_md_x', 'settings_for_ajax'))->render();
 
-        return \Response::json(["html" => $html,'all_posts' => $all_posts]);
+        return \Response::json(["html" => $html, 'all_posts' => $all_posts]);
     }
-    public function search(PostsRepository $repository,Request $request){
+
+    public function search(PostsRepository $repository, Request $request)
+    {
         $term = $request->term;
         $search_by = json_decode($request->search_by);
         $settings_for_ajax = unserialize($request->settings_for_ajax_search);
         $sort_by = $request->sort_by;
         $sort_how = $request->sort_how;
 
-        $posts = $repository->renderSearch($term,$search_by);
+        $posts = $repository->renderSearch($term, $search_by);
 
-        if($sort_how && $sort_by){
-            $posts = $repository->renderSort($posts,$sort_by,$sort_how);
-        }else{
+        if ($sort_how && $sort_by) {
+            $posts = $repository->renderSort($posts, $sort_by, $sort_how);
+        } else {
             $posts = $repository->renderSort($posts);
         }
 
@@ -324,28 +328,65 @@ class BlogCommonController extends Controller
 
         $posts = $posts->get();
         $all_posts = json_encode($posts);
-        $posts = new Paginator($limit_per_page,6,'bty-pagination-2',$posts);
+        $posts = new Paginator($limit_per_page, 6, 'bty-pagination-2', $posts);
 
-        $html = \View::make('mbshp::cars._partials.render-for-post',compact('posts','col_md_x','settings_for_ajax'))->render();
+        $html = \View::make('mbshp::common._partials.render-for-post', compact('posts', 'col_md_x', 'settings_for_ajax'))->render();
 
-        return \Response::json(["html" => $html,'all_posts' => $all_posts]);
+        return \Response::json(["html" => $html, 'all_posts' => $all_posts]);
     }
-    public function findPage(PostsRepository $repository, Request $request){
+
+    public function findPage(PostsRepository $repository, Request $request)
+    {
         $all_posts = json_decode($request->all_posts);
         $col_md_x = isset($request->bootstrap_col) ? $request->bootstrap_col : "col-md-4";
         $settings_for_ajax = unserialize($request->settings_for_ajax);
         $limit_per_page = isset($request->limit_per_page) ? $request->limit_per_page : 10;
 
-        if(!count($all_posts)){
+        if (!count($all_posts)) {
             $posts = $repository->getPublished();
-        }else{
+        } else {
             $posts = $all_posts;
         }
         $all_posts = json_encode($posts);
 
-        $posts = new Paginator($limit_per_page,6,'bty-pagination-2',$posts);
-        $html = \View::make('mbshp::cars._partials.render-for-post',compact('posts','col_md_x','settings_for_ajax'))->render();
+        $posts = new Paginator($limit_per_page, 6, 'bty-pagination-2', $posts);
+        $html = \View::make('mbshp::common._partials.render-for-post', compact('posts', 'col_md_x', 'settings_for_ajax'))->render();
 
-        return \Response::json(["html" => $html,"all_posts" => $all_posts]);
+        return \Response::json(["html" => $html, "all_posts" => $all_posts]);
+    }
+
+    public function getOptions(AdminsettingRepository $adminsettingRepository, $slug)
+    {
+        $data = [];
+        $settings = $adminsettingRepository->getSettings('product', $slug);
+        if ($settings) {
+            $data = (json_decode($settings->val, true));
+        }
+        $options = get_prices_data();
+        foreach ($options as $key => $option) {
+            if (isset($data['options'][$key])) {
+                $options[$key]['checked'] = true;
+            } else {
+                $options[$key]['checked'] = false;
+            }
+        }
+        return view('mbshp::common.options', compact('options', 'data', 'slug'));
+    }
+
+    public function postOptions(Request $request, AdminsettingRepository $adminsettingRepository, $slug)
+    {
+        $flag = false;
+        $data = $request->except('_token');
+        if ($data['allow_price']) {
+            $flag = true;
+        }
+        $adminsettingRepository->createOrUpdate(json_encode($data, true), 'product', $slug);
+        return \Response::json(['error' => false, 'flag' => $flag]);
+    }
+
+    public function getOrderButton($slug)
+    {
+        $columns = \DB::select("SHOW COLUMNS FROM $slug");
+        return view('mbshp::common.order_button',compact('columns','slug'));
     }
 }
