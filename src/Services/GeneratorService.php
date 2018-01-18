@@ -43,7 +43,7 @@ class GeneratorService extends GeneralService
 
     private function makeTable()
     {
-        CreatePostsTable::up($this->slug);
+        CreatePostsTable::up(str_replace('-','_',$this->slug));
     }
 
     private function makePages()
