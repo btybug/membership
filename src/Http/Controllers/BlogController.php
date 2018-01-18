@@ -80,18 +80,23 @@ class BlogController extends Controller
 
     public function getDelete($id, FrontPagesRepository $frontPagesRepository)
     {
+
         $blog = $this->blogRepositroy->find($id);
         $page=$frontPagesRepository->findOneByMultiple([
             'module_id'=>'sahak.avatar/membership',
             'slug' => "all_" . $blog->slug,
         ]);
         $child=$frontPagesRepository->findBy('parent_id',$page->id);
-        Painter::findByVariation($child->template)->variations(false)->deleteVariation($child->template);
-        Painter::findByVariation($page->template)->variations(false)->deleteVariation($page->template);
-        $child->delete();
-        $page->delete();
-        $blog->delete();
-        CreatePostsTable::down($blog->slug);
+        try{
+            Painter::findByVariation($child->template)->variations(false)->deleteVariation($child->template);
+            Painter::findByVariation($page->template)->variations(false)->deleteVariation($page->template);
+            $child->delete();
+            $page->delete();
+            $blog->delete();
+            CreatePostsTable::down($blog->slug);
+        }catch (\Exception $e){
+            return redirect()->back()->with(['message'=>$e->getMessage()]);
+        }
         return redirect()->back();
     }
 }
