@@ -7,6 +7,12 @@ use BtyBugHook\Membership\Models\Post;
 
 class PostsRepository extends GeneralRepository
 {
+    private $table;
+    public function __construct()
+    {
+        $this->table = \Request::route('slug');
+        parent::__construct();
+    }
     /**
      * @return mixed
      */
@@ -62,6 +68,11 @@ class PostsRepository extends GeneralRepository
 
     public function model()
     {
-        return new Post();
+        return \DB::table($this->table);
+    }
+
+    public function getAll()
+    {
+        return $this->model->get();
     }
 }

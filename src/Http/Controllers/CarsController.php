@@ -29,7 +29,7 @@ class CarsController extends Controller
 
     }
 
-    public function getIndex()
+    public function getIndex(PostsRepository $postsRepository)
     {
         return view('mbshp::cars.index');
     }

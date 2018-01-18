@@ -35,12 +35,13 @@ class BlogController extends Controller
         Request $request
     )
     {
-        return $this->generatorService->generate($request->title);
         $this->blogRepositroy->create([
             'title' => $request->title,
-            'slug' => str_slug($request->title,"_"),
+            'slug' => str_slug($request->title, "_"),
             'author_id' => \Auth::id()
         ]);
+
+        $this->generatorService->generate($request->title);
 
         return \Response::json(['error' => false]);
     }
