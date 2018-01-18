@@ -130,12 +130,13 @@ class BlogCommonController extends Controller
     }
 
     public function getList(
-        FormsRepository $formsRepository
+        FormsRepository $formsRepository,
+        $slug
     )
     {
         $pluginForms = $formsRepository->getFormsByFieldType('posts',['core','plugin']);
         $forms = $formsRepository->getFormsByFieldType('posts',['custom']);
-        return view("mbshp::cars.form-list",compact('pluginForms','forms'));
+        return view("mbshp::cars.form-list",compact('pluginForms','forms','slug'));
     }
 
 

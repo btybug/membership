@@ -128,7 +128,7 @@ class ModuleServiceProvider extends ServiceProvider
         Routes::registerPages('sahak.avatar/membership');
 
         \Eventy::action('shortcode.except.url', [
-            'admin/membership/cars/form-list'
+            'admin/membership/{param}/form-list'
         ]);
     }
 
