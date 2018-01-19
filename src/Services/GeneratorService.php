@@ -63,7 +63,7 @@ class GeneratorService extends GeneralService
     {
         $frontPageRepo = new FrontPagesRepository();
         \DB::transaction(function () use ($frontPageRepo) {
-           $frontPageRepo->create([
+            $all_page = $frontPageRepo->create([
                 'title' => "All " . $this->title,
                 'slug' => "all_" . $this->slug,
                 'url' => '/' . $this->slug,
