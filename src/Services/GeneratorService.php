@@ -138,7 +138,9 @@ class GeneratorService extends GeneralService
                 'created_by' => 'plugin',
                 'type' => 'new',
                 'fields_type' => str_replace('-','_',$this->slug)
-            ],[
+            ]);
+
+            $form->create([
                 'name' => 'Edit '.$this->title,
                 'slug' => 'edit_'.$this->slug,
                 'created_by' => 'plugin',
@@ -155,7 +157,9 @@ class GeneratorService extends GeneralService
                 'column_name' => 'title',
                 'type' => 'text',
                 'structured_by' => 'plugin',
-            ],[
+            ]);
+
+            $fieldRepo->create([
                 'name' => 'Status',
                 'slug' => uniqid(),
                 'visibility' => true,
@@ -163,7 +167,8 @@ class GeneratorService extends GeneralService
                 'column_name' => 'status',
                 'type' => 'select',
                 'structured_by' => 'plugin',
-            ],[
+            ]);
+            $fieldRepo->create([
                 'name' => 'Description',
                 'slug' => uniqid(),
                 'visibility' => true,
