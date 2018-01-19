@@ -89,11 +89,11 @@ class BlogController extends Controller
     {
 
         $blog = $this->blogRepositroy->findOrFail($id);
-        $form = $formsRepository->findOneByMultiple([
+        $form = $formsRepository->findAllByMultiple([
             'fields_type' => str_replace("-","_",$blog->slug),
         ]);
 
-        $fields = $fieldsRepository->findOneByMultiple([
+        $fields = $fieldsRepository->findAllByMultiple([
             'table_name' => str_replace("-","_",$blog->slug),
         ]);
         $page = $frontPagesRepository->findOneByMultiple([

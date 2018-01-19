@@ -46,6 +46,7 @@
                                     <div class="col-md-2">
                                         <p>
                                             <input type="checkbox" data-id="{!! $field->id !!}"
+                                                   data-table="{!! $form->fields_type !!}"
                                                    value="{!! $field->column_name !!}"
                                                    name="fields_json[{!! $field->id !!}]"
                                                    {!! (! in_array($field->slug,$existingFields)) ?: "checked"  !!}
@@ -101,5 +102,5 @@
 @stop
 
 @section( 'JS' )
-    {!! BBscript(plugins_path('vendor/btybug.hook/blog/src/public/scripts.js')) !!}
+    {!! BBscript(plugins_path('vendor/sahak.avatar/membership/src/public/scripts.js')) !!}
 @stop

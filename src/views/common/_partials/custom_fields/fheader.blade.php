@@ -1,2 +1,2 @@
-<h2 class="form-title">Create Post</h2>
+<h2 class="form-title">Form</h2>
 <div class="field-box">

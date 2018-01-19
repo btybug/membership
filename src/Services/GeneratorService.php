@@ -7,6 +7,7 @@ use Btybug\btybug\Services\GeneralService;
 use Btybug\Console\Repository\FieldsRepository;
 use Btybug\Console\Repository\FormsRepository;
 use Btybug\Console\Repository\FrontPagesRepository;
+use Btybug\Console\Services\FormService;
 use BtyBugHook\Membership\Database\CreatePostsTable;
 use BtyBugHook\Membership\Repository\PostsRepository;
 
@@ -18,6 +19,7 @@ class GeneratorService extends GeneralService
     private $slug;
     private $fileString;
     private $generatingFile;
+    private $formService;
     private $stubPath = 'vendor' . DS . 'sahak.avatar' . DS . 'membership' . DS . 'src' . DS . 'Stubs';
     private $modelPath = 'vendor' . DS . 'sahak.avatar' . DS . 'membership' . DS . 'src' . DS . 'Models' . DS . 'Blogs';
     private $all_unit_slug = 'membership_plans';
@@ -28,9 +30,10 @@ class GeneratorService extends GeneralService
         '{slug}' => 'slug',
     ];
 
-    public function __construct(PostsRepository $postsRepository)
+    public function __construct(PostsRepository $postsRepository,FormService $formService)
     {
         $this->postRepo = $postsRepository;
+        $this->formService = $formService;
     }
 
 
@@ -132,22 +135,22 @@ class GeneratorService extends GeneralService
         $form = new FormsRepository();
         $fieldRepo = new FieldsRepository();
         \DB::transaction(function () use ($form,$fieldRepo) {
-            $form->create([
+           $create_form =  $form->create([
                 'name' => 'Create '.$this->title,
                 'slug' => 'create_'.$this->slug,
                 'created_by' => 'plugin',
                 'type' => 'new',
                 'fields_type' => str_replace('-','_',$this->slug)
             ]);
-
-            $form->create([
+            $this->generateFormBlade($create_form);
+            $edit_form = $form->create([
                 'name' => 'Edit '.$this->title,
                 'slug' => 'edit_'.$this->slug,
                 'created_by' => 'plugin',
                 'type' => 'edit',
                 'fields_type' => str_replace('-','_',$this->slug)
             ]);
-
+            $this->generateFormBlade($edit_form);
             //generating create form fields
             $fieldRepo->create([
                 'name' => 'Title',
@@ -178,5 +181,12 @@ class GeneratorService extends GeneralService
                 'structured_by' => 'plugin',
             ]);
         });
+    }
+
+    private function generateFormBlade($form){
+        $html = "{{--Form $form->id --}}\r\n" . \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/fheader.blade.php')) . "\r\n";
+        $html .= \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/ffooter.blade.php')) . "\r\n";
+
+        $this->formService->generateBlade($form->id, $html);
     }
 }

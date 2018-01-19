@@ -112,13 +112,14 @@ class BlogCommonController extends Controller
         $id
     )
     {
+        $table = $this->postsRepository->table;
         $form = $formsRepository->findOrFail($id);
         $form->fields_json = $formService->fieldsJson($id, true);
         $form->unit_json = json_encode(ajaxExtract(json_decode($form->unit_json, true)));
         $fields = json_encode((count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : []);
         $html = $formService->render($id);
 
-        return view("mbshp::common.form_bulder", compact('form', 'fields', 'html'));
+        return view("mbshp::common.form_bulder", compact('form', 'fields', 'html', 'table'));
     }
 
     public function postFormBulder(
