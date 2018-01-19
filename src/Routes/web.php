@@ -138,8 +138,8 @@ Route::group(['prefix' => '{slug}'], function () {
     Route::post('/options', 'BlogCommonController@postOptions')->name('mbsp_settings_mb_save_options');
     Route::get('/order-button', 'BlogCommonController@getOrderButton', true)->name('mbsp_order_button');
     Route::post('/order-button', 'BlogCommonController@postOrderButton', true)->name('mbsp_save_order_button');
-    Route::post('/render-fields', 'BlogCommonController@postRenderField');
-    Route::post('/save-form', 'BlogCommonController@postSaverForm');
+    Route::post('/render-fields', 'BlogCommonController@postRenderField')->name('mbsp_render_fields');
+    Route::post('/save-form', 'BlogCommonController@postSaverForm')->name('mbsp_save_form');
 
     Route::group(['prefix' => 'edit-post'], function () {
         Route::get('/', 'BlogCommonController@getEditPost', true);
@@ -148,7 +148,7 @@ Route::group(['prefix' => '{slug}'], function () {
     });
 
     Route::group(['prefix' => 'form-list'], function () {
-        Route::get('/', 'BlogCommonController@getList', true);
+        Route::get('/', 'BlogCommonController@getList', true)->name('blog_form_list');
         Route::get('/create', 'BlogCommonController@getFormBulder', true)->name("form_builder_posts");
 
         Route::group(['prefix' => 'edit-form'], function () {

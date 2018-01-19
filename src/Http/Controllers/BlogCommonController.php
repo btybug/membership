@@ -11,6 +11,7 @@ use Btybug\Console\Services\FieldService;
 use Btybug\Console\Services\FormService;
 use Btybug\User\Repository\RoleRepository;
 use BtyBugHook\Membership\Models\Post;
+use BtyBugHook\Membership\Services\ReplaceAtor;
 use Illuminate\Http\Request;
 use Btybug\Console\Repository\FrontPagesRepository;
 use Btybug\btybug\Models\Migrations;
@@ -412,7 +413,7 @@ class BlogCommonController extends Controller
         $fields = $fieldsRepository->getBy('table_name', $this->postsRepository->table);
         $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
 
-        return view('mbshp::common.forms.edit', compact('form', 'fields', 'existingFields'));
+        return view('mbshp::common.forms.edit', compact('form', 'fields', 'existingFields','slug'));
     }
 
     public function postRenderField(
@@ -433,8 +434,7 @@ class BlogCommonController extends Controller
         Request $request,
         FieldsRepository $fieldsRepository,
         FormService $formService,
-        $slug,
-        $id
+        $slug
     )
     {
         $data = $request->except('_token');
@@ -452,7 +452,6 @@ class BlogCommonController extends Controller
         $html .= \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/ffooter.blade.php')) . "\r\n";
         $data['fields_html'] = $html;
         $data['fields_json'] = array_keys($fields);
-
         $formService->createOrUpdate($data);
 
         return ['error' => false];

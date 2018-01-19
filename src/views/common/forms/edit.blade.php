@@ -102,5 +102,56 @@
 @stop
 
 @section( 'JS' )
-    {!! BBscript(plugins_path('vendor/sahak.avatar/membership/src/public/scripts.js')) !!}
+    <script>
+        $("body").on('input', '.form-title-settings', function () {
+            var val = $(this).val();
+
+            $(".form-title").text(val);
+        });
+
+        $("body").on('change', '.select-field', function () {
+            var checkbox = this;
+            var field = $(checkbox).val();
+            if (checkbox.checked) {
+                var table = $(checkbox).data('table');
+                $.ajax({
+                    url: "{!! route('mbsp_render_fields',$slug) !!}",
+                    data: {table: table, field: field},
+                    headers: {
+                        'X-CSRF-TOKEN': $("input[name='_token']").val()
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (!data.error) {
+                            $(".field-box").append(data.html);
+                        }
+                    },
+                    type: 'POST'
+                });
+                // alert($(checkbox).val());
+            } else {
+
+                $("#bty-input-id-" + $(checkbox).data('id')).remove();
+            }
+        });
+
+
+        $('button[data-action=save-form]').on('click', function () {
+            var data = $('#fields-list').serialize();
+            $.ajax({
+                url: "{!! route('mbsp_save_form',$slug) !!}",
+                data: data,
+                headers: {
+                    'X-CSRF-TOKEN': $("input[name='_token']").val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (!data.error) {
+                        window.location.href = "{!! route('blog_form_list',$slug) !!}";
+                    }
+                },
+                type: 'POST'
+            });
+        });
+    </script>
 @stop
