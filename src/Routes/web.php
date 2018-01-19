@@ -128,7 +128,7 @@ Route::group(['prefix' => 'products-settings'], function () {
 Route::group(['prefix' => '{slug}'], function () {
     Route::get('/', 'BlogCommonController@getIndex', true);
     Route::get('/posts', 'BlogCommonController@getPosts', true);
-    Route::get('/posts-data', 'BlogCommonController@postsData')->name('postsData');
+    Route::get('/posts-data', 'BlogCommonController@postsData')->name('mbsp_posts_data');
     Route::get('/create-data', 'BlogCommonController@createPosts');
     Route::get('/new-post', 'BlogCommonController@getNewPost', true);
 //Route::post('/new-post', 'IndexConroller@postNewPost');

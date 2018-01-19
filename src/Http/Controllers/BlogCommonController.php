@@ -40,17 +40,15 @@ class BlogCommonController extends Controller
 
     public function getPosts($slug)
     {
-        $posts = $this->postsRepository->getAll();
-
-        return view('mbshp::common.list', compact(['posts', 'slug']));
+        return view('mbshp::common.list', compact(['slug']));
     }
 
     public function postsData($slug)
     {
         set_time_limit(-1);
         ini_set('memory_limit', '2048M');
-        return DataTables::of($this->postsRepository->model())->addColumn('actions', function ($post) {
-            $url = url("admin/membership/slug/edit-post", $post->id);
+        return DataTables::of(\DB::table($this->postsRepository->table))->addColumn('actions', function ($post) use ($slug) {
+            $url = url("admin/membership/$slug/edit-post", $post->id);
             return "<a href='$url' class='btn btn-warning'><i class='fa fa-edit'></i></a>";
         }, 2)->addColumn('author', function ($post) {
             return BBGetUser($post->author_id);
