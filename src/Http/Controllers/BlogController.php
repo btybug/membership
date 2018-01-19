@@ -11,6 +11,8 @@ namespace BtyBugHook\Membership\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Btybug\btybug\Models\Painter\Painter;
+use Btybug\Console\Repository\FieldsRepository;
+use Btybug\Console\Repository\FormsRepository;
 use Btybug\Console\Repository\FrontPagesRepository;
 use BtyBugHook\Membership\Database\CreatePostsTable;
 use BtyBugHook\Membership\Repository\BlogRepository;
@@ -58,10 +60,10 @@ class BlogController extends Controller
         $blog = $this->blogRepositroy->findOrFail($id);
 
         $blog->update([
-           'status' => true
+            'status' => true
         ]);
 
-        return redirect()->back()->with('message','Blog activated');
+        return redirect()->back()->with('message', 'Blog activated');
     }
 
     public function getDeactivate(
@@ -75,29 +77,47 @@ class BlogController extends Controller
             'status' => false
         ]);
 
-        return redirect()->back()->with('message','Blog deactivated');
+        return redirect()->back()->with('message', 'Blog deactivated');
     }
 
-    public function getDelete($id, FrontPagesRepository $frontPagesRepository)
+    public function getDelete(
+        $id,
+        FrontPagesRepository $frontPagesRepository,
+        FormsRepository $formsRepository,
+        FieldsRepository $fieldsRepository
+    )
     {
 
-        $blog = $this->blogRepositroy->find($id);
-        $page=$frontPagesRepository->findOneByMultiple([
-            'module_id'=>'sahak.avatar/membership',
+        $blog = $this->blogRepositroy->findOrFail($id);
+        $form = $formsRepository->findOneByMultiple([
+            'fields_type' => str_replace("-","_",$blog->slug),
+        ]);
+
+        $fields = $fieldsRepository->findOneByMultiple([
+            'table_name' => str_replace("-","_",$blog->slug),
+        ]);
+        $page = $frontPagesRepository->findOneByMultiple([
+            'module_id' => 'sahak.avatar/membership',
             'slug' => "all_" . $blog->slug,
         ]);
-        try{
-            if($page){
-            $child=$frontPagesRepository->findBy('parent_id',$page->id);
-            Painter::findByVariation($child->template)->variations(false)->deleteVariation($child->template);
-            Painter::findByVariation($page->template)->variations(false)->deleteVariation($page->template);
-            $child->delete();
-            $page->delete();
+        try {
+            if ($page) {
+                $child = $frontPagesRepository->findBy('parent_id', $page->id);
+                Painter::findByVariation($child->template)->variations(false)->deleteVariation($child->template);
+                Painter::findByVariation($page->template)->variations(false)->deleteVariation($page->template);
+                $child->delete();
+                $page->delete();
+                if(count($form)){
+                    $form->delete();
+                }
+                if(count($fields)){
+                    $fields->delete();
+                }
             }
             $blog->delete();
             CreatePostsTable::down($blog->slug);
-        }catch (\Exception $e){
-            return redirect()->back()->with(['message'=>$e->getMessage()]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with(['message' => $e->getMessage()]);
         }
         return redirect()->back();
     }

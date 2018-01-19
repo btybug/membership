@@ -4,6 +4,7 @@ namespace BtyBugHook\Membership\Services;
 
 use Btybug\btybug\Models\Painter\Painter;
 use Btybug\btybug\Services\GeneralService;
+use Btybug\Console\Repository\FieldsRepository;
 use Btybug\Console\Repository\FormsRepository;
 use Btybug\Console\Repository\FrontPagesRepository;
 use BtyBugHook\Membership\Database\CreatePostsTable;
@@ -60,10 +61,9 @@ class GeneratorService extends GeneralService
 
     private function registerFrontPages()
     {
-
         $frontPageRepo = new FrontPagesRepository();
         \DB::transaction(function () use ($frontPageRepo) {
-            $all_page = $frontPageRepo->create([
+           $frontPageRepo->create([
                 'title' => "All " . $this->title,
                 'slug' => "all_" . $this->slug,
                 'url' => '/' . $this->slug,
@@ -130,20 +130,48 @@ class GeneratorService extends GeneralService
 
     private function registerForms(){
         $form = new FormsRepository();
-        $form->create([
-            'name' => 'Create '.$this->title,
-            'slug' => 'create_'.$this->slug,
-            'created_by' => 'plugin',
-            'type' => 'new',
-            'fields_type' => str_replace('-','_',$this->slug)
-        ]);
+        $fieldRepo = new FieldsRepository();
+        \DB::transaction(function () use ($form,$fieldRepo) {
+            $form->create([
+                'name' => 'Create '.$this->title,
+                'slug' => 'create_'.$this->slug,
+                'created_by' => 'plugin',
+                'type' => 'new',
+                'fields_type' => str_replace('-','_',$this->slug)
+            ],[
+                'name' => 'Edit '.$this->title,
+                'slug' => 'edit_'.$this->slug,
+                'created_by' => 'plugin',
+                'type' => 'edit',
+                'fields_type' => str_replace('-','_',$this->slug)
+            ]);
 
-        $form->create([
-            'name' => 'Edit '.$this->title,
-            'slug' => 'edit_'.$this->slug,
-            'created_by' => 'plugin',
-            'type' => 'edit',
-            'fields_type' => str_replace('-','_',$this->slug)
-        ]);
+            //generating create form fields
+            $fieldRepo->create([
+                'name' => 'Title',
+                'slug' => uniqid(),
+                'visibility' => true,
+                'table_name' => str_replace('-','_',$this->slug),
+                'column_name' => 'title',
+                'type' => 'text',
+                'structured_by' => 'plugin',
+            ],[
+                'name' => 'Status',
+                'slug' => uniqid(),
+                'visibility' => true,
+                'table_name' => str_replace('-','_',$this->slug),
+                'column_name' => 'status',
+                'type' => 'select',
+                'structured_by' => 'plugin',
+            ],[
+                'name' => 'Description',
+                'slug' => uniqid(),
+                'visibility' => true,
+                'table_name' => str_replace('-','_',$this->slug),
+                'column_name' => 'description',
+                'type' => 'textarea',
+                'structured_by' => 'plugin',
+            ]);
+        });
     }
 }

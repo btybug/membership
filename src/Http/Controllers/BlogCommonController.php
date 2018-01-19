@@ -106,9 +106,10 @@ class BlogCommonController extends Controller
     }
 
     public function getEditFormBulder(
-        $id,
         FormsRepository $formsRepository,
-        FormService $formService
+        FormService $formService,
+        $slug,
+        $id
     )
     {
         $form = $formsRepository->findOrFail($id);
@@ -390,5 +391,65 @@ class BlogCommonController extends Controller
     {
         $columns = \DB::select("SHOW COLUMNS FROM $slug");
         return view('mbshp::common.order_button',compact('columns','slug'));
+    }
+
+    public function getMyFormsEdit (
+        FormsRepository $formsRepository,
+        FieldsRepository $fieldsRepository,
+        FormService $formService,
+        $slug,
+        $id
+    )
+    {
+        $form = $formsRepository->findOneByMultiple(['id' => $id,'created_by' => 'plugin']);
+        if( ! $form) abort(404,"Form not found");
+
+        $fields = $fieldsRepository->getBy('table_name',$this->postsRepository->table);
+        $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug','field_slug')->toArray() : [];
+
+        return view('mbshp::common.forms.edit',compact('form','fields','existingFields'));
+    }
+
+    public function postRenderField(
+        Request $request,
+        FieldsRepository $fieldsRepository
+    )
+    {
+        $field = $fieldsRepository->findByTableAndCol($request->table, $request->field);
+
+        if ($field && view()->exists("mbshp::common._partials.custom_fields." . $field->type)) {
+            $html = \view("mbshp::common._partials.custom_fields." . $field->type)->with('field', $field->toArray())->render();
+            return ['error' => false, 'html' => $html];
+        }
+        return ['error' => true];
+    }
+
+    public function postSaverForm(
+        Request $request,
+        FieldsRepository $fieldsRepository,
+        FormService $formService,
+        $slug,
+        $id
+    )
+    {
+        $data = $request->except('_token');
+        $id = $data['id'];
+        $fields = $data['fields_json'];
+        $html = "{{--Form $id --}}\r\n" . \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/fheader.blade.php')) . "\r\n";
+        foreach ($fields as $field) {
+            $field = $fieldsRepository->findByTableAndCol($this->postsRepository->table, $field);
+            $path = plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/' . $field->type . '.blade.php');
+            if (\File::exists($path)) {
+                $blade = \File::get($path) . "\r\n";
+                $html .= ReplaceAtor::replace($blade, $field);
+            }
+        }
+        $html .= \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/ffooter.blade.php')) . "\r\n";
+        $data['fields_html'] = $html;
+        $data['fields_json'] = array_keys($fields);
+
+        $formService->createOrUpdate($data);
+
+        return ['error' => false];
     }
 }

@@ -167,8 +167,8 @@ Route::group(['prefix' => '{slug}'], function () {
             Route::get('/{id}', 'BlogCommonController@getMyFormsView', true)->name("form_view_blog");
         });
         Route::group(['prefix' => 'edit'], function () {
-            Route::get('/', 'MyFormController@getMyFormsEdit', true);
-            Route::get('/{id}', 'MyFormController@getMyFormsEdit', true)->name("form_edit_blog");
+            Route::get('/', 'BlogCommonController@getMyFormsEdit', true);
+            Route::get('/{id}', 'BlogCommonController@getMyFormsEdit', true)->name("form_edit_blog");
         });
         Route::post('/form-fields', 'BlogCommonController@postFormFieldsSettings');
     });
