@@ -94,7 +94,9 @@ class DataTablesConroller extends Controller
         return DataTables::of($repository->model()->where('status', true))->addColumn('actions', function ($blog) {
             $url = route("mbsp_blog_edit", $blog->id);
             $deactivate = route("mbsp_blog_deactivate", $blog->id);
+            $settings = route("mbsp_settings_blog", $blog->slug);
             $html="<a href='$url' class='bty-btn-acction bt-edit'></a>";
+            $html.="<a href='$settings' class='btn btn-warning'><i class='fa fa-cog'></i></a>";
             $html.="<a href='$deactivate' class='bty-btn bty-btn-default bty-btn-cl-red bty-btn-size-md'><span>Archive</span></a>";
             return $html;
         }, 2)->editColumn('author_id', function ($blog) {

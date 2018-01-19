@@ -133,7 +133,7 @@ Route::group(['prefix' => '{slug}'], function () {
     Route::get('/new-post', 'BlogCommonController@getNewPost', true);
 //Route::post('/new-post', 'IndexConroller@postNewPost');
     Route::post('/get-fields', 'BlogCommonController@getFieldsByTable');
-    Route::get('/settings', 'BlogCommonController@getSettings', true);
+    Route::get('/settings', 'BlogCommonController@getSettings', true)->name('mbsp_settings_blog');
     Route::get('/options', 'BlogCommonController@getOptions', true)->name('mbsp_settings_blog_options');
     Route::post('/options', 'BlogCommonController@postOptions')->name('mbsp_settings_mb_save_options');
     Route::get('/order-button', 'BlogCommonController@getOrderButton', true)->name('mbsp_order_button');
