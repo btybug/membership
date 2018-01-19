@@ -73,6 +73,7 @@ class GeneratorService extends GeneralService
                 'module_id' => 'sahak.avatar/membership',
                 'header' => true,
                 'type' => 'plugin',
+                'page_layout' => 'front_layout_with_2_col.cccccccccc',
                 'status' => 'published',
                 'content_type' => 'template',
                 'template' => $this->all_unit_slug . '.' . $this->slug
@@ -86,6 +87,7 @@ class GeneratorService extends GeneralService
                 'parent_id' => $all_page->id,
                 'header' => true,
                 'type' => 'plugin',
+                'page_layout' => 'front_layout_with_2_col.cccccccccc',
                 'status' => 'published',
                 'content_type' => 'template',
                 'template' => $this->single_unit_slug . '.' . $this->slug
