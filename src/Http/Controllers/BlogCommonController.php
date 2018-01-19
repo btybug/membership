@@ -387,13 +387,17 @@ class BlogCommonController extends Controller
         return \Response::json(['error' => false, 'flag' => $flag]);
     }
 
-    public function getOrderButton($slug)
+    public function getOrderButton($slug,AdminsettingRepository $adminsettingRepository)
     {
+        $settingsData=$adminsettingRepository->getSettings( 'blog_order_button', $slug);
+        if($settingsData){
+            $settings=json_decode($settingsData->val,true);
+        }
         $columns = \DB::select("SHOW COLUMNS FROM $slug");
-        return view('mbshp::common.order_button',compact('columns','slug'));
+        return view('mbshp::common.order_button', compact('columns', 'slug','settings'));
     }
 
-    public function getMyFormsEdit (
+    public function getMyFormsEdit(
         FormsRepository $formsRepository,
         FieldsRepository $fieldsRepository,
         FormService $formService,
@@ -401,13 +405,13 @@ class BlogCommonController extends Controller
         $id
     )
     {
-        $form = $formsRepository->findOneByMultiple(['id' => $id,'created_by' => 'plugin']);
-        if( ! $form) abort(404,"Form not found");
+        $form = $formsRepository->findOneByMultiple(['id' => $id, 'created_by' => 'plugin']);
+        if (!$form) abort(404, "Form not found");
 
-        $fields = $fieldsRepository->getBy('table_name',$this->postsRepository->table);
-        $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug','field_slug')->toArray() : [];
+        $fields = $fieldsRepository->getBy('table_name', $this->postsRepository->table);
+        $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
 
-        return view('mbshp::common.forms.edit',compact('form','fields','existingFields'));
+        return view('mbshp::common.forms.edit', compact('form', 'fields', 'existingFields'));
     }
 
     public function postRenderField(
@@ -450,6 +454,22 @@ class BlogCommonController extends Controller
 
         $formService->createOrUpdate($data);
 
+        return ['error' => false];
+    }
+
+    /**
+     * @param Request $request
+     * @param AdminsettingRepository $adminsettingRepository
+     * @return array
+     */
+    public function postOrderButton(
+        Request $request,
+        AdminsettingRepository $adminsettingRepository
+    )
+    {
+        $slug = $request->get('slug');
+        $data = json_encode($request->except(['slug', '_token']), true);
+        $adminsettingRepository->createOrUpdate($data, 'blog_order_button', $slug);
         return ['error' => false];
     }
 }
