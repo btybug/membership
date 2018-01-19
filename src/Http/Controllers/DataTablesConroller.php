@@ -95,7 +95,7 @@ class DataTablesConroller extends Controller
             $url = route("mbsp_blog_edit", $blog->id);
             $deactivate = route("mbsp_blog_deactivate", $blog->id);
             $html="<a href='$url' class='bty-btn-acction bt-edit'></a>";
-            $html.="<a href='$deactivate' class='btn btn-info'>Archive</a>";
+            $html.="<a href='$deactivate' class='bty-btn bty-btn-default bty-btn-cl-red bty-btn-size-md'><span>Archive</span></a>";
             return $html;
         }, 2)->editColumn('author_id', function ($blog) {
             return BBGetUser($blog->author_id);
@@ -110,7 +110,7 @@ class DataTablesConroller extends Controller
             $deleteUrl = route("mbsp_blog_delete", $blog->id);
             $makeActive = route("mbsp_blog_make_active", $blog->id);
             $html ="<a href='$deleteUrl' class='bty-btn-acction bt-delete'></a>";
-            $html.="<a href='$makeActive' class='btn btn-success'>Make Active</a>";
+            $html.="<a href='$makeActive' class='bty-btn bty-btn-save bty-btn-size-md'><span>Make Active</span></a>";
             return $html;
         }, 2)->editColumn('author_id', function ($blog) {
             return BBGetUser($blog->author_id);
