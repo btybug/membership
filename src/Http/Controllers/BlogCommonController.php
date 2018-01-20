@@ -439,6 +439,7 @@ class BlogCommonController extends Controller
         $id = $data['id'];
         $fields = $data['fields_json'];
         $html = "{{--Form $id --}}\r\n" . \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/fheader.blade.php')) . "\r\n";
+
         foreach ($fields as $field) {
             $field = $fieldsRepository->findByTableAndCol($this->postsRepository->table, $field);
             $path = plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/' . $field->type . '.blade.php');
@@ -447,6 +448,7 @@ class BlogCommonController extends Controller
                 $html .= ReplaceAtor::replace($blade, $field);
             }
         }
+
         $html .= \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/ffooter.blade.php')) . "\r\n";
         $data['fields_html'] = $html;
         $data['fields_json'] = array_keys($fields);
