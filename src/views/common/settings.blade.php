@@ -40,8 +40,12 @@
                             <div class="row">
                                 <div class="col-md-12 m-b-10">
                                     <div class="col-sm-4 p-l-0">All posts Unit</div>
-{{--                                    {!! BBbutton2('unit','all_main_content','all_posts',(isset($all->template) && $all->template)?'Change':'Select',['class'=>'btn btn-default change-layout','model' =>(isset($all->template) && $all->template) ?$all->template : null]) !!}--}}
-                                    <a href="{!! url(route('uploads_settings',$all->template)) !!}" target="_blank">Customize</a>
+                                    <div class="col-md-5">
+                                    {!! BBbutton2('unit','all_main_content','all_posts',(isset($all->template) && $all->template)?'Change':'Select',['class'=>'btn btn-default change-layout','model' =>(isset($all->template) && $all->template) ?$all->template : null]) !!}
+                                    </div>
+                                    <div class="col-md-3">
+                                    <a href="{!! url(route('uploads_settings',$all->template)) !!}" class="btn btn-warning" target="_blank">Customize</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -49,8 +53,12 @@
                             <div class="row">
                                 <div class="col-md-12 m-b-10">
                                     <div class="col-sm-4 p-l-0">Single posts Unit</div>
-                                    <a href="{!! url(route('uploads_settings',$single->template)) !!}" target="_blank">Customize</a>
-                                    {{--{!! BBbutton2('unit','single_main_content','single_post',(isset($single->template) && $single->template)?'Change':'Select',['class'=>'btn btn-default change-layout','model' =>(isset($single->template) && $single->template) ?$single->template : null]) !!}--}}
+                                    <div class="col-md-5">
+                                    {!! BBbutton2('unit','single_main_content','single_post',(isset($single->template) && $single->template)?'Change':'Select',['class'=>'btn btn-default change-layout','model' =>(isset($single->template) && $single->template) ?$single->template : null]) !!}
+                                    </div>
+                                    <div class="col-md-3">
+                                    <a href="{!! url(route('uploads_settings',$single->template)) !!}" class="btn btn-warning" target="_blank">Customize</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
