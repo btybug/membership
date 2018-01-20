@@ -87,15 +87,7 @@ class BlogController extends Controller
         FieldsRepository $fieldsRepository
     )
     {
-
         $blog = $this->blogRepositroy->findOrFail($id);
-        $form = $formsRepository->findAllByMultiple([
-            'fields_type' => str_replace("-","_",$blog->slug),
-        ]);
-
-        $fields = $fieldsRepository->findAllByMultiple([
-            'table_name' => str_replace("-","_",$blog->slug),
-        ]);
         $page = $frontPagesRepository->findOneByMultiple([
             'module_id' => 'sahak.avatar/membership',
             'slug' => "all_" . $blog->slug,
@@ -107,17 +99,13 @@ class BlogController extends Controller
                 Painter::findByVariation($page->template)->variations(false)->deleteVariation($page->template);
                 $child->delete();
                 $page->delete();
-                if(count($form)){
-                    $form->delete();
-                }
-                if(count($fields)){
-                    $fields->delete();
-                }
+                $formsRepository->deleteByCondition('fields_type', str_replace("-","_",$blog->slug));
+                $fieldsRepository->deleteByCondition('table_name', str_replace("-","_",$blog->slug));
             }
             $blog->delete();
             CreatePostsTable::down($blog->slug);
         } catch (\Exception $e) {
-            return redirect()->back()->with(['message' => $e->getMessage()]);
+            return redirect()->back()->with(['message' => $e->getMessage(). ' ' . $e->getLine()]);
         }
         return redirect()->back();
     }
