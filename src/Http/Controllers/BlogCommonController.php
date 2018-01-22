@@ -146,12 +146,13 @@ class BlogCommonController extends Controller
     public function postSettings(
         Request $request,
         FrontPagesRepository $pagesRepository,
-        AdminsettingRepository $adminsettingRepository
+        AdminsettingRepository $adminsettingRepository,
+        $slug
     )
     {
-        $adminsettingRepository->createOrUpdate(json_encode($request->only('posts_create_form', 'posts_edit_form', 'url_manager'), true), 'btybug_blog', 'blog_settings');
-        $all = $pagesRepository->findBy('slug', 'all-posts');
-        $single = $pagesRepository->findBy('slug', 'single-post');
+        $adminsettingRepository->createOrUpdate(json_encode($request->only('posts_create_form', 'posts_edit_form', 'url_manager'), true), 'btybug_blog', $slug.'_settings');
+        $all = $pagesRepository->findBy('slug', 'all_'.$slug);
+        $single = $pagesRepository->findBy('slug', 'single_'.$slug);
         $pagesRepository->update($all->id, ['template' => $request->all_main_content]);
         $pagesRepository->update($single->id, ['template' => $request->single_main_content]);
         return redirect()->back();
