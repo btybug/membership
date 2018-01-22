@@ -56,9 +56,11 @@ class BlogCommonController extends Controller
         })->rawColumns(['actions'])->make(true);
     }
 
-    public function getNewPost()
+    public function getNewPost(
+        $slug
+    )
     {
-        return view('mbshp::common.create');
+        return view('mbshp::common.create',compact('slug'));
     }
 
     public function postNewPost(
@@ -94,7 +96,8 @@ class BlogCommonController extends Controller
         }
         $this->data['after_columns'] = $after_columns;
 
-        $settings = $adminsettingRepository->findOneByMultipleSettingsArray(['section' => 'btybug_blog', 'settingkey' => 'blog_settings']);
+        $settings = $adminsettingRepository->findOneByMultipleSettingsArray(['section' => 'btybug_blog', 'settingkey' => $slug.'_settings']);
+
         return view('mbshp::common.settings', compact(['all', 'single', 'createForms', 'editForms', 'settings', 'slug', 'table']))->with($this->data);
     }
 

@@ -1,7 +1,7 @@
 @extends('btybug::layouts.admin')
 @section('content')
     <div class="col-md-8">
-        {!! form_render(get_active_form()) !!}
+        [form slug=create_{{$slug}}]
     </div>
 @stop
 @section('CSS')
