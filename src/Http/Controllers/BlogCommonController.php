@@ -11,6 +11,7 @@ use Btybug\Console\Services\FieldService;
 use Btybug\Console\Services\FormService;
 use Btybug\User\Repository\RoleRepository;
 use BtyBugHook\Membership\Models\Post;
+use BtyBugHook\Membership\Services\GeneratorService;
 use BtyBugHook\Membership\Services\ReplaceAtor;
 use Illuminate\Http\Request;
 use Btybug\Console\Repository\FrontPagesRepository;
@@ -367,23 +368,32 @@ class BlogCommonController extends Controller
         }
         $options = get_prices_data();
         foreach ($options as $key => $option) {
-            if (isset($data['options'][$key])) {
+            if (isset($data['allow_price']['options'][$key])) {
                 $options[$key]['checked'] = true;
             } else {
                 $options[$key]['checked'] = false;
             }
         }
+
         return view('mbshp::common.options', compact('options', 'data', 'slug'));
     }
 
-    public function postOptions(Request $request, AdminsettingRepository $adminsettingRepository, $slug)
+    public function postOptions(
+        Request $request,
+        AdminsettingRepository $adminsettingRepository,
+        GeneratorService $generatorService,
+        FormsRepository $formsRepository,
+        $slug
+    )
     {
         $flag = false;
         $data = $request->except('_token');
-        if ($data['allow_price']) {
+        if ($data['allow_price']['is_active']) {
             $flag = true;
         }
         $adminsettingRepository->createOrUpdate(json_encode($data, true), 'product', $slug);
+
+        $generatorService->generateTabs($slug);
         return \Response::json(['error' => false, 'flag' => $flag]);
     }
 
@@ -410,7 +420,6 @@ class BlogCommonController extends Controller
 
         $fields = $fieldsRepository->getBy('table_name', $this->postsRepository->table);
         $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
-
         return view('mbshp::common.forms.edit', compact('form', 'fields', 'existingFields','slug'));
     }
 
@@ -432,28 +441,16 @@ class BlogCommonController extends Controller
         Request $request,
         FieldsRepository $fieldsRepository,
         FormService $formService,
+        GeneratorService $generatorService,
         $slug
     )
     {
         $data = $request->except('_token');
         $id = $data['id'];
         $fields = $data['fields_json'];
-        $html = "{{--Form $id --}}\r\n" . \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/fheader.blade.php')) . "\r\n";
-
-        foreach ($fields as $field) {
-            $field = $fieldsRepository->findByTableAndCol($this->postsRepository->table, $field);
-            $path = plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/' . $field->type . '.blade.php');
-            if (\File::exists($path)) {
-                $blade = \File::get($path) . "\r\n";
-                $html .= ReplaceAtor::replace($blade, $field);
-            }
-        }
-
-        $html .= \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/ffooter.blade.php')) . "\r\n";
-        $data['fields_html'] = $html;
         $data['fields_json'] = array_keys($fields);
         $formService->createOrUpdate($data);
-
+        $generatorService->generateTabs($slug);
         return ['error' => false];
     }
 

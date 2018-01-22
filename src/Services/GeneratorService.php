@@ -3,6 +3,7 @@
 namespace BtyBugHook\Membership\Services;
 
 use Btybug\btybug\Models\Painter\Painter;
+use Btybug\btybug\Repositories\AdminsettingRepository;
 use Btybug\btybug\Services\GeneralService;
 use Btybug\Console\Repository\FieldsRepository;
 use Btybug\Console\Repository\FormsRepository;
@@ -20,6 +21,9 @@ class GeneratorService extends GeneralService
     private $fileString;
     private $generatingFile;
     private $formService;
+    private $fieldsRepository;
+    private $adminsettingRepository;
+    private $formsRepositroy;
     private $stubPath = 'vendor' . DS . 'sahak.avatar' . DS . 'membership' . DS . 'src' . DS . 'Stubs';
     private $modelPath = 'vendor' . DS . 'sahak.avatar' . DS . 'membership' . DS . 'src' . DS . 'Models' . DS . 'Blogs';
     private $all_unit_slug = 'membership_plans';
@@ -30,10 +34,13 @@ class GeneratorService extends GeneralService
         '{slug}' => 'slug',
     ];
 
-    public function __construct(PostsRepository $postsRepository,FormService $formService)
+    public function __construct(PostsRepository $postsRepository,FormService $formService,FormsRepository $formsRepository,FieldsRepository $fieldsRepository,AdminsettingRepository $adminsettingRepository)
     {
         $this->postRepo = $postsRepository;
         $this->formService = $formService;
+        $this->formsRepositroy = $formsRepository;
+        $this->fieldsRepository = $fieldsRepository;
+        $this->adminsettingRepository = $adminsettingRepository;
     }
 
 
@@ -191,6 +198,35 @@ class GeneratorService extends GeneralService
         $html = "{{--Form $form->id --}}\r\n" . \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/fheader.blade.php')) . "\r\n";
         $html .= \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/default_content.blade.php')) . "\r\n";
         $html .= \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/ffooter.blade.php')) . "\r\n";
+
+        $this->formService->generateBlade($form->id, $html);
+    }
+
+    public function generateTabs($slug){
+
+        $form = $this->formsRepositroy->findBy('slug','create_'.$slug);
+        $fieldsJson = $form->fields_json;
+        $fieldHtml = '';
+        $data = [];
+        $settings = $this->adminsettingRepository->getSettings('product', $slug);
+        if ($settings) {
+            $data = (json_decode($settings->val, true));
+        }
+
+        if($fieldsJson){
+            $fields = json_decode($fieldsJson,true);
+            foreach ($fields as $field) {
+                $field = $this->fieldsRepository->find($field);
+                $path = plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/' . $field->type . '.blade.php');
+                if (\File::exists($path)) {
+                    $blade = \File::get($path) . "\r\n";
+                    $fieldHtml .= ReplaceAtor::replace($blade, $field);
+                }
+            }
+        }
+
+        $html = \View('mbshp::common._partials.custom_fields.formTemplate',compact(['fieldHtml','data']))->render();
+
 
         $this->formService->generateBlade($form->id, $html);
     }

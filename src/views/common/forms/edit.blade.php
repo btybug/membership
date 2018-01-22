@@ -3,7 +3,7 @@
     <div class="row">
         <h2>Edit Form</h2>
         <div class="col-md-12">
-            {!! Form::model($form,['id'=>'fields-list']) !!}
+            {!! Form::model($form,['id'=>'fields-list','url' => url(route('mbsp_save_form',$slug))]) !!}
             {!! Form::hidden('id',$form->id) !!}
             <div class="bty-panel-collapse 	bty-panel-cl-tomato">
                 <div>

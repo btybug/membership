@@ -12,8 +12,8 @@
                         <div class="checkbox">
                             <label for="allow_price">
 
-                                <input type="hidden" name="allow_price" id="allow_price" value="0">
-                                {!! Form::checkbox('allow_price',1,$data['allow_price']??false,['id'=>'allow_price']) !!}
+                                <input type="hidden" name="allow_price[is_active]" id="allow_price" value="0">
+                                {!! Form::checkbox('allow_price[is_active]',1,$data['allow_price']['is_active']??false,['id'=>'allow_price']) !!}
                                 Allow price
                             </label>
                         </div>
@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="form-horizontal options  @if( !isset($data['allow_price']) || $data['allow_price']!=1 ) hidden  @endif">
+        <div class="form-horizontal options  @if( !isset($data['allow_price']['is_active']) || $data['allow_price']['is_active']!=1 ) hidden  @endif">
             <fieldset>
                 <!-- Multiple Checkboxes -->
                 <div class="form-group">
@@ -32,7 +32,7 @@
                         @foreach($options as $option)
                         <div class="checkbox">
                             <label for="checkboxes-{!! $option['slug'] !!}">
-                                <input type="checkbox" name="options[{!! $option['slug'] !!}]" @if($option['checked']) checked @endif id="checkboxes-{!! $option['slug'] !!}" value="1">
+                                <input type="checkbox" name="allow_price[options][{!! $option['slug'] !!}]" @if($option['checked']) checked @endif id="checkboxes-{!! $option['slug'] !!}" value="1">
                                 {!! $option['name'] !!}
                             </label>
                         </div>
