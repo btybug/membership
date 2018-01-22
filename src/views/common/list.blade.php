@@ -51,6 +51,13 @@
                         action: function (e, dt, node, config) {
                             window.location = '/admin/membership/{{ $slug }}/settings'
                         }
+                    },
+                    {
+                        text: 'View in Front Page',
+                        className: 'btn btn-info',
+                        action: function (e, dt, node, config) {
+                            window.location = '/{{ $slug }}'
+                        }
                     }
                 ]
                 , colReorder: {
