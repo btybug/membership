@@ -80,7 +80,7 @@ function get_all_blog_posts(){
     $page = \Btybug\btybug\Services\RenderService::getFrontPageByURL();
     if($page) {
         $slug = str_replace_first('all_', '', $page->slug);
-        $data = DB::table($slug)->where('status', 'published')->orWhere('status', 1)->get();
+        $data = DB::table(str_replace('-', '_', $slug))->where('status', 'published')->orWhere('status', 1)->get();
     }
     return $data;
 }
