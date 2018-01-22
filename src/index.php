@@ -45,23 +45,17 @@ if (! function_exists('get_post_url')) {
     }
 }
 
-function get_blog_from_url(){
-//    $param = \Request::route()->uri;
-//    dd($param);
-//    $blog = new \BtyBugHook\Membership\Repository\BlogRepository();
-//    $blog->find();
-}
-
 if (! function_exists('posts_url_manager')) {
     function posts_url_manager(){
         $settingsRepository = new \Btybug\btybug\Repositories\AdminsettingRepository();
-        $settings = $settingsRepository->findOneByMultipleSettingsArray(['section' => 'btybug_blog','settingkey' => 'blog_settings']);
+        if(get_blog_slug_in_page())
+            $settings = $settingsRepository->findOneByMultipleSettingsArray(['section' => 'btybug_blog','settingkey' => get_blog_slug_in_page().'_settings']);
 
         if(isset($settings['url_manager'])){
             return $settings['url_manager'];
         }
 
-        return false;
+        return 'id';
     }
 }
 
@@ -82,5 +76,24 @@ if (! function_exists('find_post_by_url')) {
 }
 
 function get_all_blog_posts(){
+    $data=[];
+    $page = \Btybug\btybug\Services\RenderService::getFrontPageByURL();
+    if($page) {
+        $slug = str_replace_first('all_', '', $page->slug);
+        $data = DB::table($slug)->where('status', 'published')->orWhere('status', 1)->get();
+    }
+    return $data;
+}
 
+function get_blog_slug_in_page(){
+    $page = \Btybug\btybug\Services\RenderService::getFrontPageByURL();
+    $slug = emptyString();
+//    if($page){
+//        $slug = str_replace_first('all_', '', $page->slug);
+//        if(! $slug) {
+//            $slug = str_replace_first('single_', '', $page->slug);
+//        }
+//    }
+
+    return $slug;
 }
