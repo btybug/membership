@@ -88,12 +88,12 @@ function get_all_blog_posts(){
 function get_blog_slug_in_page(){
     $page = \Btybug\btybug\Services\RenderService::getFrontPageByURL();
     $slug = emptyString();
-//    if($page){
-//        $slug = str_replace_first('all_', '', $page->slug);
-//        if(! $slug) {
-//            $slug = str_replace_first('single_', '', $page->slug);
-//        }
-//    }
+    if($page){
+        $slug = str_replace_first('all_', '', $page->slug);
+        if(! $slug) {
+            $slug = str_replace_first('single_', '', $page->slug);
+        }
+    }
 
     return $slug;
 }
