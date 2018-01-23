@@ -194,7 +194,6 @@
             </div>
         </div>
     </div>
-    </div>
 
     @include('resources::assests.deleteModal')
     @include('resources::assests.magicModal')
