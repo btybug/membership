@@ -90,7 +90,8 @@ function get_blog_slug_in_page(){
     $slug = emptyString();
     if($page){
         $slug = str_replace_first('all_', '', $page->slug);
-        if(! $slug) {
+
+        if($page->parent_id){
             $slug = str_replace_first('single_', '', $page->slug);
         }
     }
