@@ -60,7 +60,7 @@ class BlogCommonController extends Controller
                 return null;
             }
         })->editColumn('description', function ($post) {
-           return str_limit($post,20);
+           return str_limit($post->description,20);
         })->rawColumns(['actions'])->make(true);
     }
 
