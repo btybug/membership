@@ -80,7 +80,7 @@
                         var className =  $(item).attr('id');
 
                         if (!data.error) {
-                            if($(item).hasAttribute('data-role')){
+                            if($(item).attr('data-role') =='parent'){
                                 if($(item).is(":checked")){
                                     $('.' + className).removeClass('hidden');
                                 }else{
