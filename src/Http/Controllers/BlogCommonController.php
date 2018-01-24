@@ -370,14 +370,16 @@ class BlogCommonController extends Controller
         if ($settings) {
             $data = (json_decode($settings->val, true));
         }
-        $options = get_prices_data();
-        foreach ($options as $key => $option) {
-            if (isset($data['allow_price']['options'][$key])) {
-                $options[$key]['checked'] = true;
-            } else {
-                $options[$key]['checked'] = false;
-            }
-        }
+        $options = \Config::get('options.listener');
+//        $options = get_prices_data();
+//
+//        foreach ($options as $key => $option) {
+//            if (isset($data['allow_price']['options'][$key])) {
+//                $options[$key]['checked'] = true;
+//            } else {
+//                $options[$key]['checked'] = false;
+//            }
+//        }
 
         return view('mbshp::common.options', compact('options', 'data', 'slug'));
     }
@@ -390,15 +392,20 @@ class BlogCommonController extends Controller
         $slug
     )
     {
-        $flag = false;
         $data = $request->except('_token');
-        if ($data['allow_price']['is_active']) {
-            $flag = true;
-        }
         $adminsettingRepository->createOrUpdate(json_encode($data, true), 'product', $slug);
-
         $generatorService->generateTabs($slug);
-        return \Response::json(['error' => false, 'flag' => $flag]);
+        return \Response::json(['error' => false]);
+    }
+
+    public function postGetOptionsForm(
+        Request $request,
+        AdminsettingRepository $adminsettingRepository,
+        $slug
+    )
+    {
+        $option = \Config::get("options.listener.$request->type.render_function",null);
+        return (is_callable($option)) ? $option($request->value) : null;
     }
 
     public function getOrderButton($slug,AdminsettingRepository $adminsettingRepository)

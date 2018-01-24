@@ -5,43 +5,55 @@
     <div class="col-md-6">
         <div class="form-horizontal">
             <fieldset>
-                <!-- Multiple Checkboxes -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="checkboxes">Payments</label>
-                    <div class="col-md-4">
-                        <div class="checkbox">
-                            <label for="allow_price">
-
-                                <input type="hidden" name="allow_price[is_active]" id="allow_price" value="0">
-                                {!! Form::checkbox('allow_price[is_active]',1,$data['allow_price']['is_active']??false,['id'=>'allow_price']) !!}
-                                Allow price
-                            </label>
+                @foreach($options as $option)
+                    <!-- Multiple Checkboxes -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="checkboxes">{!! strtoupper($option['name']) !!}</label>
+                            <div class="col-md-4">
+                                <div class="checkbox">
+                                    <label for="{{ $option['name'] }}">
+                                        <input type="hidden" name="{{ $option['name'] }}[is_active]" id="{{ $option['name'] }}" value="0">
+                                        {!! Form::checkbox($option['name']."[is_active]",1,$data[$option['name']]['is_active']??false,['id'=>$option['name'],'data-role' => 'parent']) !!}
+                                        Allow {!! strtoupper($option['name']) !!}
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                @endforeach
             </fieldset>
         </div>
     </div>
     <div class="col-md-6">
-        <div class="form-horizontal options  @if( !isset($data['allow_price']['is_active']) || $data['allow_price']['is_active']!=1 ) hidden  @endif">
-            <fieldset>
-                <!-- Multiple Checkboxes -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="checkboxes">Payment Options</label>
-                    <div class="col-md-4">
-                        @foreach($options as $option)
-                        <div class="checkbox">
-                            <label for="checkboxes-{!! $option['slug'] !!}">
-                                <input type="checkbox" name="allow_price[options][{!! $option['slug'] !!}]" @if($option['checked']) checked @endif id="checkboxes-{!! $option['slug'] !!}" value="1">
-                                {!! $option['name'] !!}
-                            </label>
+        @foreach($options as $option)
+            <div class="form-horizontal {{ $option['name'] }}  @if( !isset($data[$option['name']]['is_active']) || $data[$option['name']]['is_active']!=1 ) hidden  @endif">
+                <fieldset>
+                    <!-- Multiple Checkboxes -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="checkboxes">Payment Options</label>
+                        <div class="col-md-4">
+                            @php
+                                $fn = $option['options_function'];
+                            @endphp
+                            @if(is_callable($fn))
+                                @php
+                                    $list = $fn();
+                                @endphp
+                                @foreach($list as $item)
+                                    <div class="checkbox">
+                                        <label for="checkboxes-{!! $item['slug'] !!}">
+                                            <input type="checkbox" name="{!! $option['name'] !!}[options][{!! $item['slug'] !!}]"
+                                                   @if(isset($data[$option['name']]['options'][$item['slug']])) checked @endif
+                                                   id="checkboxes-{!! $item['slug'] !!}" value="1">
+                                            {!! $item['name'] !!}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
-                        @endforeach
                     </div>
-                </div>
-
-            </fieldset>
-        </div>
+                </fieldset>
+            </div>
+        @endforeach
     </div>
     {!! Form::close() !!}
 @stop
@@ -52,9 +64,9 @@
         $(function () {
 
             $('form').on('change','input[type=checkbox]', function () {
-                optionSave();
+                optionSave(this);
             });
-            function optionSave() {
+            function optionSave(item) {
                 var data=$('form').serialize();
                 $.ajax({
                     type: "post",
@@ -65,10 +77,16 @@
                         'X-CSRF-TOKEN': $("input[name='_token']").val()
                     },
                     success: function (data) {
-                        if (!data.error && data.flag) {
-                            $('.options').removeClass('hidden');
-                        } else {
-                            $('.options').addClass('hidden');
+                        var className =  $(item).attr('id');
+
+                        if (!data.error) {
+                            if($(item).hasAttribute('data-role')){
+                                if($(item).is(":checked")){
+                                    $('.' + className).removeClass('hidden');
+                                }else{
+                                    $('.' + className).addClass('hidden');
+                                }
+                            }
                         }
                     }
                 });

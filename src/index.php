@@ -1,6 +1,20 @@
 <?php
 addProvider('BtyBugHook\Membership\Providers\ModuleServiceProvider');
 
+function get_options_data(string $name,$slug){
+    $options = [];
+    $adminsettingRepository = new \Btybug\btybug\Repositories\AdminsettingRepository();
+    $settings = $adminsettingRepository->getSettings('product', $slug);
+    if ($settings) {
+        $data = (json_decode($settings->val, true));
+        if(isset($data[$name]) && isset($data[$name]['options'])){
+            $options = $data[$name]['options'];
+        }
+    }
+
+    return $options;
+}
+
 if (! function_exists('get_field_attr')) {
     function get_field_attr($id,$attr = null){
         $fieldRepository = new \Btybug\Console\Repository\FieldsRepository();

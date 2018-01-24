@@ -38,6 +38,13 @@ class ModuleServiceProvider extends ServiceProvider
 
         BlogService::getActive();
 
+        \Eventy::addAction('options.listener', function ($what) {
+            $options = \Config::get('options.listener', []);
+            $options[$what['name']] = $what;
+            \Config::set('options.listener', $options);
+            return (\Config::get('options.listener'));
+        });
+
 
         \Eventy::action('admin.menus', [
             "title" => "Products",
