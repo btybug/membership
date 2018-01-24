@@ -197,13 +197,13 @@ class BlogCommonController extends Controller
     }
 
     public function getEditPost(
-        $id,
-        PostsRepository $postsRepository
+        PostsRepository $postsRepository,
+        $slug,
+        $id
     )
     {
         $post = $postsRepository->findOrFail($id);
-
-        return view('mbshp::common.edit', compact('post'));
+        return view('mbshp::common.edit', compact('post','slug'));
     }
 
     public function postEditPos(
@@ -394,7 +394,8 @@ class BlogCommonController extends Controller
     {
         $data = $request->except('_token');
         $adminsettingRepository->createOrUpdate(json_encode($data, true), 'product', $slug);
-        $generatorService->generateTabs($slug);
+        $generatorService->generateTabs('create_'.$slug,$slug);
+        $generatorService->generateTabs('edit_'.$slug,$slug);
         return \Response::json(['error' => false]);
     }
 
@@ -460,9 +461,13 @@ class BlogCommonController extends Controller
         $id = $data['id'];
         $fields = $data['fields_json'];
         $data['fields_json'] = array_keys($fields);
-        $formService->createOrUpdate($data);
-        $generatorService->generateTabs($slug);
-        return ['error' => false];
+        $form = $formService->createOrUpdate($data);
+        if($form){
+            $generatorService->generateTabs($form->slug,$slug);
+            return ['error' => false];
+        }
+
+        return ['error' => true];
     }
 
     /**

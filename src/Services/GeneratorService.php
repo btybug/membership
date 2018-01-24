@@ -180,6 +180,8 @@ class GeneratorService extends GeneralService
                 'table_name' => str_replace('-','_',$this->slug),
                 'column_name' => 'status',
                 'type' => 'select',
+                'manual' => 'manual',
+                'json_data' => '{"manual":"draft,published"}',
                 'structured_by' => 'plugin',
             ]);
             $fieldRepo->create([
@@ -202,9 +204,9 @@ class GeneratorService extends GeneralService
         $this->formService->generateBlade($form->id, $html);
     }
 
-    public function generateTabs($slug){
+    public function generateTabs($form_slug,$slug = null){
 
-        $form = $this->formsRepositroy->findBy('slug','create_'.$slug);
+        $form = $this->formsRepositroy->findBy('slug',$form_slug);
         $fieldsJson = $form->fields_json;
         $fieldHtml = '';
         $data = [];

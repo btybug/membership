@@ -89,6 +89,13 @@ class PostsRepository extends GeneralRepository
         return $this->model->get();
     }
 
+    public function findOrFail(int $id, array $columns = ['*'], array $with = [])
+    {
+        $result = $this->model->select($columns)->where('id',$id)->first();
+        abort_unless($result,401);
+        return $this->model->select($columns)->where('id',$id)->first();
+    }
+
     public function checkStatus(){
         return BlogService::checkStatus($this->slug);
     }
