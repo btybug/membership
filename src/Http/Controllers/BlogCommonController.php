@@ -53,6 +53,14 @@ class BlogCommonController extends Controller
             return "<a href='$url' class='btn btn-warning'><i class='fa fa-edit'></i></a>";
         }, 2)->addColumn('author', function ($post) {
             return BBGetUser($post->author_id);
+        })->editColumn('image', function ($post) {
+            if($post->image){
+                return "<img src='$post->image' width='50px' height='50px' alt='image' />";
+            }else{
+                return null;
+            }
+        })->editColumn('description', function ($post) {
+           return str_limit($post,20);
         })->rawColumns(['actions'])->make(true);
     }
 
