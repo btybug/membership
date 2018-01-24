@@ -61,7 +61,7 @@ class BlogCommonController extends Controller
             }
         })->editColumn('description', function ($post) {
            return str_limit($post->description,20);
-        })->rawColumns(['actions'])->make(true);
+        })->rawColumns(['actions','image'])->make(true);
     }
 
     public function getNewPost(
