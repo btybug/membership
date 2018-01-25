@@ -41,10 +41,11 @@
                                 <div class="col-md-12 m-b-10">
                                     <div class="col-sm-4 p-l-0">All posts Unit</div>
                                     <div class="col-md-5">
-                                    {!! BBbutton2('unit','all_main_content','all_posts',(isset($all->template) && $all->template)?'Change':'Select',['class'=>'btn btn-default change-layout','copy'=>'1','model' =>(isset($all->template) && $all->template) ?$all->template : null]) !!}
+                                        {!! BBbutton2('unit','all_main_content','all_posts',(isset($all->template) && $all->template)?'Change':'Select',['class'=>'btn btn-default change-layout','copy'=>'1','model' =>(isset($all->template) && $all->template) ?$all->template : null]) !!}
                                     </div>
                                     <div class="col-md-3">
-                                    <a href="{!! url(route('uploads_settings',$all->template)) !!}" class="btn btn-warning" target="_blank">Customize</a>
+                                        <a href="{!! url(route('uploads_settings',$all->template)) !!}"
+                                           class="btn btn-warning" target="_blank">Customize</a>
                                     </div>
                                 </div>
                             </div>
@@ -54,10 +55,11 @@
                                 <div class="col-md-12 m-b-10">
                                     <div class="col-sm-4 p-l-0">Single posts Unit</div>
                                     <div class="col-md-5">
-                                    {!! BBbutton2('unit','single_main_content','single_post',(isset($single->template) && $single->template)?'Change':'Select',['class'=>'btn btn-default change-layout','copy'=>'1','model'=>'1','model' =>(isset($single->template) && $single->template) ?$single->template : null]) !!}
+                                        {!! BBbutton2('unit','single_main_content','single_post',(isset($single->template) && $single->template)?'Change':'Select',['class'=>'btn btn-default change-layout','copy'=>'1','model'=>'1','model' =>(isset($single->template) && $single->template) ?$single->template : null]) !!}
                                     </div>
                                     <div class="col-md-3">
-                                    <a href="{!! url(route('uploads_settings',$single->template)) !!}" class="btn btn-warning" target="_blank">Customize</a>
+                                        <a href="{!! url(route('uploads_settings',$single->template)) !!}"
+                                           class="btn btn-warning" target="_blank">Customize</a>
                                     </div>
                                 </div>
                             </div>
@@ -99,9 +101,9 @@
                 <div id="formBuilderCollapse" class="panel-collapse collapse in" role="tabpanel"
                      aria-labelledby="formBuilder">
                     <div class="panel-body">
-                    <div class="col-md-12 m-b-15">
-                        <button type="button" id="add_colum" class="btn btn-info">Add Column</button>
-                    </div>
+                        <div class="col-md-12 m-b-15">
+                            <button type="button" id="add_colum" class="btn btn-info">Add Column</button>
+                        </div>
                     {!! Form::open(['class'=>'form-horizontal columns-add-form hide']) !!}
                     <!-- Select Basic -->
                         <div class="form-group">
@@ -169,7 +171,8 @@
                                                data-column="{{ $colum->Field }}"><i class="fa fa-pencil-square-o"
                                                                                     aria-hidden="true"></i></a>
                                             <a href="{!! url('admin/console/structure/tables/fields',[$table,$colum->Field]) !!}"
-                                               class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                               class="btn btn-danger"><i class="fa fa-trash-o"
+                                                                         aria-hidden="true"></i></a>
                                         @else
                                             <a href="javascript:void(0)"
                                                class="btn btn-primary get-column-data" data-table="{{ $table }}"
@@ -177,11 +180,11 @@
                                                                                     aria-hidden="true"></i></a>
                                         @endif
 
-                                            @if(\Btybug\Console\Services\FieldService::checkField($table,$colum->Field))
-                                                <a href="{!! route("edit_field",['id' => \Btybug\Console\Services\FieldService::getFieldID($table,$colum->Field)]) !!}"
-                                                   class="btn btn-warning" ><i class="fa fa-pencil"
-                                                                               aria-hidden="true"></i> Field</a>
-                                            @endif
+                                        @if(\Btybug\Console\Services\FieldService::checkField($table,$colum->Field))
+                                            <a href="{!! route("edit_field",['id' => \Btybug\Console\Services\FieldService::getFieldID($table,$colum->Field)]) !!}"
+                                               class="btn btn-warning"><i class="fa fa-pencil"
+                                                                          aria-hidden="true"></i> Field</a>
+                                        @endif
                                     </th>
 
                                 </tr>
@@ -193,6 +196,197 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container-fluid">
+        <h2>Taxses</h2>
+        <div class="col-md-12">
+            <div class="panel panelSettingData">
+                <div class="panel-heading" role="tab" id="urlManager">
+                    <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion"
+                                               href="#urlManagerCol" aria-expanded="true" aria-controls="urlManagerCol">
+                            <i
+                                    class="glyphicon glyphicon-chevron-right"></i>Url Manager</a></h4>
+                </div>
+                <div id="urlManagerCol" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="urlManager">
+                    <div class="panel-body">
+                        {!! Form::model($settings,['url' => route('post_settings_save',['slug' => $slug])]) !!}
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <h4 class="panel-title">Tax & services</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-horizontal">
+
+                                        <!-- Multiple Radios -->
+                                        <div class="form-group">
+                                            <div class="radio">
+                                                <label for="radios-">
+                                                    <input type="radio" name="" >
+                                                    Allow Tax Services
+                                                </label>
+                                            </div>
+                                        </div>
+                                            <div class="form-group">
+                                            <label class="col-md-4 control-label" for="radios">Insert Product
+                                                Price</label>
+                                            <div class="col-md-4">
+                                                <div class="radio">
+                                                    <label for="radios-0">
+                                                        <input type="radio" name="radios" id="radios-0" value="1"
+                                                               checked="checked">
+                                                        INCLUDE Tax
+                                                    </label>
+                                                </div>
+                                                <div class="radio">
+                                                    <label for="radios-1">
+                                                        <input type="radio" name="radios" id="radios-1" value="2">
+                                                        EXCLUDE Tax
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <label class="col-md-4 control-label" for="radios">Display Product Price</label>
+                                        <div class="col-md-4">
+                                            <div class="radio">
+                                                <label for="radios-0">
+                                                    <input type="radio" name="radios" id="radios-0" value="1"
+                                                           checked="checked">
+                                                    include Tax
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label for="radios-1">
+                                                    <input type="radio" name="radios" id="radios-1" value="2">
+                                                    exclude Tax
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        {!! Form::submit("Save",['class' => 'btn settingBtn pull-right']) !!}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {!! Form::submit("Save",['class' => 'btn settingBtn pull-right']) !!}
+                    </div>
+                    {!! Form::close() !!}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="panel panelSettingData">
+            <div class="panel-heading" role="tab" id="formBuilder">
+                <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion"
+                                           href="#formBuilderCollapse" aria-expanded="true"
+                                           aria-controls="formBuilderCollapse">
+                        <i class="glyphicon glyphicon-chevron-right"></i>Table Columns</a></h4>
+            </div>
+            <div id="formBuilderCollapse" class="panel-collapse collapse in" role="tabpanel"
+                 aria-labelledby="formBuilder">
+                <div class="panel-body">
+                    <div class="col-md-12 m-b-15">
+                        <button type="button" id="add_colum" class="btn btn-info">Add Column</button>
+                    </div>
+                {!! Form::open(['class'=>'form-horizontal columns-add-form hide']) !!}
+                <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="engine">Add after</label>
+                        <div class="col-md-4">
+                            {!! Form::select('after_column',$after_columns,null,['class'=>'form-control','id'=>'add_column']) !!}
+                        </div>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Column Name</th>
+                            <th>DataType</th>
+                            <th>Lenght/Values</th>
+                            <th>Default</th>
+                            <th>Null</th>
+                            <th>Key Unique</th>
+                            <th>Field</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody id="table_engine">
+
+                        </tbody>
+                    </table>
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-success" id="submit_form">Create</button>
+                    </div>
+                    {!! Form::close() !!}
+
+
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Column Name</th>
+                            <th>DataType</th>
+                            {{--<th>Create Form</th>--}}
+                            <th>Is Null</th>
+                            <th>Key</th>
+                            <th>Default</th>
+                            <th>Extra</th>
+                            <th>Field</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($columns as $colum)
+                            <tr>
+                                @foreach($colum as $k=>$v)
+                                    <th>
+                                        {!! $v !!}
+                                    </th>
+                                @endforeach
+                                <th>
+                                    @if(\Btybug\Console\Services\FieldService::checkField($table,$colum->Field))
+                                        YES
+                                    @else
+                                        NO
+                                    @endif
+                                </th>
+                                <th>
+                                    @if(\Btybug\Console\Services\ColumnService::columnExists($table,$colum->Field))
+                                        <a href="javascript:void(0)"
+                                           class="btn btn-warning get-column-data" data-table="{{ $table }}"
+                                           data-column="{{ $colum->Field }}"><i class="fa fa-pencil-square-o"
+                                                                                aria-hidden="true"></i></a>
+                                        <a href="{!! url('admin/console/structure/tables/fields',[$table,$colum->Field]) !!}"
+                                           class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    @else
+                                        <a href="javascript:void(0)"
+                                           class="btn btn-primary get-column-data" data-table="{{ $table }}"
+                                           data-column="{{ $colum->Field }}"><i class="fa fa-eye"
+                                                                                aria-hidden="true"></i></a>
+                                    @endif
+
+                                    @if(\Btybug\Console\Services\FieldService::checkField($table,$colum->Field))
+                                        <a href="{!! route("edit_field",['id' => \Btybug\Console\Services\FieldService::getFieldID($table,$colum->Field)]) !!}"
+                                           class="btn btn-warning"><i class="fa fa-pencil"
+                                                                      aria-hidden="true"></i> Field</a>
+                                    @endif
+                                </th>
+
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 
     @include('resources::assests.deleteModal')
@@ -276,10 +470,10 @@
                     },
                     data: {table: table, column: column},
                     success: function (data) {
-                        if(! data.error){
+                        if (!data.error) {
                             $("#column-pop-up .modal-body").html(data.html);
                             $("#column-pop-up").modal();
-                        }else{
+                        } else {
                             alert(data.message);
                         }
                     }
@@ -295,7 +489,7 @@
             var i = 1;
             $('#add_colum').on('click', function () {
                 var form = $(".columns-add-form")
-                if(form.hasClass('hide')){
+                if (form.hasClass('hide')) {
                     form.removeClass("hide");
                     form.addClass("show");
                 }
@@ -348,12 +542,12 @@
             });
 
 
-            $('body').on('click', '.edit-column-btn' ,function () {
+            $('body').on('click', '.edit-column-btn', function () {
                 var data = $('#edit-column-form').serialize();
                 var column = $(this).data('column');
                 $.ajax({
                     type: 'POST',
-                    url: '/admin/console/structure/tables/edit-column/posts/'+column,
+                    url: '/admin/console/structure/tables/edit-column/posts/' + column,
                     headers: '{!! csrf_token() !!}',
                     datatype: 'json',
                     cache: false,
