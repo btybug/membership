@@ -66,18 +66,34 @@
 
         <!-- Multiple Radios -->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="radios">Tax options</label>
+                <label class="col-md-4 control-label" for="radios">Insert Product Price</label>
                 <div class="col-md-4">
                     <div class="radio">
                         <label for="radios-0">
                             <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
-                            Inserted Price for product INCLUDE Tax
+                             INCLUDE Tax
                         </label>
                     </div>
                     <div class="radio">
                         <label for="radios-1">
                             <input type="radio" name="radios" id="radios-1" value="2">
-                            Inserted Price for product EXCLUDE Tax
+                             EXCLUDE Tax
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <label class="col-md-4 control-label" for="radios">Display Product Price</label>
+                <div class="col-md-4">
+                    <div class="radio">
+                        <label for="radios-0">
+                            <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+                             include Tax
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label for="radios-1">
+                            <input type="radio" name="radios" id="radios-1" value="2">
+                             exclude Tax
                         </label>
                     </div>
                 </div>
