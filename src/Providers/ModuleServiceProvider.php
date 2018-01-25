@@ -49,7 +49,7 @@ class ModuleServiceProvider extends ServiceProvider
         \Eventy::action('admin.menus', [
             "title" => "Products",
             "custom-link" => "#",
-            "icon" => "fa-product-hunt",
+            "icon" => "fa fa-product-hunt",
             "is_core" => "yes",
             "children" => [
 //                [

@@ -56,6 +56,41 @@
         @endforeach
     </div>
     {!! Form::close() !!}
+    <div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab">
+            <h4 class="panel-title">Tax & services</h4>
+        </div>
+        <div class="panel-body">
+        <div class="form-horizontal">
+
+        <!-- Multiple Radios -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="radios">Tax options</label>
+                <div class="col-md-4">
+                    <div class="radio">
+                        <label for="radios-0">
+                            <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+                            Inserted Price for product INCLUDE Tax
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label for="radios-1">
+                            <input type="radio" name="radios" id="radios-1" value="2">
+                            Inserted Price for product EXCLUDE Tax
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                {!! Form::submit("Save",['class' => 'btn settingBtn pull-right']) !!}
+            </div>
+        </div>
+
+        </div>
+    </div>
+    </div>
 @stop
 @section('CSS')
 @stop
