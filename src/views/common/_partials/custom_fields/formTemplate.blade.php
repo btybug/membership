@@ -59,25 +59,15 @@
                         @foreach($data as $key => $value)
                             @if($value['is_active'] && isset($value['tab']) && $value['tab'] == 'others')
                                 @php
-                                    $options = get_options_data($key,$slug)
+                                    $options = get_options_data($key,$slug);
+                                    $registered_data = get_item_data_from_listener($key);
+                                    $fn = $registered_data['render_function'];
                                 @endphp
                                 <fieldset class="bty-form-select" id="bty-input-id-16">
-                                    <div class="bty-input-select-1">
-                                        <select data-type="{!! $key !!}" class="form-control input-md select-option-type" id="select-{{ $key }}">
-                                            <option selected="selected" value="">Select {!! strtoupper(str_replace('_',' ',$key)) !!}</option>
-                                            @foreach($options as $k => $option)
-                                                @if($option !== 1)
-                                                    <option value="{!! $option !!}">{!! str_replace('_',' ',$option) !!}</option>
-                                                @else
-                                                    <option value="{!! $k !!}">{!! str_replace('_',' ',$k) !!}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                    @foreach($options as $k => $option)
+                                        {!! $fn($k) !!}
+                                    @endforeach
                                 </fieldset>
-                                <div class="select-{{ $key }}">
-
-                                </div>
                             @endif
                         @endforeach
                     @endif

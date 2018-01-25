@@ -388,7 +388,7 @@ class BlogCommonController extends Controller
 //                $options[$key]['checked'] = false;
 //            }
 //        }
-
+//        dd($options);
         return view('mbshp::common.options', compact('options', 'data', 'slug'));
     }
 
