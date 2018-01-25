@@ -226,10 +226,7 @@ class GeneratorService extends GeneralService
                 }
             }
         }
-
         $html = \View('mbshp::common._partials.custom_fields.formTemplate',compact(['fieldHtml','data','slug']))->render();
-
-
         $this->formService->generateBlade($form->id, $html);
     }
 }

@@ -8,7 +8,7 @@
             </li>
             @if(count($data))
                 @foreach($data as $key => $value)
-                    @if($value['is_active'])
+                    @if($value['is_active'] && ! isset($value['tab']))
                         <li class="nav-item">
                             <a class="nav-link" id="pills-link-{{ $key }}" data-toggle="pill" href="#pills-{{ $key }}"
                                role="tab"
@@ -30,7 +30,7 @@
             </div>
             @if(count($data))
                 @foreach($data as $key => $value)
-                    @if($value['is_active'])
+                    @if($value['is_active'] && !isset($value['tab']))
                         <div class="tab-pane" id="pills-{{ $key }}" role="tabpanel"
                              aria-labelledby="pills-{{ $key }}-tab">
                            @php
@@ -55,7 +55,32 @@
             @endif
             <div class="tab-pane" id="pills-other" role="tabpanel" aria-labelledby="pills-other-tab">
                 <div class="other-box">
-                    Other
+                    @if(count($data))
+                        @foreach($data as $key => $value)
+                            @if($value['is_active'] && isset($value['tab']) && $value['tab'] == 'others')
+                                @php
+                                    $options = get_options_data($key,$slug)
+                                @endphp
+                                <fieldset class="bty-form-select" id="bty-input-id-16">
+                                    <div class="bty-input-select-1">
+                                        <select data-type="{!! $key !!}" class="form-control input-md select-option-type" id="select-{{ $key }}">
+                                            <option selected="selected" value="">Select {!! strtoupper(str_replace('_',' ',$key)) !!}</option>
+                                            @foreach($options as $k => $option)
+                                                @if($option !== 1)
+                                                    <option value="{!! $option !!}">{!! str_replace('_',' ',$option) !!}</option>
+                                                @else
+                                                    <option value="{!! $k !!}">{!! str_replace('_',' ',$k) !!}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </fieldset>
+                                <div class="select-{{ $key }}">
+
+                                </div>
+                            @endif
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
