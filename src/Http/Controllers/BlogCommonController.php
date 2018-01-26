@@ -21,6 +21,7 @@ use BtyBugHook\Blog\Http\Requests\CreatePostRequest;
 use BtyBugHook\Membership\Http\Requests\PostSettingsRequest;
 use BtyBugHook\Membership\Repository\PostsRepository;
 use BtyBugHook\Membership\Services\PostsService;
+use Illuminate\Support\Facades\Response;
 use Yajra\DataTables\DataTables;
 
 class BlogCommonController extends Controller
@@ -507,5 +508,10 @@ class BlogCommonController extends Controller
         $data = json_encode($request->except(['slug', '_token']), true);
         $adminsettingRepository->createOrUpdate($data, 'blog_order_button', $slug);
         return ['error' => false];
+    }
+
+    public function getTabGenerator(Request $request)
+    {
+        return Response::json(['error'=>false,"html"=>'<img src="https://i0.wp.com/rickmcnary.me/wp-content/uploads/2013/11/Laughing-Chimpanzee-1.jpg?resize=1080%2C675&ssl=1">']);
     }
 }

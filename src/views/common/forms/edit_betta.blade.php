@@ -97,7 +97,8 @@
                         class="fa fa-plus"></i>Insert New Tab
             </button>
 
-            <div class="modal fade bd-example-modal-lg" id="tab-manage-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+            <div class="modal fade bd-example-modal-lg" id="tab-manage-modal" tabindex="-1" role="dialog"
+                 aria-labelledby="myLargeModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -150,22 +151,42 @@
             var jsonData = JSON.parse(jsonString);
 
             var tabJson = {name: null, data: {}}
-        $('#save-tab-changes').on('click', function () {
-            var newTab = (objectifyForm($('#tab-options')));
-            var copyData = tabJson;
-            copyData.name = newTab.name;
-            jsonData.push(copyData);
-            $('#tabs-json-area').text(JSON.stringify(jsonData));
-        });
+            $('#save-tab-changes').on('click', function () {
+                var newTab = (objectifyForm($('#tab-options')));
+                var copyData = tabJson;
+                copyData.name = newTab.name;
+                jsonData.push(copyData);
+                updateTabs(jsonData);
+                $('#tabs-json-area').text(JSON.stringify(jsonData));
 
-        function objectifyForm(formArray) {//serialize data function
-            var data = {};
-            formArray.serializeArray().map(function (x) {
-                data[x.name] = x.value;
+
             });
-            data.data = {};
-            return data;
-        }
+
+            function updateTabs(data) {
+                $.ajax({
+                    url: "{!! route('form_edit_tab_generate',$slug) !!}",
+                    data: data,
+                    headers: {
+                        'X-CSRF-TOKEN': $("input[name='_token']").val()
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (!data.error) {
+                            $('.preview-area').html(data.html);
+                        }
+                    },
+                    type: 'POST'
+                });
+            }
+
+            function objectifyForm(formArray) {//serialize data function
+                var data = {};
+                formArray.serializeArray().map(function (x) {
+                    data[x.name] = x.value;
+                });
+                data.data = {};
+                return data;
+            }
         });
 
     </script>
