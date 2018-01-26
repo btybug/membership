@@ -91,6 +91,31 @@
                 </div>
             </div>
             {!! Form::close() !!}
+            <div class="bty-panel-collapse 	bty-panel-cl-tomato m-t-20" style="min-height: 370px">
+                <div>
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#settingsFields"
+                       aria-expanded="true">
+                        <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                        <span class="title">Inset New Tab</span>
+                    </a>
+                </div>
+                <div id="settingsFields" class="collapse in" aria-expanded="true" style="">
+                    <div class="content">
+                        <div class="col-md-12">
+                            <button class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-lg"><i
+                                        class="fa fa-plus"> Insert New Tab</i></button>
+                            <ul class="nav nav-tabs tab-items" id="myTab" role="tablist">
+
+                            </ul>
+
+
+                            <div class="tab-content" id="formTabContent">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <h2>Preview Area</h2>
             <button class="btn btn-info pull-right" data-toggle="modal" data-target=".bd-example-modal-lg"><i
@@ -129,6 +154,7 @@
                 </div>
             </div>
 
+
             <div class="col-md-12 preview-area">
                 {!! form_render(['id' => $form->id]) !!}
             </div>
@@ -145,23 +171,80 @@
 @stop
 
 @section( 'JS' )
+
     <script>
         $(function () {
+            function tabsGenerate(json) {
+                var li = $('<li/>', {class: "nav-item"});
+                var deleteI = $('<button/>', {class: "fa fa-trash", "style": "color:#9A2720"});
+                var a = $('<a/>', {
+                    class: "nav-link",
+                    "data-toggle": "tab",
+                    role: "tab",
+                    "aria-selected": "true"
+                });
+                var div = $('<div/>', {
+                    class: "tab-pane fade",
+                    role: "tabpanel",
+                    "aria-labelledby": "profile-tab"
+                });
+                $('#formTabContent').empty();
+                $('.tab-items').empty();
+                $.each(json, function (k, v) {
+                    var tab = a.clone();
+                    var del = deleteI.clone();
+                    del.attr('data-id', k);
+
+                    tab.text(v.name);
+                    tab.attr('href', '#' + v.name);
+                    tab.attr('aria-controls', v.name);
+                    var item = li.clone();
+                    item.append(del);
+                    item.append(tab);
+
+                    var divContent = div.clone();
+                    divContent.attr('aria-labelledby', 'tab-' + v.name);
+                    divContent.attr('id', v.name);
+                    divContent.text(v.name);
+                    $('#formTabContent').append(divContent);
+                    $('.tab-items').append(item)
+
+                })
+
+            }
+
+
             var jsonString = $('#tabs-json-area').text();
             var jsonData = JSON.parse(jsonString);
-
+            tabsGenerate(jsonData);
             var tabJson = {name: null, data: {}}
             $('#save-tab-changes').on('click', function () {
                 var newTab = (objectifyForm($('#tab-options')));
                 var copyData = tabJson;
                 copyData.name = newTab.name;
-                copyData.data = [{'type' : 'unit', 'value' : 'price_calculate.default'}];
+                copyData.data = [{'type': 'unit', 'value': 'price_calculate.default'}];
                 jsonData.push(copyData);
                 updateTabs(jsonData);
+                $('#tab-manage-modal').modal('hide');
                 $('#tabs-json-area').text(JSON.stringify(jsonData));
 
 
             });
+
+//data-id
+            $('.tab-items').on('click', 'button[data-id]', function () {
+                var id = $(this).attr('data-id');
+                deleteTab(id);
+            })
+
+            function deleteTab(id) {
+                jsonString = $('#tabs-json-area').text();
+                jsonData = JSON.parse(jsonString);
+                jsonData.splice(id)
+                $('#tabs-json-area').text(JSON.stringify(jsonData));
+                updateTabs(jsonData);
+                tabsGenerate(jsonData);
+            }
 
             function updateTabs(data) {
                 $.ajax({
@@ -174,6 +257,10 @@
                     success: function (data) {
                         if (!data.error) {
                             $('.preview-area').html(data.html);
+
+                            jsonString = $('#tabs-json-area').text();
+                            jsonData = JSON.parse(jsonString);
+                            tabsGenerate(jsonData);
                         }
                     },
                     type: 'POST'

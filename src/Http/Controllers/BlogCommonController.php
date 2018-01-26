@@ -512,7 +512,7 @@ class BlogCommonController extends Controller
 
     public function getTabGenerator(Request $request,$slug)
     {
-        $html = \View('mbshp::common._partials.custom_fields.formTemplate',compact('slug'))->with('data',$request->data)->render();
+        $html = \View('mbshp::common._partials.custom_fields.formTemplate',compact('slug'))->with('data',$request->get('data',[]))->render();
         return \Response::json(['error'=>false,"html"=>$html]);
     }
 }
