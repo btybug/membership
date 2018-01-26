@@ -442,6 +442,21 @@ class BlogCommonController extends Controller
         $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
         return view('mbshp::common.forms.edit', compact('form', 'fields', 'existingFields','slug'));
     }
+    public function getMyFormsEditBetta(
+        FormsRepository $formsRepository,
+        FieldsRepository $fieldsRepository,
+        FormService $formService,
+        $slug,
+        $id
+    )
+    {
+        $form = $formsRepository->findOneByMultiple(['id' => $id, 'created_by' => 'plugin']);
+        if (!$form) abort(404, "Form not found");
+
+        $fields = $fieldsRepository->getBy('table_name', $this->postsRepository->table);
+        $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
+        return view('mbshp::common.forms.edit_betta', compact('form', 'fields', 'existingFields','slug'));
+    }
 
     public function postRenderField(
         Request $request,

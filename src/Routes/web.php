@@ -172,6 +172,10 @@ Route::group(['prefix' => '{slug}'], function () {
             Route::get('/', 'BlogCommonController@getMyFormsEdit', true);
             Route::get('/{id}', 'BlogCommonController@getMyFormsEdit', true)->name("form_edit_blog");
         });
+        Route::group(['prefix' => 'edit-betta'], function () {
+            Route::get('/', 'BlogCommonController@getMyFormsEditBetta', true);
+            Route::get('/{id}', 'BlogCommonController@getMyFormsEditBetta', true)->name("form_edit_blog");
+        });
         Route::post('/form-fields', 'BlogCommonController@postFormFieldsSettings');
     });
 
