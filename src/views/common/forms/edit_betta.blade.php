@@ -155,6 +155,7 @@
                 var newTab = (objectifyForm($('#tab-options')));
                 var copyData = tabJson;
                 copyData.name = newTab.name;
+                copyData.data = [{'type' : 'unit', 'value' : 'price_calculate.default'}];
                 jsonData.push(copyData);
                 updateTabs(jsonData);
                 $('#tabs-json-area').text(JSON.stringify(jsonData));
@@ -165,7 +166,7 @@
             function updateTabs(data) {
                 $.ajax({
                     url: "{!! route('form_edit_tab_generate',$slug) !!}",
-                    data: data,
+                    data: {data: data},
                     headers: {
                         'X-CSRF-TOKEN': $("input[name='_token']").val()
                     },

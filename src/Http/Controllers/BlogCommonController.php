@@ -510,8 +510,9 @@ class BlogCommonController extends Controller
         return ['error' => false];
     }
 
-    public function getTabGenerator(Request $request)
+    public function getTabGenerator(Request $request,$slug)
     {
-        return Response::json(['error'=>false,"html"=>'<img src="https://i0.wp.com/rickmcnary.me/wp-content/uploads/2013/11/Laughing-Chimpanzee-1.jpg?resize=1080%2C675&ssl=1">']);
+        $html = \View('mbshp::common._partials.custom_fields.formTemplate',compact('slug'))->with('data',$request->data)->render();
+        return \Response::json(['error'=>false,"html"=>$html]);
     }
 }
