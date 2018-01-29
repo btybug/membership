@@ -1,0 +1,8 @@
+.icons{ margin:0 -4px; padding:0; list-style:none; display:block; overflow:auto; max-height:280px; }
+.icons li {float: left; margin: 4px;   text-align: center;  border: 1px solid #ccc;  border-radius: 2px;  background-color: #fff;}
+.icons li > a{width: 30px;  height: 30px; line-height:30px; display:block;}
+.icons li > a:hover{ background:#01649c; color:#FFF; }
+.iconselected, .iconselected:active, .iconselected:focus {
+    background-color: #01649c;
+    color: #fff;
+}
