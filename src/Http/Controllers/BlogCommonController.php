@@ -447,12 +447,19 @@ class BlogCommonController extends Controller
         FormsRepository $formsRepository,
         FieldsRepository $fieldsRepository,
         FormService $formService,
+        AdminsettingRepository $adminsettingRepository,
         $slug,
         $id
     )
     {
         $form = $formsRepository->findOneByMultiple(['id' => $id, 'created_by' => 'plugin']);
         if (!$form) abort(404, "Form not found");
+
+        $data = [];
+        $settings = $adminsettingRepository->getSettings('product', $slug);
+        if ($settings) {
+            $data = (json_decode($settings->val, true));
+        }
 
         $fields = $fieldsRepository->getBy('table_name', $this->postsRepository->table);
         $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];

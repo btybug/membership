@@ -497,7 +497,8 @@
                     <div class="col-sm-6">
                         <select  class="form-control customselect" data-style="btn-black" data-htmlclass="content" data-selector="contentType" data-css="contentType">
                             <option value="text">Text</option>
-                            <option value="widget">Widget</option>
+                            <option value="units">Units</option>
+                            <option value="fields">Fields</option>
                             <option value="forms">Forms</option>
                             <option value="quote">Quote</option>
                             <option value="othercontent">Other Content</option>
@@ -521,48 +522,31 @@
                     </div>
                 </div>
 
-                <div class="form-group hide" data-panel-show="widget">
+                <div class="form-group hide" data-panel-show="units">
                     <ul class="boxMenuList">
                         <li data-id="1" data-name="widget 1">
                             <a href="#">
                                 <img src="/public/img/admin-img.jpg">
-                                <span>widget 1</span>
+                                <span>Unit 1</span>
                             </a>
                         </li>
+                    </ul>
+                </div>
 
-                        <li data-id="1" data-name="widget 1">
-                            <a href="#">
-                                <img src="/public/img/image-light-box.jpg">
-                                <span>widget 2</span>
-                            </a>
-                        </li>
-
-                        <li data-id="1" data-name="widget 1">
-                            <a href="#">
-                                <img src="/public/img/images-img-3.jpg">
-                                <span>widget 3</span>
-                            </a>
-                        </li>
-
-                        <li data-id="1" data-name="widget 1">
-                            <a href="#">
-                                <img src="/public/img/admin-img.jpg">
-                                <span>widget 4</span>
-                            </a>
-                        </li>
-
-                        <li data-id="1" data-name="widget 1">
-                            <a href="#">
-                                <img src="/public/img/image-light-box.jpg">
-                                <span>widget 5</span>
-                            </a>
-                        </li>
-                        <li data-id="1" data-name="widget 1">
-                            <a href="#">
-                                <img src="/public/img/images-img-3.jpg">
-                                <span>widget 6</span>
-                            </a>
-                        </li>
+                <div class="form-group hide" data-panel-show="fields">
+                    <ul class="boxMenuList">
+                        @if(count($fields))
+                            @foreach($fields as $field)
+                                <li data-id="{!! $field->id !!}" data-name="{!! $field->column_name !!}">
+                                    <a href="#">
+                                        <img src="/public/img/admin-img.jpg">
+                                        <span>{{ $field->name }}</span>
+                                    </a>
+                                </li>
+                            @endforeach
+                        @else
+                            No Columns Available
+                        @endif
 
                     </ul>
                 </div>
