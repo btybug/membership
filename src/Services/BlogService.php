@@ -78,6 +78,6 @@ class BlogService  extends GeneralService
         $fields = $this->fieldsRepository->getBy('table_name', $form->fields_type);
         $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
 
-        return ['fields' => $fields, 'existingFields' => $existingFields];
+        return ['fields' => $fields, 'existingFields' => $existingFields,'form' => $form];
     }
 }

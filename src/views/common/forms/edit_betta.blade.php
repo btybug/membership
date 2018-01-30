@@ -187,7 +187,8 @@
                         if (!data.error) {
                             var data_id = data.data_id;
                             $('body').find('div[data-id=' + data_id + ']').find('.partials-area').html(data.html);
-                        }
+                        }else{
+                            alert(data.message);                        }
                     }
                 });
             });
