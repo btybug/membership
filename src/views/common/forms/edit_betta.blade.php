@@ -30,93 +30,26 @@
                     </div>
                 </div>
             </div>
-
-            <div class="bty-panel-collapse 	bty-panel-cl-tomato m-t-20">
-                <div>
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#availableFields"
-                       aria-expanded="true">
-                        <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                        <span class="title">Available Fields</span>
-                    </a>
-                </div>
-                <div id="availableFields" class="collapse in" aria-expanded="true" style="">
-                    <div class="content">
-                        <div class="text-center">
-                            @if(count($fields))
-                                @foreach($fields as $field)
-                                    <div class="col-md-2">
-                                        <p>
-                                            <input type="checkbox" data-id="{!! $field->id !!}"
-                                                   data-table="{!! $form->fields_type !!}"
-                                                   value="{!! $field->column_name !!}"
-                                                   name="fields_json[{!! $field->id !!}]"
-                                                   {!! (! in_array($field->slug,$existingFields)) ?: "checked"  !!}
-                                                   class="bty-input-checkbox-2 select-field"
-                                                   id="bty-cbox-{{ $field->id }}">
-                                            <label for="bty-cbox-{{ $field->id }}">{{ $field->name }}</label>
-                                        </p>
-                                    </div>
-                                @endforeach
-                            @else
-                                No Columns Available
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bty-panel-collapse 	bty-panel-cl-tomato m-t-20">
-                <div>
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#settingsFields"
-                       aria-expanded="true">
-                        <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                        <span class="title">Settings</span>
-                    </a>
-                </div>
-                <div id="settingsFields" class="collapse in" aria-expanded="true" style="">
-                    <div class="content">
-                        <div class="col-md-12">
-                            <div class="col-md-6">
-                                <div class="col-md-4">
-                                    <span class="bty-hover-17 bty-f-s-20">Form title</span>
-                                </div>
-                                <div class="col-md-8">
-                                    <input class="bty-input-label-2 m-t-0 form-title-settings"
-                                           placeholder="What is your Form title ?"
-                                           name="form_title" type="text" value="Create post">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             {!! Form::close() !!}
-            <div class="bty-panel-collapse 	bty-panel-cl-tomato m-t-20" style="min-height: 370px">
-                <div>
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#settingsFields"
-                       aria-expanded="true">
-                        <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                        <span class="title">Inset New Tab</span>
-                    </a>
-                </div>
-                <div id="settingsFields" class="collapse in" aria-expanded="true" style="">
-                    <div class="content">
-                        <div class="col-md-12">
-                            <button class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-lg"><i
-                                        class="fa fa-plus"> Insert New Tab</i></button>
-                            <ul class="nav nav-tabs tab-items" id="myTab" role="tablist">
 
-                            </ul>
-
-
-                            <div class="tab-content" id="formTabContent">
-
+            <div class="col-md-12">
+                <div class="content">
+                    <div class="col-md-12">
+                        <button class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-lg"><i
+                                    class="fa fa-plus"> Insert New Tab</i></button>
+                        <ul class="nav nav-tabs tab-items" id="myTab" role="tablist">
+                            <li class="nav-item active">
+                                <a class="nav-link" data-toggle="tab" role="tab" aria-selected="true" href="#General" aria-controls="General" aria-expanded="true">General</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="formTabContent">
+                            <div class="tab-pane fade active in" role="tabpanel" aria-labelledby="tab-General" id="General">
+                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <h2>Preview Area</h2>
 
             <div class="modal fade bd-example-modal-lg" id="tab-manage-modal" tabindex="-1" role="dialog"
