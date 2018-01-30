@@ -102,7 +102,7 @@
         <div class="col-md-4">
             <div class="form-horizontal">
                 <div class="form-group">
-                    <select class="form-control" data-role="options">
+                    <select class="form-control partials-change">
                         <option value="0">Select Option</option>
                         <option value="fields">Field</option>
                         <option value="units">Unit</option>
@@ -168,15 +168,15 @@
             }
 
 //get partial options view
-            $('body').on('change', 'select[data-role=options]', function () {
-                console.log(445465465)
+            $('body').on('change', '.partials-change', function () {
 
                 var data = {
                     'type': $(this).val(),
                     'data_id': $(this).attr('data-id'),
-                    'form_id': $('input[name=id]').val()
+                    'options_form_id': $('input[name=id]').val()
                 };
                 $.ajax({
+                    type:'POST',
                     url: "{!! route('form_partial_options',$slug) !!}",
                     data: data,
                     headers: {
@@ -188,8 +188,7 @@
                             var data_id = data.data_id;
                             $('body').find('div[data-id=' + data_id + ']').find('.partials-area').html(data.html);
                         }
-                    },
-                    type: 'POST'
+                    }
                 });
             });
 

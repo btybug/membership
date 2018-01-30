@@ -532,7 +532,7 @@ class BlogCommonController extends Controller
     )
     {
         $type = $request->type;
-        $data = $blogService->getDataByType($type,$request->form_id);
+        $data = $blogService->getDataByType($type,$request->options_form_id);
         $html=\View::make("mbshp::common._partials.types.$type")->with($data)->render();
         return Response::json(['error'=>false,'html'=>$html,'data_id'=>$request->data_id]);
     }
