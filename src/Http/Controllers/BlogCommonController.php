@@ -528,13 +528,14 @@ class BlogCommonController extends Controller
 
     public function getPartialOptions(
         Request $request,
-        BlogService $blogService
+        BlogService $blogService,
+        $slug
     )
     {
         $type = $request->type;
         if(! $type) return Response::json(['error'=>true,'message' => 'Select type']);
 
-        $data = $blogService->getDataByType($type,$request->options_form_id);
+        $data = $blogService->getDataByType(['type' => $type,'form_id' =>$request->options_form_id,'slug' =>$slug]);
         $html=\View::make("mbshp::common._partials.types.$type")->with($data)->render();
         return Response::json(['error'=>false,'html'=>$html,'data_id'=>$request->data_id]);
     }
