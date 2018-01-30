@@ -5,31 +5,24 @@
         <div class="col-md-12">
             {!! Form::model($form,['id'=>'fields-list','url' => url(route('mbsp_save_form',$slug))]) !!}
             {!! Form::hidden('id',$form->id) !!}
-            <div class="bty-panel-collapse 	bty-panel-cl-tomato">
-                <div>
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#general"
-                       aria-expanded="true">
-                        <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                        <span class="title">General</span>
-                        <button class="bty-btn bty-btn-save bty-btn-cl-black bty-btn-size-sm pull-right m-r-10"
-                                data-action="save-form"><span>Save</span></button>
-                    </a>
-                </div>
-                <div id="general" class="collapse in" aria-expanded="true" style="">
-                    <div class="content">
+
                         <div class="col-md-12 m-b-15">
-                            <div class="col-md-6">
-                                <div class="col-md-4">
+
+                                <div class="col-md-2">
                                     <span class="bty-hover-17 bty-f-s-20">Form name</span>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-4">
                                     {!! Form::text('name',null,['placeholder' => 'What is your Form name ?','class' => 'bty-input-label-2 m-t-0']) !!}
                                 </div>
-                            </div>
+                                <div class="col-mg-6">
+                                    <div class="btn-group btn-group-lg">
+                                        <button type="button" class="btn btn-primary">Tabs</button>
+                                        <button type="button" class="btn btn-primary">Items</button>
+                                        <button type="button" class="btn btn-success">Save</button>
+                                    </div>
+                                </div>
                         </div>
                     </div>
-                </div>
-            </div>
             {!! Form::close() !!}
 
             {{--<div class="col-md-12">--}}
@@ -54,16 +47,6 @@
             {{--</div>--}}
 
 
-            <div class="bty-panel-collapse 	bty-panel-cl-tomato">
-                <div>
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#tabformlist"
-                       aria-expanded="true">
-                        <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                        <span class="title">Tabs Add</span>
-                    </a>
-                </div>
-                <div id="tabformlist" class="collapse in" aria-expanded="true" style="">
-                    <div class="content tab-form-list">
                         <div class="col-md-12">
                             <button class="bty-btn bty-btn-add" data-toggle="modal" data-target=".bd-example-modal-lg"><span>Insert New Tab</span></button>
                             <ul class="nav nav-tabs tab-items" id="myTab" role="tablist">
@@ -79,9 +62,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
 
 
