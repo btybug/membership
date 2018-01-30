@@ -522,4 +522,11 @@ class BlogCommonController extends Controller
         $html = \View('mbshp::common._partials.custom_fields.formTemplate',compact('slug'))->with('data',$request->get('data',[]))->render();
         return \Response::json(['error'=>false,"html"=>$html]);
     }
+
+    public function getPartialOptions(Request $request)
+    {
+        $type=$request->type;
+        $html=\View::make("mbshp::common._partials.types.$type")->render();
+        return Response::json(['error'=>false,'html'=>$html,'data_id'=>$request->data_id]);
+    }
 }

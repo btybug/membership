@@ -39,12 +39,14 @@
                                     class="fa fa-plus"> Insert New Tab</i></button>
                         <ul class="nav nav-tabs tab-items" id="myTab" role="tablist">
                             <li class="nav-item active">
-                                <a class="nav-link" data-toggle="tab" role="tab" aria-selected="true" href="#General" aria-controls="General" aria-expanded="true">General</a>
+                                <a class="nav-link" data-toggle="tab" role="tab" aria-selected="true" href="#General"
+                                   aria-controls="General" aria-expanded="true">General</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="formTabContent">
-                            <div class="tab-pane fade active in" role="tabpanel" aria-labelledby="tab-General" id="General">
-                                
+                            <div class="tab-pane fade active in" role="tabpanel" aria-labelledby="tab-General"
+                                 id="General">
+
                             </div>
                         </div>
                     </div>
@@ -96,6 +98,22 @@
             </div>
         </div>
     </div>
+    <div class="tab-content-settings-to-clone hidden">
+        <div class="col-md-4">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <select class="form-control" data-role="options">
+                    <option value="0">Select Option</option>
+                    <option value="fields">Field</option>
+                    <option value="units">Unit</option>
+                </select>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-8 partials-area">
+
+        </div>
+    </div>
 @stop
 @section( 'CSS' )
 @stop
@@ -107,6 +125,7 @@
             function tabsGenerate(json) {
                 var li = $('<li/>', {class: "nav-item"});
                 var deleteI = $('<button/>', {class: "fa fa-trash", "style": "color:#9A2720"});
+                var options = $('.tab-content-settings-to-clone');
                 var a = $('<a/>', {
                     class: "nav-link",
                     "data-toggle": "tab",
@@ -118,31 +137,55 @@
                     role: "tabpanel",
                     "aria-labelledby": "profile-tab"
                 });
+
                 $('#formTabContent').empty();
                 $('.tab-items').empty();
                 $.each(json, function (k, v) {
                     var tab = a.clone();
                     var del = deleteI.clone();
+                    var item = li.clone();
+                    var divContent = div.clone();
+                    var optionsClone = options.clone();
+                    optionsClone.find('select').attr('data-id',k);
+                    divContent.attr('data-id',k);
+                    optionsClone.removeClass('hidden');
+                    optionsClone.removeClass('tab-content-settings-to-clone');
+                    optionsClone.addClass('tab-content-settings');
                     del.attr('data-id', k);
-
                     tab.text(v.name);
                     tab.attr('href', '#' + v.name);
                     tab.attr('aria-controls', v.name);
-                    var item = li.clone();
                     item.append(del);
                     item.append(tab);
-
-                    var divContent = div.clone();
                     divContent.attr('aria-labelledby', 'tab-' + v.name);
                     divContent.attr('id', v.name);
-                    divContent.text(v.name);
+                    divContent.html(optionsClone);
                     $('#formTabContent').append(divContent);
                     $('.tab-items').append(item)
 
-                })
+                });
 
             }
-
+//get partial options view
+            $('body').on('change','select[data-role=options]',function () {
+               var data={'type':$(this).val(),'data_id':$(this).attr('data-id')};
+                $.ajax({
+                    url: "{!! route('form_partial_options',$slug) !!}",
+                    data: data,
+                    headers: {
+                        'X-CSRF-TOKEN': $("input[name='_token']").val()
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (!data.error) {
+                            var data_id=data.data_id;
+                            $('body').find('div[data-id='+data_id+']').find('.partials-area').html(data.html);
+                           console.log(data_id);
+                        }
+                    },
+                    type: 'POST'
+                });
+            });
 
             var jsonString = $('#tabs-json-area').text();
             var jsonData = JSON.parse(jsonString);

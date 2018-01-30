@@ -176,6 +176,7 @@ Route::group(['prefix' => '{slug}'], function () {
             Route::get('/', 'BlogCommonController@getMyFormsEditBetta', true);
             Route::get('/{id}', 'BlogCommonController@getMyFormsEditBetta', true)->name("form_edit_blog");
             Route::post('/tab-generate', 'BlogCommonController@getTabGenerator')->name("form_edit_tab_generate");
+            Route::post('/get-partial-options', 'BlogCommonController@getPartialOptions')->name("form_partial_options");
         });
         Route::post('/form-fields', 'BlogCommonController@postFormFieldsSettings');
     });
