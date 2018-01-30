@@ -6,7 +6,7 @@
             {!! Form::model($form,['id'=>'fields-list','url' => url(route('mbsp_save_form',$slug))]) !!}
             {!! Form::hidden('id',$form->id) !!}
 
-                        <div class="col-md-12 m-b-15">
+                        <div class="col-md-12 m-b-15 form-area">
 
                                 <div class="col-md-2">
                                     <span class="bty-hover-17 bty-f-s-20">Form name</span>
@@ -203,7 +203,9 @@
 @section( 'CSS' )
     <style>
 
-
+.form-area{
+    background-color: #78909C;
+}
         .modal.left .modal-dialog,
         .modal.right .modal-dialog {
             position: fixed;
