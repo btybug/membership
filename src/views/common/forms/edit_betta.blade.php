@@ -16,8 +16,8 @@
                                 </div>
                                 <div class="col-mg-6">
                                     <div class="btn-group btn-group-lg">
-                                        <button type="button" class="btn btn-primary">Tabs</button>
-                                        <button type="button" class="btn btn-primary">Items</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Tabs</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal0">Items</button>
                                         <button type="button" class="btn btn-success">Save</button>
                                     </div>
                                 </div>
@@ -47,21 +47,21 @@
             {{--</div>--}}
 
 
-                        <div class="col-md-12">
-                            <button class="bty-btn bty-btn-add" data-toggle="modal" data-target=".bd-example-modal-lg"><span>Insert New Tab</span></button>
-                            <ul class="nav nav-tabs tab-items" id="myTab" role="tablist">
-                                <li class="nav-item active">
-                                    <a class="nav-link" data-toggle="tab" role="tab" aria-selected="true" href="#General"
-                                       aria-controls="General" aria-expanded="true">General</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="formTabContent">
-                                <div class="tab-pane fade active in" role="tabpanel" aria-labelledby="tab-General"
-                                     id="General">
+                        {{--<div class="col-md-12">--}}
+                            {{--<button class="bty-btn bty-btn-add" data-toggle="modal" data-target=".bd-example-modal-lg"><span>Insert New Tab</span></button>--}}
+                            {{--<ul class="nav nav-tabs tab-items" id="myTab" role="tablist">--}}
+                                {{--<li class="nav-item active">--}}
+                                    {{--<a class="nav-link" data-toggle="tab" role="tab" aria-selected="true" href="#General"--}}
+                                       {{--aria-controls="General" aria-expanded="true">General</a>--}}
+                                {{--</li>--}}
+                            {{--</ul>--}}
+                            {{--<div class="tab-content" id="formTabContent">--}}
+                                {{--<div class="tab-pane fade active in" role="tabpanel" aria-labelledby="tab-General"--}}
+                                     {{--id="General">--}}
 
-                                </div>
-                            </div>
-                        </div>
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
 
 
@@ -130,9 +130,185 @@
 
         </div>
     </div>
+
+
+    <div class="container demo">
+
+
+        {{--<div class="text-center">--}}
+            {{--<button type="button" class="btn btn-demo" data-toggle="modal" data-target="#myModal">--}}
+                {{--Left Sidebar Modal--}}
+            {{--</button>--}}
+
+            {{--<button type="button" class="btn btn-demo" data-toggle="modal" data-target="#myModal2">--}}
+                {{--Right Sidebar Modal--}}
+            {{--</button>--}}
+        {{--</div>--}}
+
+        <!-- Modal -->
+        <div class="modal right fade" id="myModal0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Right Sidebar</h4>
+                    </div>
+
+                    <div class="modal-body">
+
+                    </div>
+
+                </div><!-- modal-content -->
+            </div><!-- modal-dialog -->
+        </div><!-- modal -->
+
+        <!-- Modal -->
+        <div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel2">Right Sidebar</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <button class="bty-btn bty-btn-add" data-toggle="modal" data-target=".bd-example-modal-lg"><span>Insert New Tab</span></button>
+                            <ul class="nav nav-tabs tab-items" id="myTab" role="tablist">
+                                <li class="nav-item active">
+                                    <a class="nav-link" data-toggle="tab" role="tab" aria-selected="true" href="#General"
+                                       aria-controls="General" aria-expanded="true">General</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="formTabContent">
+                                <div class="tab-pane fade active in" role="tabpanel" aria-labelledby="tab-General"
+                                     id="General">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- modal-content -->
+            </div><!-- modal-dialog -->
+        </div><!-- modal -->
+
+
+    </div><!-- container -->
+
+
 @stop
 @section( 'CSS' )
     <style>
+
+
+        .modal.left .modal-dialog,
+        .modal.right .modal-dialog {
+            position: fixed;
+            margin: auto;
+            width: 320px;
+            height: 100%;
+            -webkit-transform: translate3d(0%, 0, 0);
+            -ms-transform: translate3d(0%, 0, 0);
+            -o-transform: translate3d(0%, 0, 0);
+            transform: translate3d(0%, 0, 0);
+        }
+
+        .modal.left .modal-content,
+        .modal.right .modal-content {
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .modal.left .modal-body,
+        .modal.right .modal-body {
+            padding: 15px 15px 80px;
+        }
+
+        /*Left*/
+        .modal.left.fade .modal-dialog{
+            left: -320px;
+            -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+            -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+            -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+            transition: opacity 0.3s linear, left 0.3s ease-out;
+        }
+
+        .modal.left.fade.in .modal-dialog{
+            left: 0;
+        }
+
+        /*Right*/
+        .modal.right.fade .modal-dialog {
+            right: -320px;
+            -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+            -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+            -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+            transition: opacity 0.3s linear, right 0.3s ease-out;
+        }
+
+        .modal.right.fade.in .modal-dialog {
+            right: 0;
+        }
+
+        /* ----- MODAL STYLE ----- */
+        .modal-content {
+            border-radius: 0;
+            border: none;
+        }
+
+        .modal-header {
+            border-bottom-color: #EEEEEE;
+            background-color: #FAFAFA;
+        }
+
+        /* ----- v CAN BE DELETED v ----- */
+
+
+        .demo {
+            padding-top: 60px;
+            padding-bottom: 110px;
+        }
+
+        .btn-demo {
+            margin: 15px;
+            padding: 10px 15px;
+            border-radius: 0;
+            font-size: 16px;
+            background-color: #FFFFFF;
+        }
+
+        .btn-demo:focus {
+            outline: 0;
+        }
+
+        .demo-footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 15px;
+            background-color: #212121;
+            text-align: center;
+        }
+
+        .demo-footer > a {
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            color: #fff;
+        }
+
+
+
+
+
+
+
+
+
+
         .tab-form-list .tab-items{
             margin-top: 15px;
         }
