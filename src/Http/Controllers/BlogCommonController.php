@@ -11,6 +11,7 @@ use Btybug\Console\Services\FieldService;
 use Btybug\Console\Services\FormService;
 use Btybug\User\Repository\RoleRepository;
 use BtyBugHook\Membership\Models\Post;
+use BtyBugHook\Membership\Services\BlogService;
 use BtyBugHook\Membership\Services\GeneratorService;
 use BtyBugHook\Membership\Services\ReplaceAtor;
 use Illuminate\Http\Request;
@@ -380,6 +381,8 @@ class BlogCommonController extends Controller
             $data = (json_decode($settings->val, true));
         }
         $options = \Config::get('options.listener');
+
+//        dd($data,$options);
 //        $options = get_prices_data();
 //
 //        foreach ($options as $key => $option) {
@@ -403,8 +406,8 @@ class BlogCommonController extends Controller
     {
         $data = $request->except('_token');
         $adminsettingRepository->createOrUpdate(json_encode($data, true), 'product', $slug);
-        $generatorService->generateTabs('create_'.$slug,$slug);
-        $generatorService->generateTabs('edit_'.$slug,$slug);
+//        $generatorService->generateTabs('create_'.$slug,$slug);
+//        $generatorService->generateTabs('edit_'.$slug,$slug);
         return \Response::json(['error' => false]);
     }
 
@@ -523,10 +526,14 @@ class BlogCommonController extends Controller
         return \Response::json(['error'=>false,"html"=>$html]);
     }
 
-    public function getPartialOptions(Request $request)
+    public function getPartialOptions(
+        Request $request,
+        BlogService $blogService
+    )
     {
-        $type=$request->type;
-        $html=\View::make("mbshp::common._partials.types.$type")->render();
+        $type = $request->type;
+        $data = $blogService->getDataByType($type,$request->form_id);
+        $html=\View::make("mbshp::common._partials.types.$type")->with($data)->render();
         return Response::json(['error'=>false,'html'=>$html,'data_id'=>$request->data_id]);
     }
 }

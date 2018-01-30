@@ -169,6 +169,8 @@
 
 //get partial options view
             $('body').on('change', 'select[data-role=options]', function () {
+                console.log(445465465)
+
                 var data = {
                     'type': $(this).val(),
                     'data_id': $(this).attr('data-id'),
