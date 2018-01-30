@@ -168,7 +168,7 @@
             }
 //get partial options view
             $('body').on('change','select[data-role=options]',function () {
-               var data={'type':$(this).val(),'data_id':$(this).attr('data-id')};
+               var data={'type':$(this).val(),'data_id':$(this).attr('data-id'),'form_id':$('input[name=id]').val()};
                 $.ajax({
                     url: "{!! route('form_partial_options',$slug) !!}",
                     data: data,
