@@ -100,15 +100,15 @@
     </div>
     <div class="tab-content-settings-to-clone hidden">
         <div class="col-md-4">
-        <div class="form-horizontal">
-            <div class="form-group">
-                <select class="form-control" data-role="options">
-                    <option value="0">Select Option</option>
-                    <option value="fields">Field</option>
-                    <option value="units">Unit</option>
-                </select>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <select class="form-control" data-role="options">
+                        <option value="0">Select Option</option>
+                        <option value="fields">Field</option>
+                        <option value="units">Unit</option>
+                    </select>
+                </div>
             </div>
-        </div>
         </div>
         <div class="col-md-8 partials-area">
 
@@ -146,8 +146,8 @@
                     var item = li.clone();
                     var divContent = div.clone();
                     var optionsClone = options.clone();
-                    optionsClone.find('select').attr('data-id',k);
-                    divContent.attr('data-id',k);
+                    optionsClone.find('select').attr('data-id', k);
+                    divContent.attr('data-id', k);
                     optionsClone.removeClass('hidden');
                     optionsClone.removeClass('tab-content-settings-to-clone');
                     optionsClone.addClass('tab-content-settings');
@@ -166,9 +166,14 @@
                 });
 
             }
+
 //get partial options view
-            $('body').on('change','select[data-role=options]',function () {
-               var data={'type':$(this).val(),'data_id':$(this).attr('data-id'),'form_id':$('input[name=id]').val()};
+            $('body').on('change', 'select[data-role=options]', function () {
+                var data = {
+                    'type': $(this).val(),
+                    'data_id': $(this).attr('data-id'),
+                    'form_id': $('input[name=id]').val()
+                };
                 $.ajax({
                     url: "{!! route('form_partial_options',$slug) !!}",
                     data: data,
@@ -178,9 +183,8 @@
                     dataType: 'json',
                     success: function (data) {
                         if (!data.error) {
-                            var data_id=data.data_id;
-                            $('body').find('div[data-id='+data_id+']').find('.partials-area').html(data.html);
-                           console.log(data_id);
+                            var data_id = data.data_id;
+                            $('body').find('div[data-id=' + data_id + ']').find('.partials-area').html(data.html);
                         }
                     },
                     type: 'POST'
