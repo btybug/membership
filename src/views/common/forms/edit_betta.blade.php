@@ -32,26 +32,62 @@
             </div>
             {!! Form::close() !!}
 
-            <div class="col-md-12">
-                <div class="content">
-                    <div class="col-md-12">
-                        <button class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-lg"><i
-                                    class="fa fa-plus"> Insert New Tab</i></button>
-                        <ul class="nav nav-tabs tab-items" id="myTab" role="tablist">
-                            <li class="nav-item active">
-                                <a class="nav-link" data-toggle="tab" role="tab" aria-selected="true" href="#General"
-                                   aria-controls="General" aria-expanded="true">General</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="formTabContent">
-                            <div class="tab-pane fade active in" role="tabpanel" aria-labelledby="tab-General"
-                                 id="General">
+            {{--<div class="col-md-12">--}}
+                {{--<div class="content">--}}
+                    {{--<div class="col-md-12">--}}
+                        {{--<button class="btn btn-info" data-toggle="modal" data-target=".bd-example-modal-lg"><i--}}
+                                    {{--class="fa fa-plus"> Insert New Tab</i></button>--}}
+                        {{--<ul class="nav nav-tabs tab-items" id="myTab" role="tablist">--}}
+                            {{--<li class="nav-item active">--}}
+                                {{--<a class="nav-link" data-toggle="tab" role="tab" aria-selected="true" href="#General"--}}
+                                   {{--aria-controls="General" aria-expanded="true">General</a>--}}
+                            {{--</li>--}}
+                        {{--</ul>--}}
+                        {{--<div class="tab-content" id="formTabContent">--}}
+                            {{--<div class="tab-pane fade active in" role="tabpanel" aria-labelledby="tab-General"--}}
+                                 {{--id="General">--}}
 
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
+
+            <div class="bty-panel-collapse 	bty-panel-cl-tomato">
+                <div>
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#tabformlist"
+                       aria-expanded="true">
+                        <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                        <span class="title">Tabs Add</span>
+                    </a>
+                </div>
+                <div id="tabformlist" class="collapse in" aria-expanded="true" style="">
+                    <div class="content tab-form-list">
+                        <div class="col-md-12">
+                            <button class="bty-btn bty-btn-add" data-toggle="modal" data-target=".bd-example-modal-lg"><span>Insert New Tab</span></button>
+                            <ul class="nav nav-tabs tab-items" id="myTab" role="tablist">
+                                <li class="nav-item active">
+                                    <a class="nav-link" data-toggle="tab" role="tab" aria-selected="true" href="#General"
+                                       aria-controls="General" aria-expanded="true">General</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="formTabContent">
+                                <div class="tab-pane fade active in" role="tabpanel" aria-labelledby="tab-General"
+                                     id="General">
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
             <h2>Preview Area</h2>
 
             <div class="modal fade bd-example-modal-lg" id="tab-manage-modal" tabindex="-1" role="dialog"
@@ -116,6 +152,51 @@
     </div>
 @stop
 @section( 'CSS' )
+    <style>
+        .tab-form-list .tab-items{
+            margin-top: 15px;
+        }
+        .tab-form-list .tab-items .nav-item{
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            flex-direction: row-reverse;
+            margin-right: 10px;
+        }
+        .tab-form-list .tab-items .nav-item button{
+            padding: 5px;
+            background-color: #d65048;
+            color: white !important;
+            border: none;
+            border-radius: 0 5px 5px 0;
+        }
+        .tab-form-list .tab-items .nav-item .nav-link{
+            background-color: #499bc7;
+            color: white;
+            margin: 0;
+            border-radius: 0;
+        }
+        .tab-form-list .tab-items .nav-item .nav-link:hover,.tab-form-list .tab-items .nav-item .nav-link:active{
+            background-color: #337ab7 !important;
+            border-color: #3685af;
+            transition: 0.5s ease;
+        }
+        .tab-form-list .tab-items .nav-item button:hover{
+            transition: 0.5s ease;
+            background-color: #ab403a !important;
+        }
+        .tab-form-list .tab-content{
+            margin-top: 10px;
+        }
+        .tab-form-list .tab-content .partials-change{
+            background-color: #499bc74a;
+            outline: none;
+            padding: 10px 8px;
+            height: auto;
+        }
+    </style>
 @stop
 
 @section( 'JS' )
