@@ -3,6 +3,7 @@
 namespace BtyBugHook\Membership\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Btybug\btybug\Models\Painter\Painter;
 use Btybug\btybug\Models\Universal\Paginator;
 use Btybug\Console\Models\Forms;
 use Btybug\Console\Repository\FieldsRepository;

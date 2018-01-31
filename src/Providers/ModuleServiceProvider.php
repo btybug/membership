@@ -28,11 +28,7 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \Config::set('services.stripe', [
-            'model' => User::class,
-            'key' => 'pk_test_zr3Wfst8jb4GrKU8BcLEUkh9',
-            'secret' => 'sk_test_5hlaHU2ovKmWpyK33i7sZxxx',
-        ]);
+
         $this->loadTranslationsFrom(__DIR__ . '/../views', 'mbshp');
         $this->loadViewsFrom(__DIR__ . '/../views', 'mbshp');
 
