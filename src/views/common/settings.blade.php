@@ -197,7 +197,7 @@
             </div>
         </div>
     </div>
-    
+
     @include('resources::assests.deleteModal')
     @include('resources::assests.magicModal')
     @include('btybug::_partials.mysql_error')
