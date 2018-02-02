@@ -142,10 +142,10 @@ $(function () {
 
         }else{
             $('[data-submenucontainer]').removeClass('active');
-            $('[data-submenucontainer="'+targetpopup+'"]').addClass('active')
+            $('[data-submenucontainer="'+targetpopup+'"]').addClass('active');
             $('[data-menucontainer="'+targetpopup+'"]').addClass('active bounceInLeft').removeClass('bounceOutLeft');
 
-            $(this).addClass('active')
+            $(this).addClass('active');
         }
     });
 
