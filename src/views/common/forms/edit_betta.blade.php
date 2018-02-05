@@ -41,7 +41,8 @@
                     <a href="#" class="btn btn-default btn-sm add-form-tab">
                         <i class="fa fa-plus"></i> Add Tab
                     </a>
-                    <a href="#" class="btn btn-danger btn-sm remove-tab" data-toggle="tooltip" data-placement="left" title="Delete active tab">
+                    <a href="#" class="btn btn-danger btn-sm remove-tab" data-toggle="tooltip" data-placement="left"
+                       title="Delete active tab">
                         <i class="fa fa-trash"></i>
                     </a>
                 </div>
@@ -70,7 +71,9 @@
                                 <div class="html-element-item draggable-element">
                                     {{ $field->name }}
                                     <div class="html-element-item-sample hidden">
-                                        {!! \BtyBugHook\Membership\Services\GeneratorService::renderField($field->id) !!}
+                                        <div class="form-group">
+                                            {!! \BtyBugHook\Membership\Services\GeneratorService::renderField($field->id) !!}
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
