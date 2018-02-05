@@ -382,7 +382,7 @@ class BlogCommonController extends Controller
             $data = (json_decode($settings->val, true));
         }
         $options = \Config::get('options.listener',[]);
-        dd($data,$options);
+//        dd($data,$options);
 //        $options = get_prices_data();
 //
 //        foreach ($options as $key => $option) {
