@@ -8,6 +8,7 @@ use Btybug\btybug\Services\GeneralService;
 use Btybug\Console\Repository\FieldsRepository;
 use Btybug\Console\Repository\FormsRepository;
 use Btybug\Console\Repository\FrontPagesRepository;
+use Btybug\Console\Services\FieldService;
 use Btybug\Console\Services\FormService;
 use BtyBugHook\Membership\Database\CreatePostsTable;
 use BtyBugHook\Membership\Repository\PostsRepository;
@@ -233,12 +234,6 @@ class GeneratorService extends GeneralService
     public static function renderField($id){
         $repositroy = new FieldsRepository();
         $field = $repositroy->find($id);
-        $fieldHtml = null;
-        $path = 'mbshp::common._partials.custom_fields.'.$field->type;
-        if (\View::exists($path)) {
-            $fieldHtml = \View($path)->with('field',$field->toArray())->render();
-        }
-
-        return $fieldHtml;
+        return FieldService::getFieldHtml($field);
     }
 }
