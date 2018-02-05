@@ -42,10 +42,7 @@
 
                 <div class="tab-actions">
 
-                    <a href="#" class="btn btn-danger btn-sm remove-tab" data-toggle="tooltip" data-placement="left"
-                       title="Delete active tab">
-                        <i class="fa fa-trash"></i>
-                    </a>
+
                 </div>
 
                 <ul class="nav nav-tabs" role="tablist">
@@ -88,7 +85,12 @@
     <!-- Templates -->
     <script type="template" id="template-tab-nav">
         <li role="presentation">
+            <div class="col-md-8">
             <a href="#{id}" role="tab" data-toggle="tab">Tab Title</a>
+            </div>
+            <div class="col-md-4">
+            <i class="fa fa-trash" style="color:#9A2720"></i>
+            </div>
         </li>
     </script>
 
@@ -124,6 +126,7 @@
                     var tab = a.clone();
                     var del = deleteI.clone();
                     var item = li.clone();
+                    item.append(del);
                     var divContent = div.clone();
                     var optionsClone = options.clone();
                     optionsClone.find('select').attr('data-id', k);
