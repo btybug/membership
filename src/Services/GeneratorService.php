@@ -229,4 +229,16 @@ class GeneratorService extends GeneralService
         $html = \View('mbshp::common._partials.custom_fields.formTemplate',compact(['fieldHtml','data','slug']))->render();
         $this->formService->generateBlade($form->id, $html);
     }
+
+    public static function renderField($id){
+        $repositroy = new FieldsRepository();
+        $field = $repositroy->find($id);
+        $fieldHtml = null;
+        $path = 'mbshp::common._partials.custom_fields.'.$field->type;
+        if (\View::exists($path)) {
+            $fieldHtml = \View($path)->with('field',$field->toArray())->render();
+        }
+
+        return $fieldHtml;
+    }
 }

@@ -65,24 +65,16 @@
                 </div>
                 <div class="panel-body">
                     <div class="html-elements-list">
-                        <div class="html-element-item draggable-element">
-                            title
-                            <div class="html-element-item-sample hidden">
-                                <div class="form-group">
-                                    <label>Title</label>
-                                    <input type="text" class="form-control">
+                        @if(count($fields))
+                            @foreach($fields as $field)
+                                <div class="html-element-item draggable-element">
+                                    {{ $field->name }}
+                                    <div class="html-element-item-sample hidden">
+                                        {{--{!! \BtyBugHook\Membership\Services\GeneratorService::renderField($field->id) !!}--}}
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="html-element-item draggable-element">
-                            description
-                            <div class="html-element-item-sample hidden">
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea class="form-control"></textarea>
-                                </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
