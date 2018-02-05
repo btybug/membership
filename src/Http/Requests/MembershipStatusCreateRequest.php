@@ -11,7 +11,7 @@ class MembershipStatusCreateRequest extends Request
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize ()
     {
         return true;
     }
@@ -21,13 +21,14 @@ class MembershipStatusCreateRequest extends Request
      *
      * @return array
      */
-    public function rules()
+    public function rules ()
     {
         if ($this->isMethod('POST')) {
             return [
                 'title' => 'required'
             ];
         }
+
         return [];
     }
 }

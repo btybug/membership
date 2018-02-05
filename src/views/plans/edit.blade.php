@@ -66,11 +66,11 @@
         <!-- Button -->
         <div class="form-group">
             <div class="col-md-4">
-                <input type="submit" id="singlebutton"  class="btn btn-primary">
+                <input type="submit" id="singlebutton" class="btn btn-primary">
             </div>
         </div>
     </fieldset>
-{!! Form::close() !!}
+    {!! Form::close() !!}
 
 @stop
 @section('CSS')

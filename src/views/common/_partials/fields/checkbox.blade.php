@@ -6,7 +6,8 @@
         @if(count(get_field_data($field['id'])))
             @foreach(get_field_data($field['id']) as $key => $item)
                 <div class="bty-new-input-checkbox">
-                    <input name="{!! $field['column_name'] !!}" value="{{ $key }}" type="checkbox" id="bty-new-cbox-{{ $key }}">
+                    <input name="{!! $field['column_name'] !!}" value="{{ $key }}" type="checkbox"
+                           id="bty-new-cbox-{{ $key }}">
                     <label for="bty-new-cbox-{{ $key }}">{{ $item }}</label>
                 </div>
             @endforeach

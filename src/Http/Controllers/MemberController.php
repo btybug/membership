@@ -20,12 +20,12 @@ use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
-    public function getIndex()
+    public function getIndex ()
     {
         return view('mbshp::members.index');
     }
 
-    public function getEdit(
+    public function getEdit (
         UserMembershipRepository $userRepository,
         MembershipTypesRepository $membershipTypes,
         MembershipStatusesRepository $membershipStatusesRepository,
@@ -35,16 +35,18 @@ class MemberController extends Controller
         $user = $userRepository->findOrFail($id);
         $mb_types = $membershipTypes->pluck('title', 'id');
         $mb_status = $membershipStatusesRepository->pluck('title', 'id');
+
         return view('mbshp::members.edit', compact('user', 'mb_types', 'mb_status'));
     }
 
-    public function postEdit(Request $request, UserMembershipRepository $userRepository)
+    public function postEdit (Request $request, UserMembershipRepository $userRepository)
     {
         $userRepository->update($request->get('id', $request->id), $request->except('_token'));
+
         return redirect()->route('mbsp_stripe');
     }
 
-    public function getoptimize(
+    public function getoptimize (
         User $user,
         UserMembership $membership,
         MembershipTypesRepository $membershipTypesRepository,
@@ -58,6 +60,6 @@ class MemberController extends Controller
         foreach ($users as $user) {
             $data[] = ['user_id' => $user->id, 'membership_type_id' => $type->id, 'status_id' => $status->id];
         }
-         dd(\DB::table('user_membership')->insert($data));
+        dd(\DB::table('user_membership')->insert($data));
     }
 }

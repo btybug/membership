@@ -7,12 +7,12 @@ use App\Http\Controllers\Controller;
 class IndexConroller extends Controller
 {
 
-    public function getPlans()
+    public function getPlans ()
     {
         return view('mbshp::plans.index');
     }
 
-    public function getPayments()
+    public function getPayments ()
     {
         return view('mbshp::payments.index');
     }

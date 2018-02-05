@@ -9,14 +9,14 @@ use Btybug\Console\Repository\FieldsRepository;
 use Btybug\Console\Repository\FormsRepository;
 use BtyBugHook\Membership\Repository\BlogRepository;
 
-class BlogService  extends GeneralService
+class BlogService extends GeneralService
 {
     private $blogRepositroy;
     private $fieldsRepository;
     private $formsRepository;
     private $adminsettingRepository;
 
-    public function __construct(
+    public function __construct (
         BlogRepository $blogRepository,
         FieldsRepository $fieldsRepository,
         FormsRepository $formsRepository,
@@ -29,13 +29,13 @@ class BlogService  extends GeneralService
         $this->adminsettingRepository = $adminsettingRepository;
     }
 
-    public static function checkStatus($slug)
+    public static function checkStatus ($slug)
     {
         $blogRepositroy = new BlogRepository();
 
-        if($slug){
-            $blog = $blogRepositroy->findBy('slug',$slug);
-            if($blog && $blog->status){
+        if ($slug) {
+            $blog = $blogRepositroy->findBy('slug', $slug);
+            if ($blog && $blog->status) {
                 return true;
             }
         }
@@ -43,37 +43,40 @@ class BlogService  extends GeneralService
         return false;
     }
 
-    public static function getActive()
+    public static function getActive ()
     {
         $blogs_array = [];
         $blogRepositroy = new BlogRepository();
         $blogs = $blogRepositroy->getActive();
-        if(count($blogs)){
-            foreach ($blogs as $blog){
-                $blogs_array[] =  [
-                    "title" => $blog->title,
+        if (count($blogs)) {
+            foreach ($blogs as $blog) {
+                $blogs_array[] = [
+                    "title"       => $blog->title,
                     "custom-link" => "/admin/membership/$blog->slug",
-                    "icon" => "fa fa-angle-right",
-                    "is_core" => "yes"
+                    "icon"        => "fa fa-angle-right",
+                    "is_core"     => "yes"
                 ];
             }
 
             \Eventy::action('admin.menus', [
-                "title" => "Products",
+                "title"       => "Products",
                 "custom-link" => "#",
-                "icon" => "fa-product-hunt",
-                "is_core" => "yes",
-                "children" => $blogs_array
+                "icon"        => "fa-product-hunt",
+                "is_core"     => "yes",
+                "children"    => $blogs_array
             ]);
         }
     }
 
-    public function getDataByType($data){
+    public function getDataByType ($data)
+    {
         $type = $data['type'];
+
         return $this->$type($data);
     }
 
-    private function units($data){
+    private function units ($data)
+    {
         $result = [];
         $settings = $this->adminsettingRepository->getSettings('product', $data['slug']);
         if ($settings) {
@@ -81,24 +84,26 @@ class BlogService  extends GeneralService
         }
 
         $units = [];
-        if(count($result)){
-            foreach ($result as $tag => $item){
-                if($item['is_active']){
+        if (count($result)) {
+            foreach ($result as $tag => $item) {
+                if ($item['is_active']) {
                     $units[] = Painter::all()->sortByTag($tag);
                 }
             }
         }
+
         return ['units' => array_flatten($units)];
     }
 
-    private function fields($data){
+    private function fields ($data)
+    {
         $form_id = $data['form_id'];
         $form = $this->formsRepository->findOneByMultiple(['id' => $form_id, 'created_by' => 'plugin']);
-        if (! $form)  abort(404);
+        if (! $form) abort(404);
 
         $fields = $this->fieldsRepository->getBy('table_name', $form->fields_type);
         $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
 
-        return ['fields' => $fields, 'existingFields' => $existingFields,'form' => $form];
+        return ['fields' => $fields, 'existingFields' => $existingFields, 'form' => $form];
     }
 }

@@ -4,13 +4,13 @@
   cursor: move;
 }
 
-.form-builder-area:empty{
+.form-builder-area:empty {
   outline: 1px dashed #c0c0c0;
   position: relative;
   height: 50px;
 }
 
-.form-builder-area:empty:after{
+.form-builder-area:empty:after {
   content: "Drop Form Fields Here";
   color: #bdbdbd;
   position: absolute;
@@ -20,7 +20,7 @@
   line-height: 50px;
 }
 
-.form-builder-tabs .tab-pane{
+.form-builder-tabs .tab-pane {
   padding: 15px 0;
 }
 

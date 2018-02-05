@@ -63,13 +63,13 @@
 }
 
 .tabs-above > .nav-tabs > li > a:hover {
-    border-color: #ddd #ddd #eee #ddd!important;
+    border-color: #ddd #ddd #eee #ddd !important;
 }
 
 .tabs-above > .nav-tabs > .active > a,
 .tabs-above > .nav-tabs > li.active > a:hover,
 .tabs-above > .nav-tabs > li.active > a:focus {
-    border-color: #ddd #ddd transparent #ddd!important;
+    border-color: #ddd #ddd transparent #ddd !important;
 }
 
 .tabs-below > .nav-tabs,
@@ -94,13 +94,13 @@
 }
 
 .tabs-below > .nav-tabs > li > a:hover {
-    border-color: #eee #ddd #ddd #ddd!important;
+    border-color: #eee #ddd #ddd #ddd !important;
 }
 
 .tabs-below > .nav-tabs > .active > a,
 .tabs-below > .nav-tabs > li.active > a:hover,
 .tabs-below > .nav-tabs > li.active > a:focus {
-    border-color: transparent #ddd #ddd #ddd!important;
+    border-color: transparent #ddd #ddd #ddd !important;
 }
 
 .tabs-left > .nav-tabs > li,
@@ -128,13 +128,13 @@
 }
 
 .tabs-left > .nav-tabs > li > a:hover {
-    border-color: #ddd #eee #ddd #ddd!important;
+    border-color: #ddd #eee #ddd #ddd !important;
 }
 
 .tabs-left > .nav-tabs > .active > a,
 .tabs-left > .nav-tabs > li.active > a:hover,
 .tabs-left > .nav-tabs > li.active > a:focus {
-    border-color: #ddd transparent #ddd #ddd!important;
+    border-color: #ddd transparent #ddd #ddd !important;
 }
 
 .tabs-right > .nav-tabs {
@@ -150,13 +150,13 @@
 }
 
 .tabs-right > .nav-tabs > li > a:hover {
-    border-color: #ddd #ddd #ddd #eee!important;
+    border-color: #ddd #ddd #ddd #eee !important;
 }
 
 .tabs-right > .nav-tabs > .active > a,
 .tabs-right > .nav-tabs > li.active > a:hover,
 .tabs-right > .nav-tabs > li.active > a:focus {
-    border-color: #ddd #ddd #ddd transparent!important;
+    border-color: #ddd #ddd #ddd transparent !important;
 }
 
 .tab-content {
@@ -281,12 +281,13 @@
 }
 
 .tab-sideways > .nav-tabs > li > a:hover {
-    border-color: #ddd #ddd #eee #ddd!important;
+    border-color: #ddd #ddd #eee #ddd !important;
 }
+
 .tab-sideways > .nav-tabs > .active > a,
 .tab-sideways > .nav-tabs > li.active > a:hover,
 .tab-sideways > .nav-tabs > li.active > a:focus {
-    border-color: #ddd #ddd #fff #ddd!important;
+    border-color: #ddd #ddd #fff #ddd !important;
 }
 
 /**

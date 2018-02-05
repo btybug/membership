@@ -8,7 +8,8 @@
                 @if(count(get_field_data($field['id'])))
                     @foreach(get_field_data($field['id']) as $key => $item)
                         <p>
-                            <input name="{!! $field['table_name']."_".$field['column_name'] !!}" value="{{ $key }}" type="checkbox" class="bty-input-checkbox-2" id="bty-cbox-{{ $key }}">
+                            <input name="{!! $field['table_name']."_".$field['column_name'] !!}" value="{{ $key }}"
+                                   type="checkbox" class="bty-input-checkbox-2" id="bty-cbox-{{ $key }}">
                             <label for="bty-cbox-{{ $key }}">{{ $item }}</label>
                         </p>
                     @endforeach

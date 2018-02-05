@@ -7,7 +7,8 @@
         @if(count(get_field_data($field['id'])))
             @foreach(get_field_data($field['id']) as $key => $item)
                 <div class="bty-new-input-radio">
-                    <input name="{!! $field['column_name'] !!}"  value="{{ $key }}" type="radio" id="bty-new-gender-{{ $key }}">
+                    <input name="{!! $field['column_name'] !!}" value="{{ $key }}" type="radio"
+                           id="bty-new-gender-{{ $key }}">
                     <label for="bty-new-gender-{{ $key }}">{{ $item }}</label>
                 </div>
             @endforeach

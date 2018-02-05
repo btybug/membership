@@ -1,13 +1,14 @@
 @php
     $page = \Btybug\btybug\Services\RenderService::getPageByURL();
 @endphp
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Form Builder</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     {!! HTML::style('public/css/admin.css') !!}
     {!! HTML::style('public/css/cms.css') !!}
@@ -16,7 +17,8 @@
 
     {!! HTML::script('public/js/jquery-2.1.4.min.js') !!}
 
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            crossorigin="anonymous"></script>
 
     {!! HTML::script('public/css/bootstrap/js/bootstrap-switch.min.js') !!}
     {!! HTML::script('public/css/font-awesome/js/fontawesome-iconpicker.min.js') !!}
@@ -88,7 +90,14 @@
                         <div class="form-group m-l-0 m-r-0">
                             <label for="success_message" class="col-sm-4 ">Event/Trigger</label>
                             <div class="col-sm-8">
-                                <select class="form-control" name="event"><option value="" selected="selected">Select Event</option><option value="App\Events\AfterLoginEvent">After Login</option><option value="App\Events\AfterLogOutEvent">After Log out</option><option value="Illuminate\Auth\Events\Registred">on registred</option><option value="App\Events\FormSubmit">on Form Submit</option><option value="App\Events\PageCreateEvent">on Page Create</option></select>
+                                <select class="form-control" name="event">
+                                    <option value="" selected="selected">Select Event</option>
+                                    <option value="App\Events\AfterLoginEvent">After Login</option>
+                                    <option value="App\Events\AfterLogOutEvent">After Log out</option>
+                                    <option value="Illuminate\Auth\Events\Registred">on registred</option>
+                                    <option value="App\Events\FormSubmit">on Form Submit</option>
+                                    <option value="App\Events\PageCreateEvent">on Page Create</option>
+                                </select>
                             </div>
                         </div>
 
@@ -110,13 +119,16 @@
                                     <label for="is_ajax_yes">Yes</label>
                                 </div>
                                 <div class="customelement radio-inline">
-                                    <input name="is_ajax" id="is_ajax_no" value="no" type="radio"> <label for="is_ajax_no">No</label>
+                                    <input name="is_ajax" id="is_ajax_no" value="no" type="radio"> <label
+                                            for="is_ajax_no">No</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group m-l-0 m-r-0">
-                            <button type="submit" class="bty-btn bty-btn-save bty-btn-cl-black bty-btn-size-sm pull-right m-r-10" data-action="save-form"><span>Save</span></button>
+                            <button type="submit"
+                                    class="bty-btn bty-btn-save bty-btn-cl-black bty-btn-size-sm pull-right m-r-10"
+                                    data-action="save-form"><span>Save</span></button>
                         </div>
                     </div>
                 </div>
@@ -128,8 +140,8 @@
 <div class="">
     <iframe src="" id="unit-iframe"></iframe>
 
-    <input type="hidden" name="fields_json" value="{}" id="existing-fields" />
-    <input type="hidden" name="unit_json" value="{}" />
+    <input type="hidden" name="fields_json" value="{}" id="existing-fields"/>
+    <input type="hidden" name="unit_json" value="{}"/>
 </div>
 {!! Form::close() !!}
 @include('resources::assests.deleteModal')
@@ -160,11 +172,13 @@
 </div>
 
 <!-- Field Container Template -->
-<script type="template/html" id="field-template"><div class="form-group" data-field-id="{id}">
+<script type="template/html" id="field-template">
+    <div
+    class="form-group" data-field-id="{id}">
     <label><i class="fa {icon}"></i> {label}</label>
     <i class="fa {tooltip_icon}" data-toggle="tooltip" data-placement="top" title="{help}"></i>
     {field}
-</div></script>
+    </div></script>
 
 <!-- Actions Buttons Template -->
 <script type="template/html" id="actions-template">
@@ -195,7 +209,7 @@
             outline-offset: 5px;
         }
 
-        .bb-form-area:empty:after{
+        .bb-form-area:empty:after {
             content: "Add Form Fields Here";
             color: #bdbdbd;
             position: absolute;
@@ -273,7 +287,7 @@
             'media': 'all'
         }).appendTo('head');
 
-        if($('link[href="' + href + '"]').length > 1){
+        if ($('link[href="' + href + '"]').length > 1) {
             $('link[href="' + href + '"]').first().remove();
         }
     }
@@ -283,15 +297,15 @@
     $(document).ready(function () {
 
         $("body")
-            // Select field
+        // Select field
             .on("click", ".select-field", function () {
                 var table = "posts";
                 var fields = $("#existing-fields").val();
                 var fieldsJSON = JSON.parse(fields);
                 var existingFields = [];
 
-                if(Object.keys(fieldsJSON).length > 0){
-                    $.each(fieldsJSON, function (index, group){
+                if (Object.keys(fieldsJSON).length > 0) {
+                    $.each(fieldsJSON, function (index, group) {
                         console.log(existingFields, group);
                         existingFields = existingFields.concat(group);
                         console.log(existingFields);
@@ -349,11 +363,11 @@
                 var toggle = $(this).hasClass("active");
                 $('.bb-form-area').removeClass("active");
 
-                if(!toggle) $(this).addClass("active");
+                if (!toggle) $(this).addClass("active");
             });
 
         // Change layout
-        $('[name=form_layout]').on('change', function (){
+        $('[name=form_layout]').on('change', function () {
             var layout = $(this).val();
             var iframe = $('#unit-iframe');
 
@@ -368,18 +382,19 @@
         var layout = '{!! $form->form_layout !!}';
 
         iframe.attr("src", "{!! url("/admin/uploads/gears/settings-iframe/") !!}/" + layout);
+
         @endif
 
-        function onFrameLoaded(){
+        function onFrameLoaded() {
             var iframe = getIframeContent();
 
             // Mark sortable areas
-            iframe.find('.bb-form-area').each(function (i){
+            iframe.find('.bb-form-area').each(function (i) {
                 $(this).attr("data-sortable", i);
             });
 
             // Add form actions
-            iframe.find('.bb-form-area').each(function (){
+            iframe.find('.bb-form-area').each(function () {
                 var formActionsTemplate = $('#form-actions-template').html();
 
                 $(this)
@@ -394,11 +409,11 @@
             var fieldsJSONString = $('[name=fields_json]').val(),
                 fieldsJSON = JSON.parse(fieldsJSONString);
 
-            $.each(fieldsJSON, function (index, fields){
+            $.each(fieldsJSON, function (index, fields) {
                 var formArea = iframe.find('[data-sortable=' + index + ']');
 
-                $.each(fields, function (index, field){
-                    var fieldHTML = $('#fields-backup').find('[data-field-id='+field+']').clone();
+                $.each(fields, function (index, field) {
+                    var fieldHTML = $('#fields-backup').find('[data-field-id=' + field + ']').clone();
                     formArea.append(fieldHTML);
                 });
 
@@ -409,22 +424,22 @@
         }
 
         // iFrame functions
-        $('#unit-iframe').load(function (){
+        $('#unit-iframe').load(function () {
             var headHTML = $('#iframe-inject-head').html();
             var iframe = getIframeContent();
             iframe.prepend(headHTML);
 
             // Load saved fields
-            if(typeof fieldsJSON !== "undefined"){
-                $.each(fieldsJSON, function (index, areaJSON){
+            if (typeof fieldsJSON !== "undefined") {
+                $.each(fieldsJSON, function (index, areaJSON) {
                     addFieldsToFormArea(areaJSON, index);
                 });
             }
 
             // Unit settings
-            if(typeof unitJSON !== "undefined"){
-                $.each(unitJSON, function (key, value){
-                    if(key !== "_token" && key !== "itemname"){
+            if (typeof unitJSON !== "undefined") {
+                $.each(unitJSON, function (key, value) {
+                    if (key !== "_token" && key !== "itemname") {
                         var field = iframe.find('#add_custome_page').find('[name=' + key + ']');
                         field.val(value);
                     }
@@ -433,13 +448,13 @@
                 document.getElementById('unit-iframe').contentWindow.savesettingevent();
             }
 
-            $('.layout-settings').click(function(){
-                var  $this = $(this);
-                if($this.hasClass('active')){
+            $('.layout-settings').click(function () {
+                var $this = $(this);
+                if ($this.hasClass('active')) {
                     $this.removeClass('active');
                     iframe.find('[data-settinglive="settings"]').addClass('hide');
                     iframe.find('.previewcontent').addClass('activeprevew');
-                }else{
+                } else {
                     $this.addClass('active');
                     iframe.find('[data-settinglive="settings"]').removeClass('hide');
                     iframe.find('.previewcontent').removeClass('activeprevew');
@@ -456,12 +471,12 @@
                     iframe.find('.bb-form-area').removeClass("active");
                     iframe.find('.bb-form-actions').removeClass("active");
 
-                    if(!toggle) {
+                    if (!toggle) {
                         $(this).addClass("active");
                         $(this).closest('.bb-form-area-container').find('.bb-form-actions').addClass("active");
                     }
                 })
-                .on('click', '.add-field-trigger', function (){
+                .on('click', '.add-field-trigger', function () {
                     iframe.find('.bb-form-area').removeClass("active");
 
                     $(this)
@@ -478,8 +493,8 @@
                     var fieldsJSON = JSON.parse(fields);
                     var existingFields = [];
 
-                    if(Object.keys(fieldsJSON).length > 0){
-                        $.each(fieldsJSON, function (index, group){
+                    if (Object.keys(fieldsJSON).length > 0) {
+                        $.each(fieldsJSON, function (index, group) {
                             console.log(existingFields, group);
                             existingFields = existingFields.concat(group);
                             console.log(existingFields);
@@ -512,10 +527,10 @@
 
                     var isRemoved = false;
 
-                    $.each(oldData, function (index, item){
-                        if(!isRemoved){
+                    $.each(oldData, function (index, item) {
+                        if (!isRemoved) {
                             var itemToRemoveIndex = item.indexOf(itemtoRemove);
-                            if(itemToRemoveIndex !== -1){
+                            if (itemToRemoveIndex !== -1) {
                                 item.splice(itemToRemoveIndex, 1);
                                 isRemoved = true;
                             }
@@ -532,11 +547,11 @@
                     });
 
                     // Remove from backup
-                    $('#fields-backup').find('[data-field-id='+itemtoRemove+']').remove();
+                    $('#fields-backup').find('[data-field-id=' + itemtoRemove + ']').remove();
                 });
         });
 
-        function getIframeContent(){
+        function getIframeContent() {
             return $('#unit-iframe').contents().find('body');
         }
 
@@ -544,18 +559,18 @@
         function addFieldsToFormArea(fieldsJSON, position) {
             var iframe = getIframeContent();
 
-            if(!position) position = 0;
+            if (!position) position = 0;
 
             // Build form
             var activeFormArea = iframe.find('.bb-form-area.active');
             var fieldHTML = "";
-            if(activeFormArea.length === 1){
+            if (activeFormArea.length === 1) {
                 position = activeFormArea.data("sortable");
                 fieldHTML = formBuilder(fieldsJSON, position);
                 activeFormArea.html(fieldHTML);
-            }else{
+            } else {
                 fieldHTML = formBuilder(fieldsJSON, position);
-                iframe.find('[data-sortable='+position+']').html(fieldHTML);
+                iframe.find('[data-sortable=' + position + ']').html(fieldHTML);
             }
 
             // Add field to backup
@@ -569,8 +584,8 @@
         }
 
         // Add action button to fields
-        function addActionsButton(iframe, position){
-            iframe.find('[data-sortable='+position+']>.form-group').each(function () {
+        function addActionsButton(iframe, position) {
+            iframe.find('[data-sortable=' + position + ']>.form-group').each(function () {
                 var $this = $(this),
                     actionsTemplate = $('#actions-template').html(),
                     id = $this.attr("data-field-id");
@@ -592,7 +607,7 @@
 
             $(fields).each(function (index, field) {
                 // Add to existing fields
-                if(!existingFieldsData[position]) existingFieldsData[position] = [];
+                if (!existingFieldsData[position]) existingFieldsData[position] = [];
                 existingFieldsData[position].push(field.object.id);
 
                 // Render fields
@@ -666,7 +681,7 @@
         }
 
         // Activate sortable
-        function activateSortable(){
+        function activateSortable() {
             var iframe = getIframeContent();
             // Form sortable
             iframe.find('.bb-form-area').sortable({
@@ -675,7 +690,7 @@
                     var fieldsJSON = $('[name=fields_json]'),
                         fieldsJSONData = JSON.parse(fieldsJSON.val());
 
-                    iframe.find('.bb-form-area').each(function (){
+                    iframe.find('.bb-form-area').each(function () {
 
                         var ids = [],
                             container = $(this),
@@ -705,12 +720,12 @@
         function onMessage(event) {
 
             var data = event.data;
-            if(data.TODO){
+            if (data.TODO) {
 
                 var TODO = data.TODO;
 
                 // On Save settings form
-                if(TODO === "POST_SETTINGS_CALLBACK"){
+                if (TODO === "POST_SETTINGS_CALLBACK") {
                     var json = data.json;
                     $('[name="unit_json"]').val(JSON.stringify(json));
 

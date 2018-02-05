@@ -30,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot ()
     {
         //
 
@@ -42,7 +42,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function map()
+    public function map ()
     {
         $this->mapWebRoutes();
 
@@ -58,19 +58,19 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapWebRoutes()
+    protected function mapWebRoutes ()
     {
         Route::group([
-            'domain' => (string)env('DOMAIN'),
+            'domain'     => (string)env('DOMAIN'),
             'middleware' => 'web',
         ], function ($router) {
             Route::group([
                 'middleware' => ['admin:Users'],
-                'prefix' => 'admin/membership',
-                'namespace' => $this->namespace,
+                'prefix'     => 'admin/membership',
+                'namespace'  => $this->namespace,
             ], function ($router) {
                 //TODO fix path when done
-                require __DIR__.'/../Routes/web.php';
+                require __DIR__ . '/../Routes/web.php';
             });
         });
     }
@@ -82,7 +82,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapApiRoutes()
+    protected function mapApiRoutes ()
     {
 
     }

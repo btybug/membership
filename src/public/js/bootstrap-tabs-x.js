@@ -18,7 +18,7 @@
             data: {},
             exist: function (key) {
                 return !!kvTabsCache.data[key] &&
-                ((new Date().getTime() - kvTabsCache.data[key]) < kvTabsCache.timeout);
+                    ((new Date().getTime() - kvTabsCache.data[key]) < kvTabsCache.timeout);
             },
             set: function (key) {
                 delete kvTabsCache.data[key];

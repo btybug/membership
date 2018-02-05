@@ -2,9 +2,9 @@
 <!-- Nav tabs -->
 @section('tab')
     <div class="main_lay_cont">
-    <div class="col-md-5">
+        <div class="col-md-5">
 
-    </div>
+        </div>
     </div>
     @include('resources::assests.magicModal')
 @stop

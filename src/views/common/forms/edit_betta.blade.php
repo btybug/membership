@@ -86,10 +86,10 @@
     <script type="template" id="template-tab-nav">
         <li role="presentation">
             <div class="col-md-8">
-            <a href="#{id}" role="tab" data-toggle="tab">Tab Title</a>
+                <a href="#{id}" role="tab" data-toggle="tab">Tab Title</a>
             </div>
             <div class="col-md-4">
-            <i class="fa fa-trash" style="color:#9A2720"></i>
+                <i class="fa fa-trash" style="color:#9A2720"></i>
             </div>
         </li>
     </script>

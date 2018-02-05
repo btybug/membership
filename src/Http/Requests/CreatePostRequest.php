@@ -20,7 +20,7 @@ class CreatePostRequest extends Request
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize ()
     {
         return true;
     }
@@ -30,19 +30,20 @@ class CreatePostRequest extends Request
      *
      * @return array
      */
-    public function rules()
+    public function rules ()
     {
         if ($this->isMethod('POST')) {
             return [
-                'title' => 'required',
-                'image' => 'required',
+                'title'       => 'required',
+                'image'       => 'required',
                 'description' => 'required',
             ];
         }
+
         return [];
     }
 
-    public function withValidator($validator)
+    public function withValidator ($validator)
     {
 //        $validator->after(function ($validator) {
 //            $postRepo = new PostsRepository();

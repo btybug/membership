@@ -32,10 +32,10 @@ class GeneratorService extends GeneralService
 
     const STUB_DATA = [
         '{ClassName}' => 'className',
-        '{slug}' => 'slug',
+        '{slug}'      => 'slug',
     ];
 
-    public function __construct(PostsRepository $postsRepository,FormService $formService,FormsRepository $formsRepository,FieldsRepository $fieldsRepository,AdminsettingRepository $adminsettingRepository)
+    public function __construct (PostsRepository $postsRepository, FormService $formService, FormsRepository $formsRepository, FieldsRepository $fieldsRepository, AdminsettingRepository $adminsettingRepository)
     {
         $this->postRepo = $postsRepository;
         $this->formService = $formService;
@@ -45,7 +45,7 @@ class GeneratorService extends GeneralService
     }
 
 
-    public function generate($title)
+    public function generate ($title)
     {
         $this->title = $title;
         $this->slug = str_slug($this->title);
@@ -55,57 +55,57 @@ class GeneratorService extends GeneralService
         $this->makeForms();
     }
 
-    private function makeTable()
+    private function makeTable ()
     {
-        CreatePostsTable::up(str_replace('-','_',$this->slug));
+        CreatePostsTable::up(str_replace('-', '_', $this->slug));
     }
 
-    private function makePages()
+    private function makePages ()
     {
         $this->registerFrontPages();
     }
 
-    private function makeForms()
+    private function makeForms ()
     {
         $this->registerForms();
     }
 
-    private function registerFrontPages()
+    private function registerFrontPages ()
     {
         $frontPageRepo = new FrontPagesRepository();
         \DB::transaction(function () use ($frontPageRepo) {
             $all_page = $frontPageRepo->create([
-                'title' => "All " . $this->title,
-                'slug' => "all_" . $this->slug,
-                'url' => '/' . $this->slug,
-                'module_id' => 'sahak.avatar/membership',
-                'header' => true,
-                'type' => 'plugin',
-                'form_path' => 'mbshp::page_settings.all_posts',
-                'page_layout' => 'front_layout_with_2_col.cccccccccc',
-                'status' => 'published',
+                'title'        => "All " . $this->title,
+                'slug'         => "all_" . $this->slug,
+                'url'          => '/' . $this->slug,
+                'module_id'    => 'sahak.avatar/membership',
+                'header'       => true,
+                'type'         => 'plugin',
+                'form_path'    => 'mbshp::page_settings.all_posts',
+                'page_layout'  => 'front_layout_with_2_col.cccccccccc',
+                'status'       => 'published',
                 'content_type' => 'template',
-                'template' => $this->all_unit_slug . '.' . $this->slug
+                'template'     => $this->all_unit_slug . '.' . $this->slug
             ]);
 
             $frontPageRepo->create([
-                'title' => "Single " . $this->title,
-                'slug' => "single_" . $this->slug,
-                'url' => '/' . $this->slug . '/{param}',
-                'module_id' => 'sahak.avatar/membership',
-                'parent_id' => $all_page->id,
-                'header' => true,
-                'type' => 'plugin',
-                'form_path' => 'mbshp::page_settings.single_post',
-                'page_layout' => 'front_layout_with_2_col.cccccccccc',
-                'status' => 'published',
+                'title'        => "Single " . $this->title,
+                'slug'         => "single_" . $this->slug,
+                'url'          => '/' . $this->slug . '/{param}',
+                'module_id'    => 'sahak.avatar/membership',
+                'parent_id'    => $all_page->id,
+                'header'       => true,
+                'type'         => 'plugin',
+                'form_path'    => 'mbshp::page_settings.single_post',
+                'page_layout'  => 'front_layout_with_2_col.cccccccccc',
+                'status'       => 'published',
                 'content_type' => 'template',
-                'template' => $this->single_unit_slug . '.' . $this->slug
+                'template'     => $this->single_unit_slug . '.' . $this->slug
             ]);
         });
     }
 
-    private function makeVariations()
+    private function makeVariations ()
     {
         $all_unit = Painter::find($this->all_unit_slug);
         $single_unit = Painter::find($this->single_unit_slug);
@@ -115,11 +115,11 @@ class GeneratorService extends GeneralService
         }
     }
 
-    private function makeModel()
+    private function makeModel ()
     {
         $data = [
             'className' => $this->strToModel($this->title),
-            'slug' => str_slug($this->title, "_")
+            'slug'      => str_slug($this->title, "_")
         ];
         $this->fileString = \File::get(plugins_path($this->stubPath . DS . 'model.stub'));
         $this->generatingFile = plugins_path($this->modelPath . DS . $data['className'] . '.php');
@@ -127,12 +127,12 @@ class GeneratorService extends GeneralService
         $this->makeFile(self::STUB_DATA, $data);
     }
 
-    private function strToModel($str)
+    private function strToModel ($str)
     {
         return ucfirst(camel_case($str));
     }
 
-    private function makeFile(array $stubs, array $data)
+    private function makeFile (array $stubs, array $data)
     {
         foreach ($stubs as $stub => $value) {
             if (isset($data[$value])) {
@@ -143,61 +143,63 @@ class GeneratorService extends GeneralService
         \File::put($this->generatingFile, $this->fileString);
     }
 
-    private function registerForms(){
+    private function registerForms ()
+    {
         $form = new FormsRepository();
         $fieldRepo = new FieldsRepository();
-        \DB::transaction(function () use ($form,$fieldRepo) {
-           $create_form =  $form->create([
-                'name' => 'Create '.$this->title,
-                'slug' => 'create_'.$this->slug,
-                'created_by' => 'plugin',
-                'type' => 'new',
-                'fields_type' => str_replace('-','_',$this->slug)
+        \DB::transaction(function () use ($form, $fieldRepo) {
+            $create_form = $form->create([
+                'name'        => 'Create ' . $this->title,
+                'slug'        => 'create_' . $this->slug,
+                'created_by'  => 'plugin',
+                'type'        => 'new',
+                'fields_type' => str_replace('-', '_', $this->slug)
             ]);
             $this->generateFormBlade($create_form);
             $edit_form = $form->create([
-                'name' => 'Edit '.$this->title,
-                'slug' => 'edit_'.$this->slug,
-                'created_by' => 'plugin',
-                'type' => 'edit',
-                'fields_type' => str_replace('-','_',$this->slug)
+                'name'        => 'Edit ' . $this->title,
+                'slug'        => 'edit_' . $this->slug,
+                'created_by'  => 'plugin',
+                'type'        => 'edit',
+                'fields_type' => str_replace('-', '_', $this->slug)
             ]);
             $this->generateFormBlade($edit_form);
             //generating create form fields
             $fieldRepo->create([
-                'name' => 'Title',
-                'slug' => uniqid(),
-                'visibility' => true,
-                'table_name' => str_replace('-','_',$this->slug),
-                'column_name' => 'title',
-                'type' => 'text',
+                'name'          => 'Title',
+                'slug'          => uniqid(),
+                'visibility'    => true,
+                'table_name'    => str_replace('-', '_', $this->slug),
+                'column_name'   => 'title',
+                'type'          => 'text',
                 'structured_by' => 'plugin',
             ]);
 
             $fieldRepo->create([
-                'name' => 'Status',
-                'slug' => uniqid(),
-                'visibility' => true,
-                'table_name' => str_replace('-','_',$this->slug),
-                'column_name' => 'status',
-                'type' => 'select',
-                'manual' => 'manual',
-                'json_data' => '{"manual":"draft,published"}',
+                'name'          => 'Status',
+                'slug'          => uniqid(),
+                'visibility'    => true,
+                'table_name'    => str_replace('-', '_', $this->slug),
+                'column_name'   => 'status',
+                'type'          => 'select',
+                'manual'        => 'manual',
+                'json_data'     => '{"manual":"draft,published"}',
                 'structured_by' => 'plugin',
             ]);
             $fieldRepo->create([
-                'name' => 'Description',
-                'slug' => uniqid(),
-                'visibility' => true,
-                'table_name' => str_replace('-','_',$this->slug),
-                'column_name' => 'description',
-                'type' => 'textarea',
+                'name'          => 'Description',
+                'slug'          => uniqid(),
+                'visibility'    => true,
+                'table_name'    => str_replace('-', '_', $this->slug),
+                'column_name'   => 'description',
+                'type'          => 'textarea',
                 'structured_by' => 'plugin',
             ]);
         });
     }
 
-    private function generateFormBlade($form){
+    private function generateFormBlade ($form)
+    {
         $html = "{{--Form $form->id --}}\r\n" . \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/fheader.blade.php')) . "\r\n";
         $html .= \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/default_content.blade.php')) . "\r\n";
         $html .= \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/ffooter.blade.php')) . "\r\n";
@@ -205,9 +207,10 @@ class GeneratorService extends GeneralService
         $this->formService->generateBlade($form->id, $html);
     }
 
-    public function generateTabs($form_slug,$slug = null){
+    public function generateTabs ($form_slug, $slug = null)
+    {
 
-        $form = $this->formsRepositroy->findBy('slug',$form_slug);
+        $form = $this->formsRepositroy->findBy('slug', $form_slug);
         $fieldsJson = $form->fields_json;
         $fieldHtml = '';
         $data = [];
@@ -216,8 +219,8 @@ class GeneratorService extends GeneralService
             $data = (json_decode($settings->val, true));
         }
 
-        if($fieldsJson){
-            $fields = json_decode($fieldsJson,true);
+        if ($fieldsJson) {
+            $fields = json_decode($fieldsJson, true);
             foreach ($fields as $field) {
                 $field = $this->fieldsRepository->find($field);
                 $path = plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/' . $field->type . '.blade.php');
@@ -227,13 +230,15 @@ class GeneratorService extends GeneralService
                 }
             }
         }
-        $html = \View('mbshp::common._partials.custom_fields.formTemplate',compact(['fieldHtml','data','slug']))->render();
+        $html = \View('mbshp::common._partials.custom_fields.formTemplate', compact(['fieldHtml', 'data', 'slug']))->render();
         $this->formService->generateBlade($form->id, $html);
     }
 
-    public static function renderField($id){
+    public static function renderField ($id)
+    {
         $repositroy = new FieldsRepository();
         $field = $repositroy->find($id);
+
         return FieldService::getFieldHtml($field);
     }
 }

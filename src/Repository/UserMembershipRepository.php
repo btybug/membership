@@ -12,7 +12,7 @@ class UserMembershipRepository extends GeneralRepository
      * @return mixed
      */
 
-    public function model()
+    public function model ()
     {
         return new UserMembership();
     }

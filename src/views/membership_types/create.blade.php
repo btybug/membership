@@ -23,7 +23,7 @@
         <fieldset class="bty-form-select">
             <legend><span><i class="fa fa-info" aria-hidden="true"></i></span>Select Plan</legend>
             <div class="bty-input-select-3">
-            {!! Form::select('plan_id',[null=>'No Plan']+$plans,old('plan_id')) !!}
+                {!! Form::select('plan_id',[null=>'No Plan']+$plans,old('plan_id')) !!}
             </div>
         </fieldset>
         <fieldset class="bty-form-text">

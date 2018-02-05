@@ -15,8 +15,8 @@ class User extends \Btybug\User\User
 {
     use Billable;
 
-    public function membership()
+    public function membership ()
     {
-       return $this->belongsTo(MembershipTypes::class,'membership_id');
+        return $this->belongsTo(MembershipTypes::class, 'membership_id');
     }
 }

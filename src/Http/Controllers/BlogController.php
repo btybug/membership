@@ -25,26 +25,26 @@ class BlogController extends Controller
     private $blogRepositroy;
     private $generatorService;
 
-    public function __construct(BlogRepository $blogRepository, GeneratorService $generatorService)
+    public function __construct (BlogRepository $blogRepository, GeneratorService $generatorService)
     {
         $this->blogRepositroy = $blogRepository;
         $this->generatorService = $generatorService;
     }
 
-    public function getIndex()
+    public function getIndex ()
     {
         return view('mbshp::blogs.index');
     }
 
-    public function postCreate(
+    public function postCreate (
         Request $request
     )
     {
         $this->blogRepositroy->create([
-            'title' => $request->title,
-            'slug' => str_slug($request->title),
+            'title'     => $request->title,
+            'slug'      => str_slug($request->title),
             'author_id' => \Auth::id(),
-            'status' => 1
+            'status'    => 1
         ]);
 
         $this->generatorService->generate($request->title);
@@ -52,7 +52,7 @@ class BlogController extends Controller
         return \Response::json(['error' => false]);
     }
 
-    public function getActivate(
+    public function getActivate (
         Request $request,
         $id
     )
@@ -66,7 +66,7 @@ class BlogController extends Controller
         return redirect()->back()->with('message', 'Blog activated');
     }
 
-    public function getDeactivate(
+    public function getDeactivate (
         Request $request,
         $id
     )
@@ -80,7 +80,7 @@ class BlogController extends Controller
         return redirect()->back()->with('message', 'Blog deactivated');
     }
 
-    public function getDelete(
+    public function getDelete (
         $id,
         FrontPagesRepository $frontPagesRepository,
         FormsRepository $formsRepository,
@@ -90,7 +90,7 @@ class BlogController extends Controller
         $blog = $this->blogRepositroy->findOrFail($id);
         $page = $frontPagesRepository->findOneByMultiple([
             'module_id' => 'sahak.avatar/membership',
-            'slug' => "all_" . $blog->slug,
+            'slug'      => "all_" . $blog->slug,
         ]);
         try {
             if ($page) {
@@ -99,14 +99,15 @@ class BlogController extends Controller
                 Painter::findByVariation($page->template)->variations(false)->deleteVariation($page->template);
                 $child->delete();
                 $page->delete();
-                $formsRepository->deleteByCondition('fields_type', str_replace("-","_",$blog->slug));
-                $fieldsRepository->deleteByCondition('table_name', str_replace("-","_",$blog->slug));
+                $formsRepository->deleteByCondition('fields_type', str_replace("-", "_", $blog->slug));
+                $fieldsRepository->deleteByCondition('table_name', str_replace("-", "_", $blog->slug));
             }
             $blog->delete();
             CreatePostsTable::down($blog->slug);
         } catch (\Exception $e) {
-            return redirect()->back()->with(['message' => $e->getMessage(). ' ' . $e->getLine()]);
+            return redirect()->back()->with(['message' => $e->getMessage() . ' ' . $e->getLine()]);
         }
+
         return redirect()->back();
     }
 }

@@ -1,21 +1,22 @@
-$.fn.media = function(options){
+$.fn.media = function (options) {
     var defaults = {
-        action : $(this),
+        action: $(this),
         value: '.filevalue',
         htmltarget: '.filehtml',
         fileParth: '.fileParth',
         val: true,
         html: true,
         type: 'images',
-        fileurl:'/media',
+        fileurl: '/media',
         filelength: 1
     };
 
-    var settings = $.extend(true, {}, defaults, options );
+    var settings = $.extend(true, {}, defaults, options);
 
-    return this.each(function() {
-        settings.action.on( "click", openpopup);
-        function openpopup(){
+    return this.each(function () {
+        settings.action.on("click", openpopup);
+
+        function openpopup() {
 
             if (settings.htmltarget.toLowerCase().indexOf("data") >= 0) {
                 settings.htmltarget = $(this).attr(settings.htmltarget);
@@ -43,21 +44,21 @@ $.fn.media = function(options){
                             Getfile = $("#content").val().split(",");
                             GetfileParth = $("#imageparth").val().split(",");
 
-                            if(Getfile !=''){
-                                if(settings.val){
+                            if (Getfile != '') {
+                                if (settings.val) {
                                     $(settings.value).val('');
                                     $(settings.fileParth).val('');
                                 }
-                                if(settings.html){
+                                if (settings.html) {
                                     $(settings.htmltarget).html('');
                                 }
 
                                 for (i = 0; i < settings.filelength; i++) {
-                                    if(settings.val){
-                                        $(settings.value).val($(settings.value).val()+Getfile[i]);
+                                    if (settings.val) {
+                                        $(settings.value).val($(settings.value).val() + Getfile[i]);
                                         $(settings.fileParth).val($(settings.fileParth).val() + $(Getfile[i]).attr('src'));
                                     }
-                                    if(settings.html){
+                                    if (settings.html) {
                                         if ($(settings.htmltarget).is('img')) {
                                             $(settings.htmltarget).attr('src', $(Getfile[i]).attr('src'));
                                         } else {
@@ -66,7 +67,7 @@ $.fn.media = function(options){
 
                                     }
 
-                                    if( i === Getfile.length){
+                                    if (i === Getfile.length) {
                                         i = settings.filelength;
                                     }
                                 }
@@ -81,19 +82,15 @@ $.fn.media = function(options){
                 }
             });
 
-            $('#mediagallery').load(settings.fileurl, function(){
+            $('#mediagallery').load(settings.fileurl, function () {
                 $('[data-role="mediatype"]').val(settings.type).addClass('hide');
                 $('#filelength').val(settings.filelength);
-                if(settings.type=="all"){
+                if (settings.type == "all") {
                     $('[data-role="mediatype"]').removeClass('hide');
                 }
 
 
-
-
-
             });
-
 
 
         }
