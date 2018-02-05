@@ -11,12 +11,12 @@ class MembershipStatusesRepository extends GeneralRepository
      * @return mixed
      */
 
-    public function model()
+    public function model ()
     {
         return new MembershipStatuses();
     }
 
-    public function getDefault()
+    public function getDefault ()
     {
         return $this->model()->where('type', 'core')->first();
     }

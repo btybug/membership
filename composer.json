@@ -10,7 +10,7 @@
   ],
   "route": "membership",
   "require": {
-    "laravel/cashier":"~7.0"
+    "laravel/cashier": "~7.0"
   },
   "autoload": {
     "psr-4": {

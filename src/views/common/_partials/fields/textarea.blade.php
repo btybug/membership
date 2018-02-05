@@ -4,7 +4,8 @@
     </div>
     <div>
         <div class="bty-new-textarea">
-            <textarea id="bio" name="{!! $field['column_name'] !!}" placeholder="{!! $field['placeholder'] !!}"></textarea>
+            <textarea id="bio" name="{!! $field['column_name'] !!}"
+                      placeholder="{!! $field['placeholder'] !!}"></textarea>
         </div>
 
     </div>

@@ -25,9 +25,9 @@
     </div>
 </div>
 <div class="col-md-12">
-            <div class="col-md-6">
-                <button type="submit" class="btn btn-success">Save</button>
-            </div>
+    <div class="col-md-6">
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
 </div>
 </div>
 {!! Form::close() !!}

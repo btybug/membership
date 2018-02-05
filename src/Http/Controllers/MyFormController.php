@@ -20,16 +20,16 @@ class MyFormController extends Controller
         FormService $formService
     )
     {
-        $form = $formsRepository->findOneByMultiple(['id' => $id,'created_by' => 'plugin']);
-        if( ! $form) abort(404,"Form not found");
+        $form = $formsRepository->findOneByMultiple(['id' => $id, 'created_by' => 'plugin']);
+        if (! $form) abort(404, "Form not found");
 
-        $fields = $fieldsRepository->getBy('table_name','posts');
-        $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug','field_slug')->toArray() : [];
+        $fields = $fieldsRepository->getBy('table_name', 'posts');
+        $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
 
-        return view('mbshp::cars.forms.edit',compact('form','fields','existingFields'));
+        return view('mbshp::cars.forms.edit', compact('form', 'fields', 'existingFields'));
     }
 
-    public function postRenderField(
+    public function postRenderField (
         Request $request,
         FieldsRepository $fieldsRepository
     )
@@ -38,12 +38,14 @@ class MyFormController extends Controller
 
         if ($field && view()->exists("mbshp::cars._partials.custom_fields." . $field->type)) {
             $html = \view("mbshp::cars._partials.custom_fields." . $field->type)->with('field', $field->toArray())->render();
+
             return ['error' => false, 'html' => $html];
         }
+
         return ['error' => true];
     }
 
-    public function postSaverForm(
+    public function postSaverForm (
         Request $request,
         FieldsRepository $fieldsRepository,
         FormService $formService

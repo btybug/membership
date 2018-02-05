@@ -18,17 +18,17 @@ class UserMembership extends Model
 
     protected $guarded = ['id'];
 
-    public function user()
+    public function user ()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function membership_type()
+    public function membership_type ()
     {
         return $this->belongsTo(MembershipTypes::class, 'membership_type_id');
     }
 
-    public function status()
+    public function status ()
     {
         return $this->belongsTo(MembershipStatuses::class, 'status_id');
     }

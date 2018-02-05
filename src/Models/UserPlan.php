@@ -16,12 +16,12 @@ class UserPlan extends Model
 
     protected $guarded = ['id'];
 
-    public function user()
+    public function user ()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function plan()
+    public function plan ()
     {
         return $this->belongsTo(Plans::class, 'plan_id');
     }

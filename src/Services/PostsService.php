@@ -17,13 +17,13 @@ class PostsService extends GeneralService
     private $result;
     private $postRepo;
 
-    public function __construct(PostsRepository $postsRepository)
+    public function __construct (PostsRepository $postsRepository)
     {
         $this->postRepo = $postsRepository;
     }
 
 
-    public function create(array $data, $file)
+    public function create (array $data, $file)
     {
         $data['author_id'] = \Auth::id();
         $data['slug'] = self::replaceSpaceWithLine($data['title']);
@@ -33,64 +33,66 @@ class PostsService extends GeneralService
         }
     }
 
-    public function update(array $data, $file)
+    public function update (array $data, $file)
     {
-        $updated = $this->postRepo->update($data['id'],$data);
+        $updated = $this->postRepo->update($data['id'], $data);
         if ($updated) {
-            if($file){
-                if($updated->image && file_exists(public_path($updated->image)) && ! is_dir(public_path($updated->image))) unlink(public_path($updated->image));
+            if ($file) {
+                if ($updated->image && file_exists(public_path($updated->image)) && ! is_dir(public_path($updated->image))) unlink(public_path($updated->image));
                 $this->upload($file, $updated->id);
             }
         }
     }
 
-    public function upload($file, $post_id)
+    public function upload ($file, $post_id)
     {
         $extension = $file->getClientOriginalExtension();
         $filename = uniqid() . "." . $extension;
         $path = 'images/posts/' . $filename;;
         $file->move('images/posts', $filename);
 
-        $this->postRepo->update($post_id,['image' => $path]);
+        $this->postRepo->update($post_id, ['image' => $path]);
     }
 
-    public function delete($id)
+    public function delete ($id)
     {
         $plan = $this->postRepo->find($id);
         unlink(public_path($plan->icon));
         $this->postRepo->delete($id);
     }
 
-    public static function replaceSpaceWithLine($string)
+    public static function replaceSpaceWithLine ($string)
     {
-        return str_replace(" ","-",$string);
+        return str_replace(" ", "-", $string);
     }
 
-    public static function getPostByUrl()
+    public static function getPostByUrl ()
     {
         $param = \Request::route()->parameters();
-        if(isset($param['param'])){
+        if (isset($param['param'])) {
             $slug = $param['param'];
             $repo = new PostsRepository();
             $post = $repo->getPublishedByUrl($slug);
+
             return $post;
         }
 
         return null;
     }
 
-    public static function getPostById($id)
+    public static function getPostById ($id)
     {
         $repo = new PostsRepository();
         $post = $repo->find($id);
+
         return $post;
     }
 
-    public static function getPostsByPluck()
+    public static function getPostsByPluck ()
     {
         $repo = new PostsRepository();
-        $post = $repo->pluck("title","id");
-        if(count($post)) return $post->toArray();
+        $post = $repo->pluck("title", "id");
+        if (count($post)) return $post->toArray();
 
         return [];
     }

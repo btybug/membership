@@ -17,10 +17,10 @@ use Illuminate\Http\Request;
 
 class ProductSettingsController extends Controller
 {
-    public function getIndex(AdminsettingRepository $adminsettingRepository)
+    public function getIndex (AdminsettingRepository $adminsettingRepository)
     {
 
-        return view('mbshp::product_settings.index',compact('pricing_page'));
+        return view('mbshp::product_settings.index', compact('pricing_page'));
     }
 
 }

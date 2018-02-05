@@ -126,29 +126,29 @@
             });
 
             $(document).ready(function () {
-                $("body").on('click','.save-changes',function () {
+                $("body").on('click', '.save-changes', function () {
                     var form = $(".form-box form");
                     $.ajax({
                         data: form.serialize(),
                         type: 'POST',
-                        url:  form.attr('action'),
+                        url: form.attr('action'),
                         headers: {
                             'X-CSRF-TOKEN': $("input[name='_token']").val()
                         },
                         datatype: 'json',
                         cache: false,
                         success: function (data) {
-                            if(! data.error){
+                            if (!data.error) {
                                 blogs.ajax.reload();
                                 $("#blog-modal").modal('hide');
-                            }else{
+                            } else {
                                 // alert(data.message);
                             }
                         }
                     });
                 });
 
-                $("body").on('click','.add-new',function () {
+                $("body").on('click', '.add-new', function () {
                     $("#blog-modal").modal();
                 });
             });

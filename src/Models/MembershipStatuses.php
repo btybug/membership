@@ -1,4 +1,5 @@
 <?php namespace BtyBugHook\Membership\Models;
+
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -7,16 +8,15 @@ use Illuminate\Database\Eloquent\Model;
  * Date: 08.01.2018
  * Time: 23:10
  */
-
 class MembershipStatuses extends Model
 {
 
-    protected $table='membership_statuses';
+    protected $table = 'membership_statuses';
 
-    protected $guarded=['id'];
+    protected $guarded = ['id'];
 
     protected $casts = [
-      'json_data' => 'json'
+        'json_data' => 'json'
     ];
 
 }

@@ -11,7 +11,8 @@
                        aria-expanded="true">
                         <span class="icon"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
                         <span class="title">General</span>
-                        <button class="bty-btn bty-btn-save bty-btn-cl-black bty-btn-size-sm pull-right m-r-10" data-action="save-form"><span>Save</span></button>
+                        <button class="bty-btn bty-btn-save bty-btn-cl-black bty-btn-size-sm pull-right m-r-10"
+                                data-action="save-form"><span>Save</span></button>
                     </a>
                 </div>
                 <div id="general" class="collapse in" aria-expanded="true" style="">
@@ -80,7 +81,8 @@
                                     <span class="bty-hover-17 bty-f-s-20">Form title</span>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="bty-input-label-2 m-t-0 form-title-settings" placeholder="What is your Form title ?"
+                                    <input class="bty-input-label-2 m-t-0 form-title-settings"
+                                           placeholder="What is your Form title ?"
                                            name="form_title" type="text" value="Create post">
                                 </div>
                             </div>

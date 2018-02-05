@@ -11,7 +11,7 @@ class PostSettingsRequest extends Request
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize ()
     {
         return true;
     }
@@ -21,16 +21,17 @@ class PostSettingsRequest extends Request
      *
      * @return array
      */
-    public function rules()
+    public function rules ()
     {
         if ($this->isMethod('POST')) {
             return [
-                'id' => 'required|exists:frontend_pages,id',
-                'title' => 'required',
-                'page_layout' => 'required',
+                'id'           => 'required|exists:frontend_pages,id',
+                'title'        => 'required',
+                'page_layout'  => 'required',
                 'main_content' => 'required'
             ];
         }
+
         return [];
     }
 }

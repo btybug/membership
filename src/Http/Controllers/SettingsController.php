@@ -18,24 +18,26 @@ use Illuminate\Support\Facades\Response;
 
 class SettingsController extends Controller
 {
-    public function getSettings(AdminsettingRepository $adminsettingRepository)
+    public function getSettings (AdminsettingRepository $adminsettingRepository)
     {
         $pricing_page = $adminsettingRepository->getSettings('membership', 'pricing_page');
+
         return view('mbshp::settings.index', compact('pricing_page'));
     }
 
-    public function getMembershipTypes()
+    public function getMembershipTypes ()
     {
         return view('mbshp::settings.mb_types');
     }
 
-    public function getCreateStatus()
+    public function getCreateStatus ()
     {
         $model = null;
+
         return view('mbshp::settings.status_form', compact(['model']));
     }
 
-    public function postCreateStatus(
+    public function postCreateStatus (
         MembershipStatusCreateRequest $request,
         MembershipStatusesRepository $repository
     )
@@ -47,23 +49,24 @@ class SettingsController extends Controller
         return redirect()->route('mbsp_settings_mb_types');
     }
 
-    public function getEditStatus(MembershipStatusesRepository $repo, $id)
+    public function getEditStatus (MembershipStatusesRepository $repo, $id)
     {
         $model = $repo->find($id);
-        if (!$model) {
+        if (! $model) {
             abort(404);
         }
+
         return view('mbshp::settings.status_form', compact("model"));
     }
 
-    public function postEditStatus(
+    public function postEditStatus (
         Request $request,
         MembershipStatusesRepository $repo,
         $id
     )
     {
         $model = $repo->find($id);
-        if (!$model) {
+        if (! $model) {
             abort(404);
         }
 
@@ -72,13 +75,13 @@ class SettingsController extends Controller
         return redirect()->route('mbsp_settings_mb_types');
     }
 
-    public function getDeleteStatus(
+    public function getDeleteStatus (
         MembershipStatusesRepository $repo,
         $id
     )
     {
         $status = $repo->find($id);
-        if (!$status) {
+        if (! $status) {
             abort(404);
         }
 
@@ -87,14 +90,12 @@ class SettingsController extends Controller
         return redirect()->back()->with('message', 'Status Deleted');
     }
 
-    public function postSavePricingPage(Request $request, AdminsettingRepository $adminsettingRepository)
+    public function postSavePricingPage (Request $request, AdminsettingRepository $adminsettingRepository)
     {
         $adminsettingRepository->createOrUpdateOriginalToJson($request->except('_token'), 'membership', 'pricing_page');
+
         return redirect()->back();
     }
-
-
-
 
 
 }

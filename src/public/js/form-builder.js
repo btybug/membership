@@ -10,7 +10,7 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
     $("body")
-        // Insert new tab
+    // Insert new tab
         .on("click", '.add-form-tab', function (e) {
             e.preventDefault();
 
@@ -33,22 +33,22 @@ $(document).ready(function () {
             activateDroppable();
         })
         // Edit tab nav
-        .on('dblclick', '.form-builder-tabs>.nav-tabs>.active>a', function (e){
+        .on('dblclick', '.form-builder-tabs>.nav-tabs>.active>a', function (e) {
             var $this = $(this);
             $this.attr("contenteditable", true);
         })
-        .on('blur', '.form-builder-tabs>.nav-tabs>.active>a', function (e){
+        .on('blur', '.form-builder-tabs>.nav-tabs>.active>a', function (e) {
             var $this = $(this);
             $this.removeAttr("contenteditable");
         })
         // Delete tab
-        .on('click', '.remove-tab', function (e){
+        .on('click', '.remove-tab', function (e) {
             e.preventDefault();
 
             var activeTabNav = $('.form-builder-tabs>.nav-tabs>.active'),
                 activeTabContent = $('.form-builder-tabs>.tab-content>.active');
 
-            if($('.form-builder-tabs>.nav-tabs>li').length === 1) return false;
+            if ($('.form-builder-tabs>.nav-tabs>li').length === 1) return false;
 
             activeTabNav.remove();
             activeTabContent.remove();
@@ -63,7 +63,7 @@ $(document).ready(function () {
     });
 
     // Droppable fields area
-    function activateDroppable(){
+    function activateDroppable() {
         $('.form-builder-area').droppable({
             accept: ".draggable-element",
             classes: {

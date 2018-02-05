@@ -1,4 +1,5 @@
 <?php namespace BtyBugHook\Membership\Models;
+
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -7,15 +8,15 @@ use Illuminate\Database\Eloquent\Model;
  * Date: 08.01.2018
  * Time: 23:10
  */
-
 class MembershipTypes extends Model
 {
 
-    protected $table='membership_types';
+    protected $table = 'membership_types';
 
-    protected $guarded=['id'];
+    protected $guarded = ['id'];
 
-    public function plan(){
-        return $this->belongsTo(Plans::class,'plan_id');
+    public function plan ()
+    {
+        return $this->belongsTo(Plans::class, 'plan_id');
     }
 }

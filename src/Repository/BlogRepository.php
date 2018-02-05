@@ -11,18 +11,18 @@ class BlogRepository extends GeneralRepository
     /**
      * @return mixed
      */
-    public function getGroupedWithAuthor($id)
+    public function getGroupedWithAuthor ($id)
     {
         return $this->model->where('author_id', $id)->get();
     }
 
-    public function getActive()
+    public function getActive ()
     {
         return $this->model->where('status', true)->get();
     }
 
 
-    public function model()
+    public function model ()
     {
         return new Blog();
     }

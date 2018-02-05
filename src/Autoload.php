@@ -1,6 +1,7 @@
 <?php
 
 namespace BtyBugHook\Membership;
+
 use Illuminate\Support\Facades\Schema;
 
 /**
@@ -9,12 +10,11 @@ use Illuminate\Support\Facades\Schema;
  * Date: 8/8/2016
  * Time: 9:11 PM
  */
-
-
 class Autoload
 {
 // this function will called only install time
-    public function up($config){
+    public function up ($config)
+    {
         Schema::table('users', function ($table) {
             $table->string('stripe_id')->nullable();
             $table->string('card_brand')->nullable();
@@ -34,7 +34,9 @@ class Autoload
             $table->timestamps();
         });
     }
+
     // this function will called only uninstall time
-    public function down($config){
+    public function down ($config)
+    {
     }
 }
