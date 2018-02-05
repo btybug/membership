@@ -70,7 +70,7 @@
                                 <div class="html-element-item draggable-element">
                                     {{ $field->name }}
                                     <div class="html-element-item-sample hidden">
-                                        {{--{!! \BtyBugHook\Membership\Services\GeneratorService::renderField($field->id) !!}--}}
+                                        {!! \BtyBugHook\Membership\Services\GeneratorService::renderField($field->id) !!}
                                     </div>
                                 </div>
                             @endforeach
