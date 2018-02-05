@@ -20,6 +20,9 @@
                 {!! Form::text('name',null,['class' => 'form-name', 'placeholder' => 'Form Name']) !!}
             </div>
             <div class="col-md-4">
+                <a href="#" class="btn btn-default btn-sm add-form-tab">
+                    <i class="fa fa-plus"></i> Add Tab
+                </a>
                 <button type="submit" class="form-save pull-right"><span>Save</span></button>
                 <button type="button" class="items-panel-trigger pull-right" data-toggle="modal"
                         data-target="#myModal0"><span>Fields</span></button>
@@ -38,9 +41,7 @@
             <div class="form-builder-tabs">
 
                 <div class="tab-actions">
-                    <a href="#" class="btn btn-default btn-sm add-form-tab">
-                        <i class="fa fa-plus"></i> Add Tab
-                    </a>
+
                     <a href="#" class="btn btn-danger btn-sm remove-tab" data-toggle="tooltip" data-placement="left"
                        title="Delete active tab">
                         <i class="fa fa-trash"></i>
