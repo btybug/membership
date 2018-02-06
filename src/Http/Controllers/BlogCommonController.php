@@ -488,7 +488,6 @@ class BlogCommonController extends Controller
         Request $request,
         FieldsRepository $fieldsRepository,
         FormService $formService,
-        GeneratorService $generatorService,
         $slug
     )
     {
@@ -497,13 +496,8 @@ class BlogCommonController extends Controller
         $fields = $data['fields_json'];
         $data['fields_json'] = array_keys($fields);
         $form = $formService->createOrUpdate($data);
-        if ($form) {
-            $generatorService->generateTabs($form->slug, $slug);
 
-            return ['error' => false];
-        }
-
-        return ['error' => true];
+        return ['error' => false];
     }
 
     /**
