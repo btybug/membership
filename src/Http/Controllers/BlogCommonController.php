@@ -492,12 +492,9 @@ class BlogCommonController extends Controller
     )
     {
         $data = $request->except('_token');
-        $id = $data['id'];
-        $fields = $data['fields_json'];
-        $data['fields_json'] = array_keys($fields);
         $form = $formService->createOrUpdate($data);
 
-        return ['error' => false];
+        return redirect()->route('blog_form_list',$slug);
     }
 
     /**

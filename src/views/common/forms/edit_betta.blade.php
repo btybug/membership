@@ -29,6 +29,8 @@
             </div>
         </div>
     </div>
+    {!! Form::textarea('fields_html',null,['class' => 'generated_html hide']) !!}
+    {!! Form::textarea('fields_json',null,['class' => 'generated_json hide']) !!}
     {!! Form::close() !!}
 
     <h3>Preview Area</h3>
@@ -114,8 +116,7 @@
             </div>
         </div>
     </div>
-    <textarea class="generated_html" name="fields_html"></textarea>
-    <textarea class="generated_json" name="fields_json"></textarea>
+
 
     <div class="row real-form hidden">
         <div class="col-md-9">
