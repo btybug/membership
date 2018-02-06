@@ -116,6 +116,16 @@ $(document).ready(function () {
 
         });
         $('.generated_html').val($('.real-form').html())
+        rebulderJson();
+    }
+    function rebulderJson() {
+        var activeId=$('.form-builder-tabs-content');
+        var data=[];
+        var elements=activeId.find('div[data-shortcode]');
+        $.each(elements,function (k,v) {
+            var tpl=$('#field-html').html();
+            data.push($(v).attr('data-id'));
+        });
         $('.generated_json').val(JSON.stringify(data));
     }
     activateDroppable();
