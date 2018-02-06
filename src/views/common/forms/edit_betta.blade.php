@@ -1,3 +1,4 @@
+
 @extends( 'btybug::layouts.admin' )
 
 @section( 'CSS' )
@@ -44,12 +45,12 @@
 
                 </div>
 
-                <ul class="nav nav-tabs" role="tablist">
+                <ul class="nav nav-tabs form-builder-tabs" role="tablist">
                     <li role="presentation" class="active">
                         <a href="#general" id="home-tab" role="tab" data-toggle="tab">General</a>
                     </li>
                 </ul>
-                <div class="tab-content">
+                <div class="tab-content form-builder-tabs-content">
                     <div class="tab-pane in active" role="tabpanel" id="general">
                         <div class="form-builder-area"></div>
                     </div>
@@ -65,7 +66,8 @@
                     <div class="html-elements-list">
                         @if(count($fields))
                             @foreach($fields as $field)
-                                <div class="html-element-item draggable-element" data-shortcode="[field id={{$field->id}}]">
+                                <div class="html-element-item draggable-element"
+                                     data-shortcode="[field id={{$field->id}}]">
                                     {{ $field->name }}
                                     <div class="html-element-item-sample hidden">
                                         <div class="form-group">
@@ -91,9 +93,9 @@
                                     {{ $key }}
                                     <div class="html-element-item-sample hidden">
                                         <div class="form-group">
-                                           @php
-                                            $fn = $option['list_function'];
-                                           @endphp
+                                            @php
+                                                $fn = $option['list_function'];
+                                            @endphp
                                             {!! $fn() !!}
                                         </div>
                                     </div>
@@ -106,6 +108,32 @@
         </div>
     </div>
 
+
+    <div class="row">
+        <div class="col-md-9">
+
+            <div class="builder-tabs">
+
+                <div class="tab-actions">
+
+
+                </div>
+
+                <ul class="nav nav-tabs builder-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#generalform"  role="tab" data-toggle="tab">General</a>
+                    </li>
+                </ul>
+                <div class="tab-content builder-tabs-content">
+                    <div class="tab-pane in active" role="tabpanel" id="generalform">
+                        <div class="form-fields-area">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Templates -->
     <script type="template" id="template-tab-nav">
         <li role="presentation">
@@ -120,7 +148,19 @@
 
     <script type="template" id="template-tab-content">
         <div class="tab-pane in" role="tabpanel" id="{id}">
-            <div class="form-builder-area"></div>
+            <div class="{DROPABLE}">
+
+            </div>
+        </div>
+    </script>
+
+    <script type="template" id="field-html">
+        <div class="form-group">
+            <fieldset class="bty-form-text" id="bty-input-id-19">
+                <div>
+                    {field}
+                </div>
+            </fieldset>
         </div>
     </script>
 @stop

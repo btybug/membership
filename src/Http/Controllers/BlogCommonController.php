@@ -391,7 +391,6 @@ class BlogCommonController extends Controller
     {
         $data = $adminsettingRepository->getSettings('product', $slug,true);
         $options = \Config::get('options.listener', []);
-//        dd($data,$options);
         return view('mbshp::common.options', compact('options', 'data', 'slug'));
     }
 

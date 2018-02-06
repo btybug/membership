@@ -15,19 +15,31 @@ $(document).ready(function () {
             e.preventDefault();
 
             var formTabs = $('.form-builder-tabs'),
+                hdFormTabs = $('.builder-tabs'),
                 tabNav = $('#template-tab-nav').html(),
+                hdTab = $('#template-tab-nav').html(),
+
                 tabContent = $('#template-tab-content').html(),
+                hdTabContent = $('#template-tab-content').html(),
                 ID = uniqueID();
 
             // Tab id
             tabNav = tabNav.replace('{id}', ID);
+            hdTab = hdTab.replace('{id}', ID + 'form');
             tabContent = tabContent.replace('{id}', ID);
+            tabContent = tabContent.replace('{DROPABLE}', 'form-builder-area');
+            hdTabContent = hdTabContent.replace('{id}', ID + 'form');
+            hdTabContent = hdTabContent.replace('{DROPABLE}','form-fields-area');
 
             // Add nav list
-            formTabs.find(".nav-tabs").append(tabNav);
-            formTabs.find(".tab-content").append(tabContent);
+            formTabs.find(".form-builder-tabs").append(tabNav);
+            formTabs.find(".form-builder-tabs-content").append(tabContent);
+
+            hdFormTabs.find(".builder-tabs").append(hdTab);
+            hdFormTabs.find(".builder-tabs-content").append(hdTabContent);
 
             $('[href="#' + ID + '"]').trigger("click");
+            $('[href="#' + ID + 'form"]').trigger("click");
 
             // Activate droppable
             activateDroppable();
@@ -64,7 +76,7 @@ $(document).ready(function () {
 
     // Droppable fields area
     function activateDroppable() {
-        $('.form-builder-area').droppable({
+        $('body').find('.form-builder-area').droppable({
             accept: ".draggable-element",
             classes: {
                 "ui-droppable-active": "form-area-active",
@@ -75,12 +87,29 @@ $(document).ready(function () {
                 var elementHTML = $(ui.draggable).find(".html-element-item-sample").html(),
                     template = $(elementHTML),
                     target = $(event.target);
-
-
+                template.attr('data-shortcode',$(ui.draggable).attr('data-shortcode'));
                 target.append(template);
+               rebulder();
             }
-        }).sortable();
+        }).sortable({
+            update: function( event, ui ) {
+                rebulder();
+            }
+        });
     }
 
+    function rebulder() {
+        var activeId=$('.form-builder-tabs-content').find('.active');
+        var elements=activeId.find('div[data-shortcode]');
+        var id=activeId.attr('id')+'form';
+        $('#'+id).find('.form-fields-area').empty();
+        $.each(elements,function (k,v) {
+            var tpl=$('#field-html').html();
+            var shortcode=$(v).attr('data-shortcode');
+            tpl=tpl.replace('{field}',shortcode);
+            $('#'+id).find('.form-fields-area').append(tpl);
+
+        });
+    }
     activateDroppable();
 });
