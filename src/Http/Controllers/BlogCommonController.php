@@ -389,23 +389,9 @@ class BlogCommonController extends Controller
 
     public function getOptions (AdminsettingRepository $adminsettingRepository, $slug)
     {
-        $data = [];
-        $settings = $adminsettingRepository->getSettings('product', $slug);
-        if ($settings) {
-            $data = (json_decode($settings->val, true));
-        }
+        $data = $adminsettingRepository->getSettings('product', $slug,true);
         $options = \Config::get('options.listener', []);
 //        dd($data,$options);
-//        $options = get_prices_data();
-//
-//        foreach ($options as $key => $option) {
-//            if (isset($data['allow_price']['options'][$key])) {
-//                $options[$key]['checked'] = true;
-//            } else {
-//                $options[$key]['checked'] = false;
-//            }
-//        }
-//        dd($options);
         return view('mbshp::common.options', compact('options', 'data', 'slug'));
     }
 
@@ -475,16 +461,12 @@ class BlogCommonController extends Controller
         $form = $formsRepository->findOneByMultiple(['id' => $id, 'created_by' => 'plugin']);
         if (! $form) abort(404, "Form not found");
 
-        $data = [];
-        $settings = $adminsettingRepository->getSettings('product', $slug);
-        if ($settings) {
-            $data = (json_decode($settings->val, true));
-        }
+        $options = $adminsettingRepository->getSettings('product', $slug,true);
 
         $fields = $fieldsRepository->getBy('table_name', $this->postsRepository->table);
         $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
 
-        return view('mbshp::common.forms.edit_betta', compact('form', 'fields', 'existingFields', 'slug'));
+        return view('mbshp::common.forms.edit_betta', compact('form', 'fields', 'existingFields', 'slug','options'));
     }
 
     public function postRenderField (

@@ -78,6 +78,31 @@
                     </div>
                 </div>
             </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Forms</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="html-elements-list">
+                        @foreach($options as $key => $option)
+                            @if($option['is_active'])
+                                <div class="html-element-item draggable-element">
+                                    {{ $key }}
+                                    <div class="html-element-item-sample hidden">
+                                        <div class="form-group">
+                                           @php
+                                            $fn = $option['list_function'];
+                                           @endphp
+                                            {!! $fn() !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

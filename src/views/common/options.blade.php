@@ -20,6 +20,9 @@
                                     @if(isset($option['tab']))
                                         {!! Form::hidden($option['name']."[tab]",$option['tab']) !!}
                                     @endif
+                                    {!! Form::hidden($option['name']."[render_function]",$option['render_function']) !!}
+                                    {!! Form::hidden($option['name']."[list_function]",$option['list_function']) !!}
+                                    {!! Form::hidden($option['name']."[options_function]",$option['options_function']) !!}
                                 </label>
                             </div>
                         </div>

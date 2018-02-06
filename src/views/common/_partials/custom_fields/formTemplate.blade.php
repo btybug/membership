@@ -19,6 +19,7 @@
             {{--{!! $fieldHtml !!}--}}
             {{--</div>--}}
             {{--</div>--}}
+
             @if(count($data))
                 @foreach($data as $key => $value)
                     <div class="tab-pane  {{ ($loop->first) ? 'active' : null }}" id="pills-{{ $value['name'] }}"
@@ -34,6 +35,33 @@
                             @endforeach
                         @endif
                     </div>
+                @endforeach
+            @endif
+
+            @if(count($data))
+                @foreach($data as $key => $value)
+                    @if($value['is_active'] && !isset($value['tab']))
+                        <div class="tab-pane" id="pills-{{ $key }}" role="tabpanel"
+                             aria-labelledby="pills-{{ $key }}-tab">
+                            @php
+                                $options = get_options_data($key,$slug)
+                            @endphp
+                            <fieldset class="bty-form-select" id="bty-input-id-16">
+                                <div class="bty-input-select-1">
+                                    <select data-type="{!! $key !!}" class="form-control input-md select-option-type"
+                                            id="select-{{ $key }}">
+                                        <option selected="selected" value="">Select {!! strtoupper($key) !!}</option>
+                                        @foreach($options as $k => $option)
+                                            <option value="{!! $k !!}">{!! str_replace('_',' ',$k) !!}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </fieldset>
+                            <div class="select-{{ $key }}">
+
+                            </div>
+                        </div>
+                    @endif
                 @endforeach
             @endif
         </div>
