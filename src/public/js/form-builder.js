@@ -125,7 +125,7 @@ $(document).ready(function () {
         var elements=activeId.find('div[data-shortcode]');
         $.each(elements,function (k,v) {
             var tpl=$('#field-html').html();
-            if($(v).hasAttribute('data-id')){
+            if($(v).attr('data-id')){
             data.push($(v).attr('data-id'));
             }
         });
