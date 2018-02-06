@@ -28,19 +28,12 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function boot ()
     {
-
         $this->loadTranslationsFrom(__DIR__ . '/../views', 'mbshp');
         $this->loadViewsFrom(__DIR__ . '/../views', 'mbshp');
 
         BlogService::getActive();
 
-        \Eventy::addAction('options.listener', function ($what) {
-            $options = \Config::get('options.listener', []);
-            $options[$what['name']] = $what;
-            \Config::set('options.listener', $options);
 
-            return (\Config::get('options.listener'));
-        });
 
 
         \Eventy::action('admin.menus', [
