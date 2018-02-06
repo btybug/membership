@@ -65,11 +65,11 @@
                     <div class="html-elements-list">
                         @if(count($fields))
                             @foreach($fields as $field)
-                                <div class="html-element-item draggable-element">
+                                <div class="html-element-item draggable-element" data-shortcode="[field id={{$field->id}}]">
                                     {{ $field->name }}
                                     <div class="html-element-item-sample hidden">
                                         <div class="form-group">
-                                            [field id={{$field->id}}]
+                                            {!! field_render(['id' => $field->id]) !!}
                                         </div>
                                     </div>
                                 </div>
