@@ -26,6 +26,8 @@ $(document).ready(function () {
             // Tab id
             tabNav = tabNav.replace('{id}', ID);
             hdTab = hdTab.replace('{id}', ID + 'form');
+            hdTab= $(hdTab);
+            hdTab.find('.trash-icon').remove();
             tabContent = tabContent.replace('{id}', ID);
             tabContent = tabContent.replace('{DROPABLE}', 'form-builder-area');
             hdTabContent = hdTabContent.replace('{id}', ID + 'form');
@@ -88,6 +90,7 @@ $(document).ready(function () {
                     template = $(elementHTML),
                     target = $(event.target);
                 template.attr('data-shortcode',$(ui.draggable).attr('data-shortcode'));
+                template.attr('data-id',$(ui.draggable).attr('data-id'));
                 target.append(template);
                rebulder();
             }
@@ -103,13 +106,17 @@ $(document).ready(function () {
         var elements=activeId.find('div[data-shortcode]');
         var id=activeId.attr('id')+'form';
         $('#'+id).find('.form-fields-area').empty();
+        var data=[];
         $.each(elements,function (k,v) {
             var tpl=$('#field-html').html();
             var shortcode=$(v).attr('data-shortcode');
+            data.push($(v).attr('data-id'));
             tpl=tpl.replace('{field}',shortcode);
             $('#'+id).find('.form-fields-area').append(tpl);
 
         });
+        $('.generated_html').val($('.real-form').html())
+        $('.generated_json').val(JSON.stringify(data));
     }
     activateDroppable();
 });

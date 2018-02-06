@@ -66,7 +66,7 @@
                     <div class="html-elements-list">
                         @if(count($fields))
                             @foreach($fields as $field)
-                                <div class="html-element-item draggable-element"
+                                <div class="html-element-item draggable-element" data-id="{!! $field->id !!}"
                                      data-shortcode="[field id={{$field->id}}]">
                                     {{ $field->name }}
                                     <div class="html-element-item-sample hidden">
@@ -107,9 +107,10 @@
             </div>
         </div>
     </div>
+    <textarea class="generated_html" name="fields_html"></textarea>
+    <textarea class="generated_json" name="fields_json"></textarea>
 
-
-    <div class="row">
+    <div class="row real-form hidden">
         <div class="col-md-9">
 
             <div class="builder-tabs">
@@ -140,7 +141,7 @@
             <div class="col-md-8">
                 <a href="#{id}" role="tab" data-toggle="tab">Tab Title</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 trash-icon">
                 <i class="fa fa-trash" style="color:#9A2720"></i>
             </div>
         </li>
