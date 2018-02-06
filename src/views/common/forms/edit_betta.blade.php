@@ -56,6 +56,12 @@
                     </div>
                 </div>
             </div>
+            <!-- Button -->
+            <div class="form-group">
+                <div class="col-md-4">
+                    <button type="submit"  class="btn btn-success">Save</button>
+                </div>
+            </div>
         </div>
         <div class="col-md-3">
             <div class="panel panel-default">
@@ -136,9 +142,8 @@
             </div>
             <!-- Button -->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="singlebutton"></label>
                 <div class="col-md-4">
-                    <button type="submit"  class="btn btn-success"></button>
+                    <button type="submit"  class="btn btn-success">Save</button>
                 </div>
             </div>
         </div>
