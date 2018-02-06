@@ -91,6 +91,7 @@ $(document).ready(function () {
                     target = $(event.target);
                 template.attr('data-shortcode',$(ui.draggable).attr('data-shortcode'));
                 template.attr('data-id',$(ui.draggable).attr('data-id'));
+                $(ui.draggable).hide();
                 target.append(template);
                rebulder();
             }

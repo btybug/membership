@@ -134,6 +134,13 @@
                 </div>
             </div>
         </div>
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4">
+                <button type="submit"  class="btn btn-success"></button>
+            </div>
+        </div>
     </div>
     <!-- Templates -->
     <script type="template" id="template-tab-nav">
