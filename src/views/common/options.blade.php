@@ -23,6 +23,7 @@
                                     {!! Form::hidden($option['name']."[render_function]",$option['render_function']) !!}
                                     {!! Form::hidden($option['name']."[list_function]",$option['list_function']) !!}
                                     {!! Form::hidden($option['name']."[options_function]",$option['options_function']) !!}
+                                    {!! Form::hidden($option['name']."[shortcode]",$option['shortcode']) !!}
                                 </label>
                             </div>
                         </div>

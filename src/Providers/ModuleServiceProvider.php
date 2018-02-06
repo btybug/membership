@@ -126,8 +126,7 @@ class ModuleServiceProvider extends ServiceProvider
 
         \Eventy::action('shortcode.except.url', [
             'admin/membership/{param}/form-list',
-            'admin/membership/{param}/form-list/edit-betta/{param}',
-            'admin/membership/{param}/options',
+            'admin/membership/{param}/form-list/edit-betta/{param}'
         ]);
     }
 
