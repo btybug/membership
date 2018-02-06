@@ -9,7 +9,6 @@
 @stop
 
 @section( 'content' )
-
     <!-- Form Builder -->
     {!! Form::model($form,['id'=>'fields-list','url' => url(route('mbsp_save_form',$slug))]) !!}
     {!! Form::hidden('id',$form->id) !!}
@@ -70,7 +69,7 @@
                                     {{ $field->name }}
                                     <div class="html-element-item-sample hidden">
                                         <div class="form-group">
-                                            {!! \BtyBugHook\Membership\Services\GeneratorService::renderField($field->id) !!}
+                                            [field id={{$field->id}}]
                                         </div>
                                     </div>
                                 </div>
