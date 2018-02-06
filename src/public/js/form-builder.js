@@ -32,7 +32,7 @@ $(document).ready(function () {
             hdTabContent = hdTabContent.replace('{DROPABLE}','form-fields-area');
 
             // Add nav list
-            formTabs.find(".form-builder-tabs").append(tabNav);
+            formTabs.find(".form-builder-tabs-area").append(tabNav);
             formTabs.find(".form-builder-tabs-content").append(tabContent);
 
             hdFormTabs.find(".builder-tabs").append(hdTab);

@@ -45,7 +45,7 @@
 
                 </div>
 
-                <ul class="nav nav-tabs form-builder-tabs" role="tablist">
+                <ul class="nav nav-tabs form-builder-tabs-area" role="tablist">
                     <li role="presentation" class="active">
                         <a href="#general" id="home-tab" role="tab" data-toggle="tab">General</a>
                     </li>
@@ -148,9 +148,7 @@
 
     <script type="template" id="template-tab-content">
         <div class="tab-pane in" role="tabpanel" id="{id}">
-            <div class="{DROPABLE}">
-
-            </div>
+            <div class="{DROPABLE}"></div>
         </div>
     </script>
 
