@@ -198,7 +198,7 @@ class GeneratorService extends GeneralService
 
             $fieldRepo->create([
                 'name'          => 'Price',
-                'slug'          => 'price_pym_'.$this->slug,
+                'slug'          => 'price_pym_'.str_replace('-', '_', $this->slug),
                 'visibility'    => false,
                 'table_name'    => str_replace('-', '_', $this->slug),
                 'column_name'   => 'price',
@@ -209,7 +209,7 @@ class GeneratorService extends GeneralService
 
             $fieldRepo->create([
                 'name'          => 'Tax & Services',
-                'slug'          => 'tax_services_pym_'.$this->slug,
+                'slug'          => 'tax_services_pym_'.str_replace('-', '_', $this->slug),
                 'visibility'    => false,
                 'table_name'    => str_replace('-', '_', $this->slug),
                 'column_name'   => 'tax_services',
