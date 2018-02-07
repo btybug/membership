@@ -24,6 +24,7 @@
                                     {!! Form::hidden($option['name']."[list_function]",$option['list_function']) !!}
                                     {!! Form::hidden($option['name']."[options_function]",$option['options_function']) !!}
                                     {!! Form::hidden($option['name']."[shortcode]",$option['shortcode']) !!}
+                                    {!! Form::hidden($option['name']."[option_field_slug]",$option['option_field_slug']) !!}
                                 </label>
                             </div>
                         </div>

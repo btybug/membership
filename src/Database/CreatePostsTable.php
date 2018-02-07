@@ -23,6 +23,8 @@ class CreatePostsTable extends Migration
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
             $table->string('status', 20)->default('draft');
+            $table->text('price')->nullable();
+            $table->text('tax_services')->nullable();
             $table->timestamps();
         });
     }

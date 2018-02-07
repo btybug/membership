@@ -82,7 +82,7 @@ class GeneratorService extends GeneralService
                 'header'       => true,
                 'type'         => 'plugin',
                 'form_path'    => 'mbshp::page_settings.all_posts',
-                'page_layout'  => 'front_layout_with_2_col.cccccccccc',
+                'page_layout'  => 'front_layout_with_2_col_2_10.default',
                 'status'       => 'published',
                 'content_type' => 'template',
                 'template'     => $this->all_unit_slug . '.' . $this->slug
@@ -97,7 +97,7 @@ class GeneratorService extends GeneralService
                 'header'       => true,
                 'type'         => 'plugin',
                 'form_path'    => 'mbshp::page_settings.single_post',
-                'page_layout'  => 'front_layout_with_2_col.cccccccccc',
+                'page_layout'  => 'front_layout_with_2_col_2_10.default',
                 'status'       => 'published',
                 'content_type' => 'template',
                 'template'     => $this->single_unit_slug . '.' . $this->slug
@@ -195,16 +195,38 @@ class GeneratorService extends GeneralService
                 'type'          => 'textarea',
                 'structured_by' => 'plugin',
             ]);
+
+            $fieldRepo->create([
+                'name'          => 'Price',
+                'slug'          => 'price_pym_'.$this->slug,
+                'visibility'    => false,
+                'table_name'    => str_replace('-', '_', $this->slug),
+                'column_name'   => 'price',
+                'type'          => 'text',
+                'structured_by' => 'plugin',
+                'before_save' => 'json_encode',
+            ]);
+
+            $fieldRepo->create([
+                'name'          => 'Tax & Services',
+                'slug'          => 'tax_services_pym_'.$this->slug,
+                'visibility'    => false,
+                'table_name'    => str_replace('-', '_', $this->slug),
+                'column_name'   => 'tax_services',
+                'type'          => 'text',
+                'structured_by' => 'plugin',
+                'before_save' => 'json_encode',
+            ]);
         });
     }
 
     private function generateFormBlade ($form)
     {
-        $html = "{{--Form $form->id --}}\r\n" . \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/fheader.blade.php')) . "\r\n";
-        $html .= \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/default_content.blade.php')) . "\r\n";
-        $html .= \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/ffooter.blade.php')) . "\r\n";
-
-        $this->formService->generateBlade($form->id, $html);
+//        $html = "{{--Form $form->id --}}\r\n" . \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/fheader.blade.php')) . "\r\n";
+//        $html .= \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/default_content.blade.php')) . "\r\n";
+//        $html .= \File::get(plugins_path('vendor/sahak.avatar/membership/src/views/common/_partials/custom_fields/ffooter.blade.php')) . "\r\n";
+        //TODO: make default form
+        $this->formService->generateBlade($form->id, '');
     }
 
     public function generateTabs ($form_slug, $slug = null)

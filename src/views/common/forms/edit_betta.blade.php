@@ -97,7 +97,7 @@
                     <div class="html-elements-list">
                         @foreach($options as $key => $option)
                             @if($option['is_active'])
-                                <div class="html-element-item draggable-element"
+                                <div class="html-element-item draggable-element" data-id="{{ get_field_by_slug($option['option_field_slug']."_".$slug) }}"
                                      data-shortcode="[{{ $option['shortcode'] }}]">
                                     {{ $key }}
                                     <div class="html-element-item-sample hidden">

@@ -462,7 +462,7 @@ class BlogCommonController extends Controller
 
         $options = $adminsettingRepository->getSettings('product', $slug,true);
 
-        $fields = $fieldsRepository->getBy('table_name', $this->postsRepository->table);
+        $fields = $fieldsRepository->findAllByMultiple(['table_name'=> $this->postsRepository->table,'visibility' => true]);
         $existingFields = (count($form->form_fields)) ? $form->form_fields()->pluck('field_slug', 'field_slug')->toArray() : [];
 
         return view('mbshp::common.forms.edit_betta', compact('form', 'fields', 'existingFields', 'slug','options'));
