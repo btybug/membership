@@ -1,4 +1,3 @@
-
 @extends( 'btybug::layouts.admin' )
 
 @section( 'CSS' )
@@ -30,6 +29,7 @@
         </div>
     </div>
     {!! Form::textarea('fields_html',null,['class' => 'generated_html hide']) !!}
+    {!! Form::textarea('original_html',null,['class' => 'original_html hide']) !!}
     {!! Form::textarea('fields_json',null,['class' => 'generated_json hide']) !!}
     {!! Form::close() !!}
 
@@ -37,33 +37,36 @@
 
     <hr/>
 
-    <div class="row">
-        <div class="col-md-9">
+    <div class="row ">
+        <div class="col-md-9 original-html-area">
+            @if($form->original_html)
+                {!! $form->original_html !!}
+            @else
+                <div class="form-builder-tabs">
 
-            <div class="form-builder-tabs">
-
-                <div class="tab-actions">
+                    <div class="tab-actions">
 
 
-                </div>
+                    </div>
 
-                <ul class="nav nav-tabs form-builder-tabs-area" role="tablist">
-                    <li role="presentation" class="active">
-                        <a href="#general" id="home-tab" role="tab" data-toggle="tab">General</a>
-                    </li>
-                </ul>
-                <div class="tab-content form-builder-tabs-content">
-                    <div class="tab-pane in active" role="tabpanel" id="general">
-                        <div class="form-builder-area"></div>
+                    <ul class="nav nav-tabs form-builder-tabs-area" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#general" id="home-tab" role="tab" data-toggle="tab">General</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content form-builder-tabs-content">
+                        <div class="tab-pane in active" role="tabpanel" id="general">
+                            <div class="form-builder-area"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- Button -->
-            <div class="form-group">
-                <div class="col-md-4">
-                    <button type="submit"  class="btn btn-success">Save</button>
+                <!-- Button -->
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
                 </div>
-            </div>
+        @endif
         </div>
         <div class="col-md-3">
             <div class="panel panel-default">
@@ -97,7 +100,8 @@
                     <div class="html-elements-list">
                         @foreach($options as $key => $option)
                             @if($option['is_active'])
-                                <div class="html-element-item draggable-element" data-id="{{ get_field_by_slug($option['option_field_slug']."_".$slug) }}"
+                                <div class="html-element-item draggable-element"
+                                     data-id="{{ get_field_by_slug($option['option_field_slug']."_".$slug) }}"
                                      data-shortcode="[{{ $option['shortcode'] }}]">
                                     {{ $key }}
                                     <div class="html-element-item-sample hidden">
@@ -130,7 +134,7 @@
 
                 <ul class="nav nav-tabs builder-tabs" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#generalform"  role="tab" data-toggle="tab">General</a>
+                        <a href="#generalform" role="tab" data-toggle="tab">General</a>
                     </li>
                 </ul>
                 <div class="tab-content builder-tabs-content">
@@ -144,7 +148,7 @@
             <!-- Button -->
             <div class="form-group">
                 <div class="col-md-4">
-                    <button type="submit"  class="btn btn-success">Save</button>
+                    <button type="submit" class="btn btn-success">Save</button>
                 </div>
             </div>
         </div>

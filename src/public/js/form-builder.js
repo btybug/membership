@@ -116,7 +116,8 @@ $(document).ready(function () {
             $('#'+id).find('.form-fields-area').append(tpl);
 
         });
-        $('.generated_html').val($('.real-form').html())
+        $('.generated_html').val($('.real-form').html());
+        $('.original_html').val($('.original-html-area').html());
         rebulderJson();
     }
     function rebulderJson() {
