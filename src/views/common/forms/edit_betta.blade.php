@@ -39,9 +39,9 @@
 
     <div class="row ">
         <div class="col-md-9 original-html-area">
-            @if($form->original_html)
-                {!! $form->original_html !!}
-            @else
+            {{--@if($form->original_html)--}}
+                {{--{!! $form->original_html !!}--}}
+            {{--@else--}}
                 <div class="form-builder-tabs">
 
                     <div class="tab-actions">
@@ -53,9 +53,23 @@
                         <li role="presentation" class="active">
                             <a href="#general" id="home-tab" role="tab" data-toggle="tab">General</a>
                         </li>
+                        <li role="presentation" >
+                            <a href="#price" id="price-tab" role="tab" data-toggle="tab">Price</a>
+                        </li>
+                        <li role="presentation" >
+                            <a href="#discount" id="discount-tab" role="tab" data-toggle="tab">Discount</a>
+                        </li>
                     </ul>
                     <div class="tab-content form-builder-tabs-content">
                         <div class="tab-pane in active" role="tabpanel" id="general">
+                            <div class="form-builder-area"></div>
+                        </div>
+                        <div class="tab-pane in" role="tabpanel" id="price">
+                            <div class="form-builder-area">
+                                {!! render_price_list() !!}
+                            </div>
+                        </div>
+                        <div class="tab-pane in" role="tabpanel" id="discount">
                             <div class="form-builder-area"></div>
                         </div>
                     </div>
@@ -66,7 +80,7 @@
                         <button type="submit" class="btn btn-success">Save</button>
                     </div>
                 </div>
-        @endif
+        {{--@endif--}}
         </div>
         <div class="col-md-3">
             <div class="panel panel-default">
