@@ -59,6 +59,12 @@
                         <li role="presentation" >
                             <a href="#discount" id="discount-tab" role="tab" data-toggle="tab">Discount</a>
                         </li>
+                        <li role="presentation" >
+                            <a href="#data" id="data-tab" role="tab" data-toggle="tab">Data</a>
+                        </li>
+                        <li role="presentation" >
+                            <a href="#links" id="links-tab" role="tab" data-toggle="tab">Links</a>
+                        </li>
                     </ul>
                     <div class="tab-content form-builder-tabs-content">
                         <div class="tab-pane in active" role="tabpanel" id="general">
@@ -70,6 +76,12 @@
                             </div>
                         </div>
                         <div class="tab-pane in" role="tabpanel" id="discount">
+                            <div class="form-builder-area"></div>
+                        </div>
+                        <div class="tab-pane in" role="tabpanel" id="data">
+                            <div class="form-builder-area"></div>
+                        </div>
+                        <div class="tab-pane in" role="tabpanel" id="links">
                             <div class="form-builder-area"></div>
                         </div>
                     </div>
