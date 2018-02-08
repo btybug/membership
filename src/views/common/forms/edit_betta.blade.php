@@ -205,6 +205,7 @@
 
 
     </div>
+    </div>
     <!-- Templates -->
     <script type="template" id="template-tab-nav">
         <li role="presentation">
