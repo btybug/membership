@@ -147,7 +147,8 @@ class GeneratorService extends GeneralService
     {
         $form = new FormsRepository();
         $fieldRepo = new FieldsRepository();
-        \DB::transaction(function () use ($form, $fieldRepo) {
+        $formFields = new FieldsRepository();
+        \DB::transaction(function () use ($form, $fieldRepo, $formFields) {
             $create_form = $form->create([
                 'name'        => 'Create ' . $this->title,
                 'slug'        => 'create_' . $this->slug,
@@ -226,6 +227,16 @@ class GeneratorService extends GeneralService
             ]);
 
             $form->update($create_form->id,['fields_json' => json_encode($fields_json_array,true)]);
+
+            $formFields->create([
+                'form_id' => $create_form->id,
+                'field_slug' => $price->slug
+            ]);
+
+            $formFields->create([
+                'form_id' => $create_form->id,
+                'field_slug' => $datum->slug
+            ]);
         });
     }
 
