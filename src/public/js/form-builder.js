@@ -101,7 +101,10 @@ $(document).ready(function () {
             }
         });
     }
-
+    $('.original-html-area').on('click',function () {
+        rebulder();
+        rebulderJson();
+    });
     function rebulder() {
         var activeId=$('.form-builder-tabs-content').find('.active');
         var elements=activeId.find('div[data-shortcode]');
