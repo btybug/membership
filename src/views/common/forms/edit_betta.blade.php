@@ -39,9 +39,9 @@
 
     <div class="row ">
         <div class="col-md-9 original-html-area">
-            {{--@if($form->original_html)--}}
-                {{--{!! $form->original_html !!}--}}
-            {{--@else--}}
+            @if($form->original_html)
+                {!! $form->original_html !!}
+            @else
                 <div class="form-builder-tabs">
 
                     <div class="tab-actions">
@@ -80,7 +80,7 @@
                         <button type="submit" class="btn btn-success">Save</button>
                     </div>
                 </div>
-        {{--@endif--}}
+        @endif
         </div>
         <div class="col-md-3">
             <div class="panel panel-default">
