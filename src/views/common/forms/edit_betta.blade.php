@@ -184,13 +184,13 @@
                         </div>
                     </div>
                     <div class="tab-pane in" role="tabpanel" id="priceform">
-                        <div class="form-builder-area"></div>
+                        <div class="form-fields-area"></div>
                     </div>
                     <div class="tab-pane in" role="tabpanel" id="discountform">
-                        <div class="form-builder-area"></div>
+                        <div class="form-fields-area"></div>
                     </div>
                     <div class="tab-pane in" role="tabpanel" id="dataform">
-                        <div class=""></div>
+                        <div class="form-fields-area"></div>
                     </div>
                     <div class="tab-pane in" role="tabpanel" id="linksform">
                 </div>

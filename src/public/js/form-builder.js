@@ -106,19 +106,22 @@ $(document).ready(function () {
         rebulderJson();
     });
     function rebulder() {
-        var activeId=$('.form-builder-tabs-content').find('.active');
-        var elements=activeId.find('div[data-shortcode]');
-        var id=activeId.attr('id')+'form';
-        $('#'+id).find('.form-fields-area').empty();
-        var data=[];
-        $.each(elements,function (k,v) {
-            var tpl=$('#field-html').html();
-            var shortcode=$(v).attr('data-shortcode');
-            data.push($(v).attr('data-id'));
-            tpl=tpl.replace('{field}',shortcode);
-            $('#'+id).find('.form-fields-area').append(tpl);
+        var tabs=$('.form-builder-tabs-content').find('.tab-pane');
+        $.each(tabs,function (key,value) {
+            var elements=$(value).find('div[data-shortcode]');
+            var id=$(value).attr('id')+'form';
+            $('#'+id).find('.form-fields-area').empty();
+            var data=[];
+            $.each(elements,function (k,v) {
+                var tpl=$('#field-html').html();
+                var shortcode=$(v).attr('data-shortcode');
+                data.push($(v).attr('data-id'));
+                tpl=tpl.replace('{field}',shortcode);
+                $('#'+id).find('.form-fields-area').append(tpl);
 
+            });
         });
+
         $('.generated_html').val($('.real-form').html());
         $('.original_html').val($('.original-html-area').html());
         rebulderJson();
