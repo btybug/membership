@@ -164,6 +164,18 @@
                     <li role="presentation" class="active">
                         <a href="#generalform" role="tab" data-toggle="tab">General</a>
                     </li>
+                    <li role="presentation" >
+                        <a href="#priceform" id="price-tab" role="tab" data-toggle="tab">Price</a>
+                    </li>
+                    <li role="presentation" >
+                        <a href="#discountform" id="discount-tab" role="tab" data-toggle="tab">Discount</a>
+                    </li>
+                    <li role="presentation" >
+                        <a href="#dataform" id="data-tab" role="tab" data-toggle="tab">Data</a>
+                    </li>
+                    <li role="presentation" >
+                        <a href="#linksform" id="links-tab" role="tab" data-toggle="tab">Links</a>
+                    </li>
                 </ul>
                 <div class="tab-content builder-tabs-content">
                     <div class="tab-pane in active" role="tabpanel" id="generalform">
@@ -171,6 +183,16 @@
 
                         </div>
                     </div>
+                    <div class="tab-pane in" role="tabpanel" id="priceform">
+                        <div class="form-builder-area"></div>
+                    </div>
+                    <div class="tab-pane in" role="tabpanel" id="discountform">
+                        <div class="form-builder-area"></div>
+                    </div>
+                    <div class="tab-pane in" role="tabpanel" id="dataform">
+                        <div class=""></div>
+                    </div>
+                    <div class="tab-pane in" role="tabpanel" id="linksform">
                 </div>
             </div>
             <!-- Button -->
