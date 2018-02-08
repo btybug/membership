@@ -156,14 +156,7 @@ class GeneratorService extends GeneralService
                 'fields_type' => str_replace('-', '_', $this->slug)
             ]);
             $this->generateFormBlade($create_form);
-            $edit_form = $form->create([
-                'name'        => 'Edit ' . $this->title,
-                'slug'        => 'edit_' . $this->slug,
-                'created_by'  => 'plugin',
-                'type'        => 'edit',
-                'fields_type' => str_replace('-', '_', $this->slug)
-            ]);
-            $this->generateFormBlade($edit_form);
+            $fields_json_array = [];
             //generating create form fields
             $fieldRepo->create([
                 'name'          => 'Title',
@@ -196,7 +189,7 @@ class GeneratorService extends GeneralService
                 'structured_by' => 'plugin',
             ]);
 
-            $fieldRepo->create([
+            $price = $fieldRepo->create([
                 'name'          => 'Price',
                 'slug'          => 'price_pym_'.str_replace('-', '_', $this->slug),
                 'visibility'    => false,
@@ -206,6 +199,20 @@ class GeneratorService extends GeneralService
                 'structured_by' => 'plugin',
                 'before_save' => 'json_encode',
             ]);
+
+            $datum = $fieldRepo->create([
+                'name'          => 'Data',
+                'slug'          => 'data_pym_'.str_replace('-', '_', $this->slug),
+                'visibility'    => false,
+                'table_name'    => str_replace('-', '_', $this->slug),
+                'column_name'   => 'data_pym',
+                'type'          => 'text',
+                'structured_by' => 'plugin',
+                'before_save' => 'json_encode',
+            ]);
+
+            $fields_json_array[] = $price->id;
+            $fields_json_array[] = $datum->id;
 
             $fieldRepo->create([
                 'name'          => 'Tax & Services',
@@ -217,6 +224,8 @@ class GeneratorService extends GeneralService
                 'structured_by' => 'plugin',
                 'before_save' => 'json_encode',
             ]);
+
+            $form->update($create_form->id,['fields_json' => json_encode($fields_json_array,true)]);
         });
     }
 

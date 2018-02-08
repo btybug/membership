@@ -79,7 +79,9 @@
                             <div class="form-builder-area"></div>
                         </div>
                         <div class="tab-pane in" role="tabpanel" id="data">
-                            <div class=""></div>
+                            <div class="">
+                                {!! render_data_list() !!}
+                            </div>
                         </div>
                         <div class="tab-pane in" role="tabpanel" id="links">
                             <div class=""></div>
