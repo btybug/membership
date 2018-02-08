@@ -79,7 +79,7 @@
                             <div class="form-builder-area"></div>
                         </div>
                         <div class="tab-pane in" role="tabpanel" id="data">
-                            <div class="form-builder-area"></div>
+                            <div class=""></div>
                         </div>
                         <div class="tab-pane in" role="tabpanel" id="links">
                             <div class="form-builder-area"></div>
