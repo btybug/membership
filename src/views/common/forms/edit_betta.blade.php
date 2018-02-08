@@ -28,9 +28,9 @@
             </div>
         </div>
     </div>
-    {!! Form::textarea('fields_html',null,['class' => 'generated_html hide']) !!}
-    {!! Form::textarea('original_html',null,['class' => 'original_html hide']) !!}
-    {!! Form::textarea('fields_json',null,['class' => 'generated_json hide']) !!}
+    {!! Form::textarea('fields_html',null,['class' => 'generated_html ']) !!}
+    {!! Form::textarea('original_html',null,['class' => 'original_html ']) !!}
+    {!! Form::textarea('fields_json',null,['class' => 'generated_json ']) !!}
     {!! Form::close() !!}
 
     <h3>Preview Area</h3>
