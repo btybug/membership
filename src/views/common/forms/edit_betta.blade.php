@@ -72,7 +72,7 @@
                         </div>
                         <div class="tab-pane in" role="tabpanel" id="price">
                             <div class="form-builder-area">
-                                <div data-id="{{ get_field_by_slug("price_pym_".$slug) }}" data-shortcode="[price_pym]">
+                                <div data-id="{{ get_field_by_slug("price_pym_".str_replace('-','_',$slug)) }}" data-shortcode="[price_pym]">
                                     {!! render_price_list() !!}
                                 </div>
 
@@ -82,7 +82,7 @@
                             <div class="form-builder-area"></div>
                         </div>
                         <div class="tab-pane in" role="tabpanel" id="data">
-                            <div data-id="{{ get_field_by_slug("data_pym_".$slug) }}" data-shortcode="[data_pym]">
+                            <div data-id="{{ get_field_by_slug("data_pym_".str_replace('-','_',$slug)) }}" data-shortcode="[data_pym]">
                                 {!! render_datapym_list() !!}
                             </div>
                         </div>
