@@ -79,7 +79,9 @@
                             </div>
                         </div>
                         <div class="tab-pane in" role="tabpanel" id="discount">
-                            <div class="form-builder-area"></div>
+                            <div data-id="{{ get_field_by_slug("discount_pym_".str_replace('-','_',$slug)) }}" data-shortcode="[discount_pym_code]">
+                                {!! render_discount_list() !!}
+                            </div>
                         </div>
                         <div class="tab-pane in" role="tabpanel" id="data">
                             <div data-id="{{ get_field_by_slug("data_pym_".str_replace('-','_',$slug)) }}" data-shortcode="[data_pym]">
