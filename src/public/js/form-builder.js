@@ -26,12 +26,12 @@ $(document).ready(function () {
             // Tab id
             tabNav = tabNav.replace('{id}', ID);
             hdTab = hdTab.replace('{id}', ID + 'form');
-            hdTab= $(hdTab);
+            hdTab = $(hdTab);
             hdTab.find('.trash-icon').remove();
             tabContent = tabContent.replace('{id}', ID);
             tabContent = tabContent.replace('{DROPABLE}', 'form-builder-area');
             hdTabContent = hdTabContent.replace('{id}', ID + 'form');
-            hdTabContent = hdTabContent.replace('{DROPABLE}','form-fields-area');
+            hdTabContent = hdTabContent.replace('{DROPABLE}', 'form-fields-area');
 
             // Add nav list
             formTabs.find(".form-builder-tabs-area").append(tabNav);
@@ -89,35 +89,37 @@ $(document).ready(function () {
                 var elementHTML = $(ui.draggable).find(".html-element-item-sample").html(),
                     template = $(elementHTML),
                     target = $(event.target);
-                template.attr('data-shortcode',$(ui.draggable).attr('data-shortcode'));
-                template.attr('data-id',$(ui.draggable).attr('data-id'));
+                template.attr('data-shortcode', $(ui.draggable).attr('data-shortcode'));
+                template.attr('data-id', $(ui.draggable).attr('data-id'));
                 $(ui.draggable).hide();
                 target.append(template);
-               rebulder();
+                rebulder();
             }
         }).sortable({
-            update: function( event, ui ) {
+            update: function (event, ui) {
                 rebulder();
             }
         });
     }
-    $('.original-html-area').on('click',function () {
+
+    $('.original-html-area').on('click', function () {
         rebulder();
         rebulderJson();
     });
+
     function rebulder() {
-        var tabs=$('.form-builder-tabs-content').find('.tab-pane');
-        $.each(tabs,function (key,value) {
-            var elements=$(value).find('div[data-shortcode]');
-            var id=$(value).attr('id')+'form';
-            $('#'+id).find('.form-fields-area').empty();
-            var data=[];
-            $.each(elements,function (k,v) {
-                var tpl=$('#field-html').html();
-                var shortcode=$(v).attr('data-shortcode');
+        var tabs = $('.form-builder-tabs-content').find('.tab-pane');
+        $.each(tabs, function (key, value) {
+            var elements = $(value).find('div[data-shortcode]');
+            var id = $(value).attr('id') + 'form';
+            $('#' + id).find('.form-fields-area').empty();
+            var data = [];
+            $.each(elements, function (k, v) {
+                var tpl = $('#field-html').html();
+                var shortcode = $(v).attr('data-shortcode');
                 data.push($(v).attr('data-id'));
-                tpl=tpl.replace('{field}',shortcode);
-                $('#'+id).find('.form-fields-area').append(tpl);
+                tpl = tpl.replace('{field}', shortcode);
+                $('#' + id).find('.form-fields-area').append(tpl);
 
             });
         });
@@ -126,17 +128,19 @@ $(document).ready(function () {
         $('.original_html').val($('.original-html-area').html());
         rebulderJson();
     }
+
     function rebulderJson() {
-        var activeId=$('.form-builder-tabs-content');
-        var data=[];
-        var elements=activeId.find('div[data-shortcode]');
-        $.each(elements,function (k,v) {
-            var tpl=$('#field-html').html();
-            if($(v).attr('data-id')){
-            data.push($(v).attr('data-id'));
+        var activeId = $('.form-builder-tabs-content');
+        var data = [];
+        var elements = activeId.find('div[data-shortcode]');
+        $.each(elements, function (k, v) {
+            var tpl = $('#field-html').html();
+            if ($(v).attr('data-id')) {
+                data.push($(v).attr('data-id'));
             }
         });
         $('.generated_json').val(JSON.stringify(data));
     }
+
     activateDroppable();
 });
