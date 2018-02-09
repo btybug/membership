@@ -89,7 +89,9 @@
                             </div>
                         </div>
                         <div class="tab-pane in" role="tabpanel" id="links">
-                            <div class=""></div>
+                            <div data-id="{{ get_field_by_slug("links_pym_".str_replace('-','_',$slug)) }}" data-shortcode="[links_pym_code]">
+                                {!! render_links() !!}
+                            </div>
                         </div>
                     </div>
                 </div>
