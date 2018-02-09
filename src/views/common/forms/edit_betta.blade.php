@@ -76,6 +76,10 @@
                                     {!! render_price_list() !!}
                                 </div>
 
+                                <div data-id="{{ get_field_by_slug("tax_services_pym_".str_replace('-','_',$slug)) }}" data-shortcode="[tax_services_pym]">
+                                    {!! render_tax_service_list() !!}
+                                </div>
+
                             </div>
                         </div>
                         <div class="tab-pane in" role="tabpanel" id="discount">

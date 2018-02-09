@@ -234,12 +234,7 @@ class GeneratorService extends GeneralService
                 'before_save' => 'json_encode',
             ]);
 
-            $fields_json_array[] = $price->id;
-            $fields_json_array[] = $datum->id;
-            $fields_json_array[] = $discount->id;
-            $fields_json_array[] = $links->id;
-
-            $fieldRepo->create([
+            $tax = $fieldRepo->create([
                 'name'          => 'Tax & Services',
                 'slug'          => 'tax_services_pym_'.str_replace('-', '_', $this->slug),
                 'visibility'    => false,
@@ -249,6 +244,14 @@ class GeneratorService extends GeneralService
                 'structured_by' => 'plugin',
                 'before_save' => 'json_encode',
             ]);
+
+            $fields_json_array[] = $price->id;
+            $fields_json_array[] = $datum->id;
+            $fields_json_array[] = $discount->id;
+            $fields_json_array[] = $links->id;
+            $fields_json_array[] = $tax->id;
+
+
 
             $form->update($create_form->id,['fields_json' => json_encode($fields_json_array,true)]);
 
@@ -270,6 +273,11 @@ class GeneratorService extends GeneralService
             $formFields->create([
                 'form_id' => $create_form->id,
                 'field_slug' => $links->slug
+            ]);
+
+            $formFields->create([
+                'form_id' => $create_form->id,
+                'field_slug' => $tax->slug
             ]);
         });
     }
