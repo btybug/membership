@@ -416,7 +416,6 @@ class BlogCommonController extends Controller
     )
     {
         $option = \Config::get("options.listener.$request->type.render_function", null);
-
         return (is_callable($option)) ? $option($request->value) : null;
     }
 
