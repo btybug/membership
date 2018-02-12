@@ -13,10 +13,7 @@
                         <div class="col-md-4">
                             <div class="checkbox">
                                 <label for="{{ $option['name'] }}">
-                                    <input type="hidden" name="{{ $option['name'] }}[is_active]"
-                                           id="{{ $option['name'] }}" value="0">
-                                    {!! Form::checkbox($option['name']."[is_active]",1,$data[$option['name']]['is_active']??false,['id'=>$option['name'],'data-role' => 'parent']) !!}
-                                    Allow {!! str_replace('_',' ',ucfirst($option['name'])) !!}
+                                    {!! Form::hidden($option['name']."[is_active]",1,['id'=>$option['name'],'data-role' => 'parent']) !!}
                                     @if(isset($option['tab']))
                                         {!! Form::hidden($option['name']."[tab]",$option['tab']) !!}
                                     @endif
@@ -44,10 +41,12 @@
                         <div class="col-md-4">
                             @php
                                 $fn = $option['options_function'];
+
                             @endphp
+
                             @if(is_callable($fn))
                                 @php
-                                    $list = $fn();
+                                       $list = $fn();
                                 @endphp
                                 @foreach($list as $item)
                                     @if(isset($item['type']) && $item['type'] == 'radio')
