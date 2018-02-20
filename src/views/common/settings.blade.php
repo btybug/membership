@@ -37,8 +37,14 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <div class="col-md-6"  style="margin: 20px;">
+                                {!! BBcustomize('unit','all_main_content','all_posts',(isset($all->template) && $all->template)?'Change':'Select',['class'=>'btn btn-default change-layout','copy'=>'1','model' =>(isset($all->template) && $all->template) ?$all->template : null]) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="row">
                                 <div class="col-md-12 m-b-10">
+
                                     <div class="col-sm-4 p-l-0">All posts Unit</div>
                                     <div class="col-md-5">
                                         {!! BBbutton2('unit','all_main_content','all_posts',(isset($all->template) && $all->template)?'Change':'Select',['class'=>'btn btn-default change-layout','copy'=>'1','model' =>(isset($all->template) && $all->template) ?$all->template : null]) !!}
