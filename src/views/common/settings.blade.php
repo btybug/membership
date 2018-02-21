@@ -38,7 +38,8 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6"  style="margin: 20px;">
-                                {!! BBcustomize('unit','all_main_content','all_posts',(isset($all->template) && $all->template)?'Change':'Select',['class'=>'btn btn-default change-layout','copy'=>'1','model' =>(isset($all->template) && $all->template) ?$all->template : null]) !!}
+                                {!! BBcustomize('unit','all_main_content','all_posts',
+                                (isset($all->template) && $all->template)?'Change':'Select','blog',['class'=>'btn btn-default change-layout','copy'=>'1','model' =>null]) !!}
                             </div>
                         </div>
                         <div class="form-group">
