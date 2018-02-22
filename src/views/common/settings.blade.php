@@ -47,7 +47,7 @@
                                             (isset($all->template) && $all->template)?'Change':'Select',$slug,['class'=>'btn btn-default change-layout','copy'=>'1','model' =>(isset($all->template) && $all->template) ?$all->template : null]) !!}
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="form-group">
